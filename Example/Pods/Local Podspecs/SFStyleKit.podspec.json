@@ -1,0 +1,22 @@
+{
+  "name": "SFStyleKit",
+  "version": "0.1.0",
+  "summary": "A short description of SFStyleKit.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Sfh03031/SFStyleKit",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Sfh03031": "sfhery@foxmail.com"
+  },
+  "source": {
+    "git": "https://github.com/Sfh03031/SFStyleKit.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "SFStyleKit/Classes/**/*"
+}
