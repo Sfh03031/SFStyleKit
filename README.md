@@ -1,6 +1,5 @@
 <div align="center" >
-<!--  <img width="70%" src="image/logo.png" />-->
-  <span style="color: red;font-size: large; display: block;">SFStyleKit</span>
+  <img width="70%" src="image/logo.png" />
 </div>
 
 # SFStyleKit
