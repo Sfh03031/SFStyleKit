@@ -29,12 +29,6 @@ public extension SFExStyle where Base: UIAlertController {
     }
     
     @discardableResult
-    func alertStyle(_ style: UIAlertController.Style) -> SFExStyle {
-        base.alertStyle = style
-        return self
-    }
-    
-    @discardableResult
     func title(_ a: String) -> SFExStyle {
         base.title = a
         return self
@@ -109,26 +103,6 @@ public extension SFExStyle where Base: UIAlertController {
     func add(action: UIAlertAction) -> SFExStyle {
         base.addAction(action)
         return self
-    }
-}
-
-/// 增加弹窗类型属性
-
-public extension UIAlertController {
-    private static let alertStyleKey = UnsafeRawPointer(bitPattern: "alertStyleKey".hashValue)!
-    
-    var alertStyle: UIAlertController.Style {
-        get {
-            var style = objc_getAssociatedObject(self, Self.alertStyleKey) as? UIAlertController.Style
-            if style == nil {
-                style = .actionSheet
-                objc_setAssociatedObject(self, Self.alertStyleKey, style, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
-            return style!
-        }
-        set {
-            objc_setAssociatedObject(self, Self.alertStyleKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
     }
 }
 

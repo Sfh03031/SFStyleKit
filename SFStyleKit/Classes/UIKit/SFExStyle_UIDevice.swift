@@ -14,7 +14,6 @@ public extension SFExStyle where Base: UIDevice {
     
     /// 设备idfv
     var idfv: String {
-        
         return UIDevice.current.identifierForVendor?.uuidString ?? ""
     }
     

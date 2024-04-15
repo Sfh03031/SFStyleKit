@@ -13,7 +13,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.sf.backgroundColor(.white).add(subview: backView)
         
         print("idfv: \(UIDevice.current.sf.idfv)")
         print("StringWithUUID: \(UIDevice.current.sf.StringWithUUID)")
@@ -40,8 +40,6 @@ class ViewController: UIViewController {
         print("systemVersion: \(UIDevice.current.sf.systemVersion)")
         
         print("memoryUsage: \(UIApplication.shared.sf.memoryUsage)")
-        
-        self.view.addSubview(backView)
         
         backView.layer.sf.borderColor(UIColor.brown.cgColor).borderWidth(2.0)
     }
