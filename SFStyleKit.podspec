@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'SFStyleKit'
   s.version          = '0.1.2'
-  s.summary          = 'SFStyleKit is a library that includes commonly used extensions and supports chain writing for UIKit,QuartzCore,Foundation,Etc. / SFStyleKit是一个支持链式编程的swift库，同时提供了许多有用的扩展。'
+  s.summary          = 'SFStyleKit is a swift library that supports chain programming and provides many useful extensions for iOS apps. / SFStyleKit是一个为支持链式编程的swift库，同时提供了许多有用的扩展。'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
