@@ -450,59 +450,13 @@ public extension SFExStyle where Base: UIView {
     }
 }
 
-//MARK: -  扩展
-
-/// 边框结构体
-public struct UIRectSide: OptionSet {
-    public let rawValue: Int
-    
-    public static let left = UIRectSide(rawValue: 1 << 0)
-    
-    public static let top = UIRectSide(rawValue: 1 << 1)
-    
-    public static let right = UIRectSide(rawValue: 1 << 2)
-    
-    public static let bottom = UIRectSide(rawValue: 1 << 3)
-    
-    public static let all: UIRectSide = [.top, .right, .left, .bottom]
-    
-    public init(rawValue: Int) {
-        self.rawValue = rawValue
-    }
-}
-
-/// 摇动视图的方向
-public enum ShakeDirection {
-    /// 水平
-    case horizontal
-    /// 垂直
-    case vertical
-}
-
-/// 摇动动画类型
-public enum ShakeAnimationType {
-    /// 线性动画
-    case linear
-    /// 缓入动画
-    case easeIn
-    /// 缓出动画
-    case easeOut
-    /// 缓入缓出动画
-    case easeInOut
-}
+//MARK: - 扩展
 
 public extension SFExStyle where Base: UIView {
     
-    @discardableResult
-    func add(subview view: UIView?) -> SFExStyle {
-        guard let view = view else { return self }
-        switch base {
-        case let v as UIStackView:
-            v.addArrangedSubview(view)
-        default:
-            base.addSubview(view)
-        }
-        return self
+    /// 字符串标识
+    static var reuseIdentifier: String {
+        return String(describing: Base.self)
     }
     
     /// 在屏幕上的位置,相对于屏幕,不是相对于SuperView
@@ -523,14 +477,6 @@ public extension SFExStyle where Base: UIView {
         return rect
     }
     
-    /// 从xib加载view
-    @discardableResult
-    static func loadNib() -> SFExStyle? {
-        let moduleName = Base.description().components(separatedBy: ".").first ?? ""
-        let bundle = Bundle.sf.moduleBundle(Base.self, moduleName) ?? Bundle.main
-        return (bundle.loadNibNamed("\(Base.self)", owner: nil, options: nil)?.first as? Base)?.sf
-    }
-    
     /// 返回该view所在VC
     var superVC: UIViewController? {
         for view in sequence(first: base.superview, next: { $0?.superview }) {
@@ -543,7 +489,18 @@ public extension SFExStyle where Base: UIView {
         return nil
     }
     
-    /// 返回该view所在的父view
+#if canImport(RxSwift) && canImport(RxCocoa)
+    var tap: ControlEvent<UITapGestureRecognizer> {
+        base.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer()
+        base.addGestureRecognizer(tap)
+        return tap.rx.event
+    }
+#endif
+    
+    /// 返回该视图所在的父视图
+    /// - Parameter of: 父视图Type
+    /// - Returns: self
     func superView<T: UIView>(of: T.Type) -> T? {
         for view in sequence(first: base.superview, next: { $0?.superview }) {
             if let father = view as? T {
@@ -551,6 +508,29 @@ public extension SFExStyle where Base: UIView {
             }
         }
         return nil
+    }
+    
+    /// 从xib加载视图
+    @discardableResult
+    static func loadNib() -> SFExStyle? {
+        let moduleName = Base.description().components(separatedBy: ".").first ?? ""
+        let bundle = Bundle.sf.moduleBundle(Base.self, moduleName) ?? Bundle.main
+        return (bundle.loadNibNamed("\(Base.self)", owner: nil, options: nil)?.first as? Base)?.sf
+    }
+    
+    /// 添加子视图
+    /// - Parameter view: 子视图
+    /// - Returns: self
+    @discardableResult
+    func add(subview view: UIView?) -> SFExStyle {
+        guard let view = view else { return self }
+        switch base {
+        case let v as UIStackView:
+            v.addArrangedSubview(view)
+        default:
+            base.addSubview(view)
+        }
+        return self
     }
     
     /// 删除所有的子视图
@@ -563,6 +543,10 @@ public extension SFExStyle where Base: UIView {
     }
     
     /// 添加点击事件
+    /// - Parameters:
+    ///   - target: 添加的对象
+    ///   - action: 事件
+    /// - Returns: self
     @discardableResult
     func addTarget(_ target: Any?, action: Selector?) -> SFExStyle {
         base.isUserInteractionEnabled = true
@@ -570,7 +554,10 @@ public extension SFExStyle where Base: UIView {
         base.addGestureRecognizer(tap)
         return self
     }
-    
+
+    /// 添加点击事件回调
+    /// - Parameter handler: 回调
+    /// - Returns: self
     @discardableResult
     func addTapAction(handler: ((_ view: UIView?) -> Void)?) -> SFExStyle {
         base.isUserInteractionEnabled = true
@@ -581,22 +568,18 @@ public extension SFExStyle where Base: UIView {
         return self
     }
     
-    #if canImport(RxSwift) && canImport(RxCocoa)
-    var tap: ControlEvent<UITapGestureRecognizer> {
-        base.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer()
-        base.addGestureRecognizer(tap)
-        return tap.rx.event
-    }
-    #endif
-    
     /// 设置阴影
+    /// - Parameters:
+    ///   - cornerRadius: 圆角，default = 5.0
+    ///   - color: 颜色，default = UIColor(red: 0, green: 0, blue: 0, alpha: 0.21)
+    ///   - offset: 偏移量，default = 0
+    ///   - opacity: 不透明度，default = 1
+    /// - Returns: self
     @discardableResult
-    func makeShadow(_ cornerRadius: CGFloat = 5,
+    func makeShadow(_ cornerRadius: CGFloat = 5.0,
                     color: UIColor? = UIColor(red: 0, green: 0, blue: 0, alpha: 0.21),
                     offset: CGSize = CGSize.zero,
-                    opacity: Float = 1) -> SFExStyle
-    {
+                    opacity: Float = 1) -> SFExStyle {
         base.layer.cornerRadius = cornerRadius
         base.layer.shadowColor = color?.cgColor
         base.layer.shadowOffset = offset
@@ -606,17 +589,24 @@ public extension SFExStyle where Base: UIView {
     }
     
     /// 设置颜色渐变
+    /// - Parameters:
+    ///   - colors: 颜色组，最少两种
+    ///   - locations: 渲染区间范围，必须是递增的，数字区间[0, 1]
+    ///   - startPoint: 渲染起点
+    ///   - endPoint: 渲染终点
+    /// - Returns: self
     @discardableResult
-    func makeGradient(_ colors: [CGColor], locations: [NSNumber], startPoint: CGPoint, endPoint: CGPoint) -> SFExStyle {
+    func makeGradient(_ colors: [CGColor],
+                      locations: [NSNumber],
+                      startPoint: CGPoint,
+                      endPoint: CGPoint) -> SFExStyle {
         let bgLayer = CAGradientLayer()
         bgLayer.colors = colors
         bgLayer.locations = locations
         bgLayer.frame = base.bounds
         bgLayer.startPoint = startPoint
         bgLayer.endPoint = endPoint
-//        base.layer.addSublayer(bgLayer)
-        if let first = base.layer.sublayers?.first,
-           first.isKind(of: CAGradientLayer.classForCoder()) {
+        if let first = base.layer.sublayers?.first, first.isKind(of: CAGradientLayer.classForCoder()) {
             base.layer.replaceSublayer(first, with: bgLayer)
         } else {
             base.layer.insertSublayer(bgLayer, at: 0)
@@ -625,10 +615,15 @@ public extension SFExStyle where Base: UIView {
     }
     
     /// 设置某几个位置的圆角
+    /// - Parameters:
+    ///   - corners: 哪几个角
+    ///   - radius: 角度值
+    /// - Returns: self
     @discardableResult
     func makeCornerRadius(corners: UIRectCorner, radius: CGFloat) -> SFExStyle {
         let cornerSize = CGSize(width: radius, height: radius)
         let maskPath = UIBezierPath(roundedRect: base.bounds, byRoundingCorners: corners, cornerRadii: cornerSize)
+        
         let maskLayer = CAShapeLayer()
         maskLayer.frame = base.bounds
         maskLayer.path = maskPath.cgPath
@@ -638,6 +633,8 @@ public extension SFExStyle where Base: UIView {
     }
     
     /// 设置统一圆角
+    /// - Parameter radius: 角度值
+    /// - Returns: self
     @discardableResult
     func makeRadius(_ radius: CGFloat) -> SFExStyle {
         base.layer.cornerRadius = radius
@@ -678,90 +675,55 @@ public extension SFExStyle where Base: UIView {
         return image
     }
     
-    /// 画带圆角的边框 - 并不会切圆角
-    /// - Parameters:
-    ///   - fillColor: 填充色
-    ///   - strokeColor: 描边色
-    ///   - lineWith: 线宽
-    ///   - lineLength: 虚线单位长度
-    ///   - lineSpacing: 虚线单位间距
-    ///   - side: 要画线的边
-    ///   - topLeft: 左上圆角
-    ///   - topRight: 右上圆角
-    ///   - bottomLeft: 左下圆角
-    ///   - bottomRight: 右下圆角
-    ///   - isDash: true虚线 false实线
-    @discardableResult
-    func drawLineWithRadius(fillColor: UIColor,
-                            strokeColor: UIColor,
-                            lineWith: CGFloat = 1,
-                            lineLength: Int = 10,
-                            lineSpacing: Int = 5,
-                            rectSide: UIRectSide,
-                            topLeft: CGFloat = 0.0,
-                            topRight: CGFloat = 0.0,
-                            bottomLeft: CGFloat = 0.0,
-                            bottomRight: CGFloat = 0.0,
-                            isDash: Bool = false) -> SFExStyle
-    {
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.bounds = base.bounds
-        shapeLayer.anchorPoint = CGPoint(x: 0, y: 0)
-        shapeLayer.fillColor = fillColor.cgColor
-        shapeLayer.strokeColor = strokeColor.cgColor
-        shapeLayer.lineWidth = lineWith
-        shapeLayer.lineJoin = kCALineJoinRound
-        // 每一段虚线长度和每两段虚线之间的间隔
-        if isDash {
-            shapeLayer.lineDashPattern = [NSNumber(value: lineLength), NSNumber(value: lineSpacing)]
+    /// 将当前视图转为图片
+    func asImage() -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = UIScreen.main.scale
+        let renderer = UIGraphicsImageRenderer(bounds: base.bounds, format: format)
+        return renderer.image { rendererContext in
+            base.layer.render(in: rendererContext.cgContext)
         }
-        
-        let minX = CGRectGetMinX(base.bounds)
-        let minY = CGRectGetMinY(base.bounds)
-        let maxX = CGRectGetMaxX(base.bounds)
-        let maxY = CGRectGetMaxY(base.bounds)
-        
-        let path = CGMutablePath()
-        if rectSide.contains(.left) {
-            path.move(to: CGPointMake(minX, maxY - bottomLeft))
-            path.addLine(to: CGPointMake(minX, topLeft))
-            path.addQuadCurve(to: CGPointMake(topLeft, minY), control: CGPointMake(minX, minY))
-        }
-        if rectSide.contains(.top) {
-            path.move(to: CGPointMake(topLeft, minY))
-            path.addLine(to: CGPointMake(maxX - topRight, minY))
-            path.addQuadCurve(to: CGPointMake(maxX, topRight), control: CGPointMake(maxX, minY))
-        }
-        if rectSide.contains(.right) {
-            path.move(to: CGPointMake(maxX, topRight))
-            path.addLine(to: CGPointMake(maxX, maxY - bottomRight))
-            path.addQuadCurve(to: CGPointMake(maxX - bottomRight, maxY), control: CGPointMake(maxX, maxY))
-        }
-        if rectSide.contains(.bottom) {
-            path.move(to: CGPointMake(maxX - bottomRight, maxY))
-            path.addLine(to: CGPointMake(bottomLeft, maxY))
-            path.addQuadCurve(to: CGPointMake(minX, maxY - bottomLeft), control: CGPointMake(minX, maxY))
-        }
-        
-        shapeLayer.path = path
-        base.layer.addSublayer(shapeLayer)
-        return self
     }
-    
-    /// 字符串标识
-    static var reuseIdentifier: String {
-        return String(describing: Base.self)
-    }
+}
+
+
+//MARK: - 扩展，视图摇晃动画
+
+/// 摇动视图的方向
+public enum ShakeDirection {
+    /// 水平
+    case horizontal
+    /// 垂直
+    case vertical
+}
+
+/// 摇动动画类型
+public enum ShakeAnimationType {
+    /// 线性动画
+    case linear
+    /// 缓入动画
+    case easeIn
+    /// 缓出动画
+    case easeOut
+    /// 缓入缓出动画
+    case easeInOut
+}
+
+public extension SFExStyle where Base: UIView {
     
     /// 摇动视图
     ///
     /// - Parameters:
-    ///   - direction: 摇动方向（水平或垂直），（默认为 .horizontal）
-    ///   - duration: 以秒为单位的动画持续时间（默认为 1 秒）。
-    ///   - animationType: 摇动动画类型（默认为 .easeOut）。
-    ///   - completion: 在动画完成时运行的可选完成处理程序（默认值为 nil）。
+    ///   - direction: 摇动方向，default = .horizontal
+    ///   - duration: 以秒为单位的动画持续时间，default = 0.6
+    ///   - animationType: 摇动动画类型，default = .easeOut
+    ///   - completion: 在动画完成时的回调，default = nil
+    /// - Returns: self
     @discardableResult
-    func shake(direction: ShakeDirection = .horizontal, duration: TimeInterval = 0.6, animationType: ShakeAnimationType = .easeOut, completion: (() -> Void)? = nil) -> SFExStyle? {
+    func shake(direction: ShakeDirection = .horizontal, 
+               duration: TimeInterval = 0.6,
+               animationType: ShakeAnimationType = .easeOut,
+               completion: (() -> Void)? = nil) -> SFExStyle? {
         CATransaction.begin()
         let animation: CAKeyframeAnimation
         switch direction {
@@ -787,6 +749,125 @@ public extension SFExStyle where Base: UIView {
         CATransaction.commit()
         return self
     }
+    
+}
+
+//MARK: - 扩展，视图边框
+
+/// 边框结构体
+public struct UIRectSide: OptionSet {
+    public let rawValue: Int
+    
+    public static let left = UIRectSide(rawValue: 1 << 0)
+    
+    public static let top = UIRectSide(rawValue: 1 << 1)
+    
+    public static let right = UIRectSide(rawValue: 1 << 2)
+    
+    public static let bottom = UIRectSide(rawValue: 1 << 3)
+    
+    public static let all: UIRectSide = [.top, .right, .left, .bottom]
+    
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+}
+
+public extension SFExStyle where Base: UIView {
+
+    /// 设置border
+    /// - Parameters:
+    ///   - color: 颜色
+    ///   - with: 线宽
+    /// - Returns: self
+    @discardableResult
+    func makeBorder(color: UIColor, with: CGFloat) -> SFExStyle {
+        base.layer.borderColor = color.cgColor
+        base.layer.borderWidth = with
+        return self
+    }
+
+    
+    /// 画边框，支持画一条或多条、支持带圆角边框、支持虚实线
+    /// 需要注意：1.画曲线边框并不会切圆角 2.如果视图切圆角了设置 isSuperClip = true
+    /// - Parameters:
+    ///   - color: 线色，default = .lightGray
+    ///   - with: 线宽，default = 1
+    ///   - dashLength: 虚线单位长度，default = 10
+    ///   - dashSpacing: 虚线单位间距，default = 5
+    ///   - rectSide: 要画线的边，default = .all
+    ///   - topLeft: 左上圆角，default = 0
+    ///   - topRight: 右上圆角，default = 0
+    ///   - bottomLeft: 左下圆角，default = 0
+    ///   - bottomRight: 右下圆角，default = 0
+    ///   - isSuperClip: 视图是否切圆角了
+    ///   - isDash: true虚线 false实线
+    /// - Returns: self
+    @discardableResult
+    func makeCustomizeBorder(color: UIColor = .lightGray,
+                             with: CGFloat = 1,
+                             dashLength: Int = 10,
+                             dashSpacing: Int = 5,
+                             rectSide: UIRectSide = .all,
+                             topLeft: CGFloat = 0.0,
+                             topRight: CGFloat = 0.0,
+                             bottomLeft: CGFloat = 0.0,
+                             bottomRight: CGFloat = 0.0,
+                             isSuperClip: Bool = false,
+                             isDash: Bool = false) -> SFExStyle {
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.bounds = base.bounds
+        shapeLayer.anchorPoint = CGPoint(x: 0, y: 0)
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = color.cgColor
+        shapeLayer.lineWidth = with
+        shapeLayer.lineJoin = kCALineJoinRound
+        
+        // 每一段虚线长度和每两段虚线之间的间隔
+        if isDash {
+            shapeLayer.lineDashPattern = [NSNumber(value: dashLength), NSNumber(value: dashSpacing)]
+        }
+        
+        let minX = CGRectGetMinX(base.bounds)
+        let minY = CGRectGetMinY(base.bounds)
+        let maxX = CGRectGetMaxX(base.bounds)
+        let maxY = CGRectGetMaxY(base.bounds)
+        
+        //FIXME: 二次贝塞尔曲线控制点，如果视图切了圆角，在圆角部分绘制的线更细一点，线宽低的话甚至看不出来绘制的曲线
+        //FIXME: 控制点坐标加减会使曲线看起来更粗一点，多次测试后加减2是个可接受的值，线宽等于1也可以看出绘制的曲线
+        //FIXME: 不能加减线宽，线宽很高的话曲线会变形
+        let control_minX = isSuperClip ? minX + 2 : minX
+        let control_minY = isSuperClip ? minY + 2 : minY
+        let control_maxX = isSuperClip ? maxX - 2 : maxX
+        let control_maxY = isSuperClip ? maxY - 2 : maxY
+        
+        let path = CGMutablePath()
+        if rectSide.contains(.left) {
+            path.move(to: CGPointMake(minX, maxY - bottomLeft))
+            path.addLine(to: CGPointMake(minX, topLeft))
+            path.addQuadCurve(to: CGPointMake(topLeft, minY), control: CGPointMake(control_minX, control_minY))
+        }
+        if rectSide.contains(.top) {
+            path.move(to: CGPointMake(topLeft, minY))
+            path.addLine(to: CGPointMake(maxX - topRight, minY))
+            path.addQuadCurve(to: CGPointMake(maxX, topRight), control: CGPointMake(control_maxX, control_minY))
+        }
+        if rectSide.contains(.right) {
+            path.move(to: CGPointMake(maxX, topRight))
+            path.addLine(to: CGPointMake(maxX, maxY - bottomRight))
+            path.addQuadCurve(to: CGPointMake(maxX - bottomRight, maxY), control: CGPointMake(control_maxX, control_maxY))
+        }
+        if rectSide.contains(.bottom) {
+            path.move(to: CGPointMake(maxX - bottomRight, maxY))
+            path.addLine(to: CGPointMake(bottomLeft, maxY))
+            path.addQuadCurve(to: CGPointMake(minX, maxY - bottomLeft), control: CGPointMake(control_minX, control_maxY))
+        }
+        
+        shapeLayer.path = path
+        base.layer.addSublayer(shapeLayer)
+        return self
+    }
+    
 }
 
 //MARK: -  get/set

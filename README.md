@@ -1,5 +1,5 @@
 <div align="center" >
-  <img width="70%" src="image/logo.png" />
+  <img width="85%" src="image/logo.png" />
 </div>
 
 # SFStyleKit
@@ -11,12 +11,35 @@
 
 ## Introduction
 
-SFStyleKit is a swift library that supports chain programmin, so you don't need to write property name and equal operator many times anymore.
+SFStyleKit is a swift library that supports chain programming, so you don't need to write property name and equal operator many times anymore.
 
 Like this:
 
 ```swift
-    backView.layer.sf.borderColor(UIColor.brown.cgColor).borderWidth(2.0)
+        let backView = UIView()
+        backView.sf
+        // 位置和尺寸
+            .frame(CGRect(x: 10, y: 50, width: self.view.bounds.width - 20, height: self.view.bounds.height / 2 - 50))
+        // 背景色
+            .backgroundColor(.random)
+        // 设置边框
+            .makeBorder(color: .brown, with: 1.0)
+        // 设置圆角
+            .makeCornerRadius(corners: [.topLeft, .topRight], radius: 10.0)
+        // 设置阴影
+            .makeShadow(5, color: .hex_bbcdc5, offset: CGSize(width: 5, height: 10), opacity: 1)
+        // 右上角显示小红点
+            .showBadgePoint()
+        // 点击事件回调
+            .addTapAction { view in
+                // 右上角不显示小红点
+                view?.sf.hiddenBadgePoint()
+            }
+        // 添加子视图
+            .add(subview: alphaLabel)
+            .add(subview: broveLabel)
+            .add(subview: btn)
+        self.view.sf.backgroundColor(.white).add(subview: backView)
 ```
 you can see the code in the Example Project.
 
@@ -91,11 +114,11 @@ Like get some current device's infomations:
 * Xcode 15.1
 
 ## Installation
-
-### Carthage
-```
-  github "Sfh03031/SFStyleKit"
-```
+<!---->
+<!--### Carthage-->
+<!--```-->
+<!--  github "Sfh03031/SFStyleKit"-->
+<!--```-->
 
 ### CocoaPods
 SFStyleKit is available through [CocoaPods](https://cocoapods.org). To install
@@ -114,24 +137,32 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.sf.backgroundColor(.white).add(subview: backView)
-    }
-    
-    lazy var backView: UIView = {
-        let view = UIView(frame: CGRect(x: 10, y: 50, width: self.view.bounds.width - 20, height: self.view.bounds.height / 2 - 50))
-        view.sf
-            .backgroundColor(UIColor.sf.random)
+        
+        let backView = UIView()
+        backView.sf
+        // 位置和尺寸
+            .frame(CGRect(x: 10, y: 50, width: self.view.bounds.width - 20, height: self.view.bounds.height / 2 - 50))
+        // 背景色
+            .backgroundColor(.random)
+        // 设置边框
+            .makeBorder(color: .brown, with: 1.0)
+        // 设置圆角
+            .makeCornerRadius(corners: [.topLeft, .topRight], radius: 10.0)
+        // 设置阴影
             .makeShadow(5, color: .hex_bbcdc5, offset: CGSize(width: 5, height: 10), opacity: 1)
-            .makeGradient([UIColor.green.cgColor, UIColor.orange.cgColor, UIColor.yellow.cgColor], locations: [0, 0.4, 1], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
+        // 右上角显示小红点
             .showBadgePoint()
+        // 点击事件回调
             .addTapAction { view in
+                // 右上角不显示小红点
                 view?.sf.hiddenBadgePoint()
             }
-            .addSubview(alphaLabel)
-            .addSubview(broveLabel)
-            .addSubview(btn)
-        return view
-    }()
+        // 添加子视图
+            .add(subview: alphaLabel)
+            .add(subview: broveLabel)
+            .add(subview: btn)
+        self.view.sf.backgroundColor(.white).add(subview: backView)
+    }
     
     lazy var alphaLabel: UILabel = {
         let label = UILabel.init(frame: CGRect(x: 150, y: 50, width: self.view.bounds.width - 300, height: 40),
@@ -246,6 +277,15 @@ UIKit
 - UITextView
 - UIView
 - UIViewController
+
+## Change log
+
+* 2024.05.15
+    1.增加新的常用色扩展
+    2.调整UIView扩展的层级结构，更新若干注释
+
+* 2024.04.15
+    初始版本
 
 ## Warning
 If the system native method has a return value or a property that is read-only, this extension is not suitable for use.

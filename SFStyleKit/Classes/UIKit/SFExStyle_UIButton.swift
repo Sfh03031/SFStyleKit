@@ -194,16 +194,22 @@ public enum ImagePosition {
 }
 
 public extension SFExStyle where Base: UIButton {
+    
     /// 创建带图片的按钮
-    ///
     /// - Parameters:
     ///   - title: 文字
     ///   - image: 图片
     ///   - state: 状态
     ///   - space: 图片与文字间距
     ///   - position: 图片的位置
+    /// - Returns: self
     @discardableResult
-    func imagePosition(title: String?, image: UIImage?, state: UIControl.State = .normal, space: CGFloat = 10, position: ImagePosition = .left, isSureTitleCompress: Bool = false) -> SFExStyle {
+    func imagePosition(title: String?, 
+                       image: UIImage?,
+                       state: UIControl.State = .normal,
+                       space: CGFloat = 10,
+                       position: ImagePosition = .left,
+                       isSureTitleCompress: Bool = false) -> SFExStyle {
         base.imageView?.contentMode = .center
         base.setImage(image, for: state)
         base.titleLabel?.contentMode = .center
@@ -213,35 +219,34 @@ public extension SFExStyle where Base: UIButton {
     }
     
     /// 修改图片位置
-    ///
     /// - Parameters:
     ///   - title: 文字
     ///   - space: 间距
     ///   - position: 图片的位置
+    ///   - isSureTitleCompress: 宽度不足时是否压缩文字
+    /// - Returns: self
     @discardableResult
     func imageSpace(title: String, space: CGFloat, position: ImagePosition, isSureTitleCompress: Bool) -> SFExStyle {
         /*
              UIButton默认布局是图片在左、文字在右，图片和文字之间边距为0，图片和文字整体居中显示
-             当同时存在image和title时，imageEdgeInsets中的top、left、bottom相对于UIButton，right相对于title，同理，titleEdgeInsets中的top、bottom、rright相对于UIButton，left相对于title
+             当同时存在image和title时，imageEdgeInsets中的top、left、bottom相对于UIButton，right相对于title，同理，titleEdgeInsets中的top、bottom、right相对于UIButton，left相对于title
              imageEdgeInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0) 表示图片整体向下移动5
              imageEdgeInsets = UIEdgeInsets.init(top: -5, left: 4, bottom: 5, right: -4) 表示图片整体向上移动5，向右移动4
-             
-             默认的情况下当按钮比较小时会自动保留图片的尺寸和将文字部分缩小，一般出现在图标和文字上下布局，button的整体较小时,因为按钮总体宽度比较小，导致系统给分配的宽度不足以完整显示文字
-             
-        作者：荔枝lizhi_iOS程序猿
-        链接：https://www.jianshu.com/p/c1934a41cdbb
+             默认的情况下当按钮比较小时会自动保留图片的尺寸和将文字部分缩小，一般出现在图标和文字上下布局，button的整体较小时，因为按钮总体宽度比较小，导致系统给分配的宽度不足以完整显示文字
          */
         
         // 防止因为通过约束布局导致titleRect获取的rect不准
         self.layoutIfNeeded()
         let imageSize = base.imageView?.image?.size ?? .zero
-        let titleSize = base.titleRect(forContentRect: base.frame).size // 系统为titleLabel分配的size
-        
-        var titleNeedSize: CGSize = .zero // 展示文字实际所需的size
+        // 系统为titleLabel分配的size
+        let titleSize = base.titleRect(forContentRect: base.frame).size
+        // 展示文字实际所需的size
+        var titleNeedSize: CGSize = .zero
         if let font = base.titleLabel?.font {
             titleNeedSize = title.size(withAttributes: [NSAttributedString.Key.font: font])
         }
-        var isTitleCompress = false // 文字是否被系统压缩
+        // 文字是否被系统压缩
+        var isTitleCompress = false
         if isSureTitleCompress {
             isTitleCompress = true
         } else if titleNeedSize.width > titleSize.width {

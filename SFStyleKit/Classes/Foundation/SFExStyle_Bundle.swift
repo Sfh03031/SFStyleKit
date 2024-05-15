@@ -35,14 +35,24 @@ public extension SFExStyle where Base: Bundle {
         return base.infoDictionary?["CFBundleName"] as? String ?? ""
     }
     
+    
     /// 获取资源bundle， 加载图片、文件等资源
+    /// - Parameters:
+    ///   - cls: 任意类
+    ///   - bundleName: bundle名字
+    /// - Returns: 目标bundle
     static func loadBundle(cls: AnyClass, bundleName: String) -> Bundle? {
         let bundle = Bundle(for: cls)
         guard let path = bundle.path(forResource: bundleName, ofType: "bundle") else { return nil }
         return Bundle(path: path)
     }
     
+    
     /// 跨模块获取bundle, 获取xib storyboard
+    /// - Parameters:
+    ///   - cls: 任意类
+    ///   - module: 模块名
+    /// - Returns: 目标bundle
     static func moduleBundle(_ cls: AnyClass, _ module: String? = nil) -> Bundle? {
         let bundle = Bundle(for: cls)
         guard let bundleURL = bundle.url(forResource: module, withExtension: "bundle") else { return nil }

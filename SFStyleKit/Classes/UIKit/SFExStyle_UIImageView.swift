@@ -111,7 +111,7 @@ public extension UIImageView {
         }
     }
     
-    /// /// 通过NSDataAsset加载gif
+    /// 通过NSDataAsset加载gif
     func loadGif(asset: String) {
         DispatchQueue.global().async {
             let image = UIImage.gif(asset: asset)

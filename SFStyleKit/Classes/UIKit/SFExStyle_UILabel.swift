@@ -151,7 +151,7 @@ public extension UILabel {
     convenience init(frame: CGRect = CGRectZero,
                      bgColor: UIColor = .clear,
                      text: String = "",
-                     textColor: UIColor = UIColor.sf.hex(hex: 0x222222),
+                     textColor: UIColor = .hex_222222,
                      font: UIFont = UIFont.systemFont(ofSize: 14.0),
                      aligment: NSTextAlignment = .natural,
                      lines: Int = 1,

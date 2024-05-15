@@ -13,7 +13,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.sf.backgroundColor(.white).add(subview: backView)
         
         print("idfv: \(UIDevice.current.sf.idfv)")
         print("StringWithUUID: \(UIDevice.current.sf.StringWithUUID)")
@@ -41,24 +40,31 @@ class ViewController: UIViewController {
         
         print("memoryUsage: \(UIApplication.shared.sf.memoryUsage)")
         
-        backView.layer.sf.borderColor(UIColor.brown.cgColor).borderWidth(2.0)
-    }
-    
-    lazy var backView: UIView = {
-        let view = UIView(frame: CGRect(x: 10, y: 50, width: self.view.bounds.width - 20, height: self.view.bounds.height / 2 - 50))
-        view.sf
-            .backgroundColor(UIColor.sf.random)
+        let backView = UIView()
+        backView.sf
+        // 位置和尺寸
+            .frame(CGRect(x: 10, y: 50, width: self.view.bounds.width - 20, height: self.view.bounds.height / 2 - 50))
+        // 背景色
+            .backgroundColor(.random)
+        // 设置边框
+            .makeBorder(color: .brown, with: 1.0)
+        // 设置圆角
+            .makeCornerRadius(corners: [.topLeft, .topRight], radius: 10.0)
+        // 设置阴影
             .makeShadow(5, color: .hex_bbcdc5, offset: CGSize(width: 5, height: 10), opacity: 1)
-            .makeGradient([UIColor.green.cgColor, UIColor.orange.cgColor, UIColor.yellow.cgColor], locations: [0, 0.4, 1], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
+        // 右上角显示小红点
             .showBadgePoint()
+        // 点击事件回调
             .addTapAction { view in
+                // 右上角不显示小红点
                 view?.sf.hiddenBadgePoint()
             }
-            .addSubview(alphaLabel)
-            .addSubview(broveLabel)
-            .addSubview(btn)
-        return view
-    }()
+        // 添加子视图
+            .add(subview: alphaLabel)
+            .add(subview: broveLabel)
+            .add(subview: btn)
+        self.view.sf.backgroundColor(.white).add(subview: backView)
+    }
     
     lazy var alphaLabel: UILabel = {
         let label = UILabel.init(frame: CGRect(x: 150, y: 50, width: self.view.bounds.width - 300, height: 40),
@@ -86,7 +92,8 @@ class ViewController: UIViewController {
             .font(UIFont.systemFont(ofSize: 15, weight: .semibold))
             .alignment(.center)
             .lines(2)
-            .makeCornerRadius(corners: [.topLeft, .bottomRight], radius: 20.0)
+            .makeCornerRadius(corners: [.topRight, .bottomLeft], radius: 20.0)
+            .makeCustomizeBorder(color: .red, with: 2, rectSide: [.left, .top, .bottom], topRight: 20, bottomLeft: 20, isSuperClip: true, isDash: false)
             .addTapAction { [weak self] view in
                 guard let self = self else { return }
                 UIAlertController.alertStyle(.alert).message("点击了 broveLabel\n\(value)").show(self).hidden(2)

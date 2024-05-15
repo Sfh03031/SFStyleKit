@@ -220,11 +220,9 @@ public extension SFExStyle where Base == String {
     }
     
     /// 获取指定位置和长度的字符串
-    ///
     /// - Parameters:
     ///   - start: 起始位置
     ///   - length: 长度, 默认到结束
-    ///
     /// - Returns: 字符串
     func subString(start: Int, length: Int = -1) -> String? {
         if base.count < start + length { return nil }
@@ -257,13 +255,12 @@ public extension SFExStyle where Base == String {
     /// - Parameters:
     ///   - font: 字体
     ///   - width: 宽度
-    ///
     /// - Returns: 文本高度
     func height(font: UIFont, width: CGFloat) -> CGFloat {
-        base.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)),
-                          options: .usesLineFragmentOrigin,
-                          attributes: [.font: font],
-                          context: nil).size.height
+        return base.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)),
+                                 options: .usesLineFragmentOrigin,
+                                 attributes: [.font: font],
+                                 context: nil).size.height
     }
     
     /// 判断地区码对应的地区是否存在
@@ -315,15 +312,16 @@ public extension SFExStyle where Base == String {
 
 
 public extension String {
-    /// html字符串转NSAttributedString富文本
-    ///
+    
+    /// html字符串转富文本
     /// - Parameters:
     ///   - font: 字体，默认15
-    ///   - lineHeight: 行高， 默认21
+    ///   - lineHeight: 行高，默认21
     ///   - isFit: 是否按给定的字号和行高展示富文本
-    ///
     /// - Returns: NSMutableAttributedString富文本
-    func htmlAttributedString(font: UIFont = UIFont.systemFont(ofSize: 15, weight: .regular), lineHeight: CGFloat = 21, isFit: Bool = false) -> NSMutableAttributedString? {
+    func htmlAttributedString(font: UIFont = UIFont.systemFont(ofSize: 15, weight: .regular), 
+                              lineHeight: CGFloat = 21,
+                              isFit: Bool = false) -> NSMutableAttributedString? {
         guard let data = self.data(using: String.Encoding.utf8, allowLossyConversion: false) else { return nil }
         
         let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [

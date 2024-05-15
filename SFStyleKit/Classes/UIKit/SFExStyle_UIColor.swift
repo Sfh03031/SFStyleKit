@@ -106,6 +106,41 @@ public extension SFExStyle where Base: UIColor {
     }
 }
 
+//MARK: 常用色
+public extension UIColor {
+    class var random: UIColor { sf.random }
+    
+    class var hex_222222: UIColor { sf.hexColor(hex: "#222222") }
+    class var hex_AFB3BF: UIColor { sf.hexColor(hex: "#AFB3BF") }
+    class var hex_C4CBDE: UIColor { sf.hexColor(hex: "#C4CBDE") }
+    class var hex_FFC800: UIColor { sf.hexColor(hex: "#FFC800") }
+    
+    class var hex_F5F6F9: UIColor { sf.hexColor(hex: "#F5F6F9") }
+    class var hex_F9FAFC: UIColor { sf.hexColor(hex: "#F9FAFC") }
+    class var hex_F5F5F9: UIColor { sf.hexColor(hex: "#F5F5F9") }
+    class var hex_FFEA00: UIColor { sf.hexColor(hex: "#FFEA00") }
+    
+    class var hex_FFF2EB: UIColor { sf.hexColor(hex: "#FFF2EB") }
+    class var hex_008AFF: UIColor { sf.hexColor(hex: "#008AFF") }
+    class var hex_E7F4FF: UIColor { sf.hexColor(hex: "#E7F4FF") }
+    class var hex_32D2FF: UIColor { sf.hexColor(hex: "#32D2FF") }
+    
+    class var hex_62CA00: UIColor { sf.hexColor(hex: "#62CA00") }
+    class var hex_DFFADC: UIColor { sf.hexColor(hex: "#DFFADC") }
+    class var hex_FF2E00: UIColor { sf.hexColor(hex: "#FF2E00") }
+    class var hex_FFE6E0: UIColor { sf.hexColor(hex: "#FFE6E0") }
+    
+    class var hex_FF3B00: UIColor { sf.hexColor(hex: "#FF3B00") }
+    class var hex_FF5200: UIColor { sf.hexColor(hex: "#FF5200") }
+    class var hex_FFAF00: UIColor { sf.hexColor(hex: "#FFAF00") }
+    class var hex_FFFAC8: UIColor { sf.hexColor(hex: "#FFFAC8") }
+    
+    class var hex_FF7800: UIColor { sf.hexColor(hex: "#FF7800") }
+    class var hex_FFF6E3: UIColor { sf.hexColor(hex: "#FFF6E3") }
+    class var hex_15D25F: UIColor { sf.hexColor(hex: "#15D25F") }
+    class var hex_E6FFF0: UIColor { sf.hexColor(hex: "#E6FFF0") }
+}
+
 //MARK: 中国色彩
 public extension UIColor {
     /// 丁香色

@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SFStyleKit'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of SFStyleKit.'
+  s.version          = '0.1.2'
+  s.summary          = 'SFStyleKit is a library that includes commonly used extensions and supports chain writing for UIKit,QuartzCore,Foundation,Etc. / SFStyleKit是一个支持链式编程的swift库，同时提供了许多有用的扩展。'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,17 +18,17 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+目前支持了UIKit、CALayer等共22种类型的链式编程写法，同时为UIDevice、UIApplication、UIView、UIImage、UIImageView、UIButton、UIColor等提供了各式扩展，例如UIDevice的设备型号、系统版本、电池、屏幕方向、屏幕亮度、设备音量、是否越狱、磁盘总/可用大小等属性或方法，UIApplication的缓存路径、内存使用情况，UIView的点击事件、动画，UIImage的加载gif数据、保存到系统相册，UIImageView的预览、加载gif图片，UIButton的调整图片和文字相对位置，UIColor的随机色、中国色、潘通年度色...
                        DESC
 
   s.homepage         = 'https://github.com/Sfh03031/SFStyleKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Sfh03031' => 'sfhery@foxmail.com' }
+  s.author           = { 'Sfh03031' => 'sfh894645252@163.com' }
   s.source           = { :git => 'https://github.com/Sfh03031/SFStyleKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '12.0'
 
   s.source_files = 'SFStyleKit/Classes/**/*'
   
@@ -39,4 +39,5 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+  
 end

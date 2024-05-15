@@ -18,7 +18,6 @@ import SVProgressHUD
 
 public extension SFExStyle where Base: UIImage {
     /// 保存图片到相册
-    ///
     /// - Parameter complete: 成功或失败
     @discardableResult
     func save2PhotoAlbum() -> SFExStyle {
