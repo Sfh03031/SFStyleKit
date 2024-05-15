@@ -24,7 +24,8 @@ Pantone's annual colors...and so on.
 
 
 
-Like this(zh:像这样):
+Like this:
+
 ```swift
         let backView = UIView()
         backView.sf
@@ -58,7 +59,7 @@ SFStyleKit also provides many easy-to-use extensions that can be viewed based on
 (zh: SFStyleKit也提供了许多易用的扩展，这些扩展的详细信息可在源码里查看。)
 
 
-Like Colors(zh: 像颜色):
+Like Colors:
 
 ```swift
     /// Chinese Colors(zh: 中国色彩)
@@ -232,10 +233,8 @@ class ViewController: UIViewController {
 
 }
 ```
-### Customized(zh:自定义) 
-You can also create your own methods.
-
-(zh: 你也可以创建你自己的方法)
+### Customized
+You can also create your own methods.(zh: 你也可以创建你自己的方法。)
 
 Like this:
 ```swift
