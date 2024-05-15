@@ -25,27 +25,29 @@ such as UIDevice's device model, system version, battery, screen orientation, sc
 
 UIApplication's cache path and memory usage;
 
-(zh: UIApplication的缓存路径、内存使用情况;)
+(zh: UIApplication的缓存路径、内存使用情况；)
 
 UIView's click events and animations;
 
-(zh: UIView的点击事件、动画)
+(zh: UIView的点击事件、动画；)
 
 UIImage's loading of gif data and saving to system albums;
 
-(zh: UIImage的加载gif数据、保存到系统相册)
+(zh: UIImage的加载gif数据、保存到系统相册；)
 
 UIImageView's preview and loading of gif images;
 
-(zh: UIImageView的预览、加载gif图片)
+(zh: UIImageView的预览、加载gif图片；)
 
 UIButton's adjustment the relative position of images and text;
 
-(zh: UIButton的调整图片和文字相对位置)
+(zh: UIButton的调整图片和文字相对位置；)
 
-UIColor's random colors, Chinese colors, Pantone's annual colors...and so on
+UIColor's random colors, Chinese colors, Pantone's annual colors...and so on.
 
-(zh: UIColor的随机色、中国色、潘通年度色...等等)
+(zh: UIColor的随机色、中国色、潘通年度色...等等。)
+
+
 
 Like this(zh:像这样):
 ```swift
@@ -74,13 +76,12 @@ Like this(zh:像这样):
             .add(subview: btn)
         self.view.sf.backgroundColor(.white).add(subview: backView)
 ```
-you can see the code in the Example Project.
-
-(zh: 可以在示例工程查看以上代码)
+you can see the code in the Example Project.(zh: 可以在示例工程查看以上代码。)
 
 SFStyleKit also provides many easy-to-use extensions that can be viewed based on the source code.
 
 (zh: SFStyleKit也提供了许多易用的扩展，这些扩展的详细信息可在源码里查看。)
+
 
 Like Colors(zh: 像颜色):
 
@@ -113,9 +114,7 @@ Like Colors(zh: 像颜色):
     
 ```
 
-Like get some current device's infomations
-
-(zh: 像获取一些当前设备信息):
+Like get some current device's infomations(zh: 像获取一些当前设备信息):
 
 ```swift
     print("idfv: \(UIDevice.current.sf.idfv)")
