@@ -12,25 +12,42 @@
 ## Introduction
 
 SFStyleKit is a swift library that supports chain programming, so you don't need to write property name and equal operator many times anymore.
+
 (zh: SFStyleKit是一个支持链式编程写法的swift库，使用它就不需要写很多的属性名和等于号了。)
+
 At present, it supports 22 types of chain programming methods such as UIKit and CALayer, and provides various extensions for UIDevice, UIApplication, UIView, UIImage, UIImageView, UIButton, UIColor, etc. 
+
 (zh: 目前，它支持UIKit和CALayer共22种类型的链式编程写法，同时为UIDevice、UIApplication、UIView、UIImage、UIImageView、UIButton、UIColor等提供了各式扩展。)
+
 such as UIDevice's device model, system version, battery, screen orientation, screen brightness, device volume, jailbreak status, total/available disk size and other properties or methods; 
+
 (zh: 例如UIDevice的设备型号、系统版本、电池、屏幕方向、屏幕亮度、设备音量、是否越狱、磁盘总/可用大小等属性或方法;)
+
 UIApplication's cache path and memory usage;
+
 (zh: UIApplication的缓存路径、内存使用情况;)
+
 UIView's click events and animations;
+
 (zh: UIView的点击事件、动画)
+
 UIImage's loading of gif data and saving to system albums;
+
 (zh: UIImage的加载gif数据、保存到系统相册)
+
 UIImageView's preview and loading of gif images;
+
 (zh: UIImageView的预览、加载gif图片)
+
 UIButton's adjustment the relative position of images and text;
+
 (zh: UIButton的调整图片和文字相对位置)
+
 UIColor's random colors, Chinese colors, Pantone's annual colors...and so on
+
 (zh: UIColor的随机色、中国色、潘通年度色...等等)
 
-Like this:
+Like this(zh:像这样):
 ```swift
         let backView = UIView()
         backView.sf
@@ -57,9 +74,13 @@ Like this:
             .add(subview: btn)
         self.view.sf.backgroundColor(.white).add(subview: backView)
 ```
-you can see the code in the Example Project.(zh: 可以在示例工程查看以上代码)
+you can see the code in the Example Project.
 
-SFStyleKit also provides many easy-to-use extensions that can be viewed based on the source code.(zh: SFStyleKit也提供了许多易用的扩展，这些扩展的详细信息可在源码里查看。)
+(zh: 可以在示例工程查看以上代码)
+
+SFStyleKit also provides many easy-to-use extensions that can be viewed based on the source code.
+
+(zh: SFStyleKit也提供了许多易用的扩展，这些扩展的详细信息可在源码里查看。)
 
 Like Colors(zh: 像颜色):
 
@@ -92,7 +113,9 @@ Like Colors(zh: 像颜色):
     
 ```
 
-Like get some current device's infomations(zh: 像获取一些当前设备信息):
+Like get some current device's infomations
+
+(zh: 像获取一些当前设备信息):
 
 ```swift
     print("idfv: \(UIDevice.current.sf.idfv)")
@@ -236,7 +259,9 @@ class ViewController: UIViewController {
 }
 ```
 ### Customized(zh:自定义) 
-You can also create your own methods.(zh: 你也可以创建你自己的方法)
+You can also create your own methods.
+
+(zh: 你也可以创建你自己的方法)
 
 Like this:
 ```swift
@@ -297,14 +322,23 @@ UIKit
 ## Change log
 
 2024.05.15, 0.1.2
-- 1.Add new common color extensions(zh:增加新的常用色扩展)
-- 2.Adjust the hierarchical structure of UIView extension and update several comments(zh:调整UIView扩展的层级结构，更新若干注释)
+- 1.Add new common color extensions
+
+    (zh:增加新的常用色扩展)
+    
+- 2.Adjust the hierarchical structure of UIView extension and update several comments
+
+    (zh:调整UIView扩展的层级结构，更新若干注释)
 
 2024.04.15, 0.1.1
-- Initial version(zh:初始版本)
+- Initial version
+
+    (zh:初始版本)
 
 ## Warning
-If the system native method has a return value or a property that is read-only, this extension is not suitable for use.(zh: 如果系统原生方法有返回值或者属性是只读属性，则不适用这种链式写法的扩展。)
+If the system native method has a return value or a property that is read-only, this extension is not suitable for use.
+
+(zh: 如果系统原生方法有返回值或者属性是只读属性，则不适用这种链式写法的扩展。)
  
 ## Contributing
 Please make an issue or pull request if you have any request.
