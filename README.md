@@ -12,40 +12,15 @@
 ## Introduction
 
 SFStyleKit is a swift library that supports chain programming, so you don't need to write property name and equal operator many times anymore.
+At present, it supports 22 types of chain programming methods such as UIKit and CALayer, and provides various extensions for UIDevice,
+UIApplication, UIView, UIImage, UIImageView, UIButton, UIColor, etc. such as UIDevice's device model, system version, battery, screen
+orientation, screen brightness, device volume, jailbreak status, total/available disk size and other properties or methods; UIApplication's
+cache path and memory usage; UIView's click events and animations; UIImage's loading of gif data and saving to system albums; UIImageView's
+preview and loading of gif images; UIButton's adjustment the relative position of images and text; UIColor's random colors, Chinese colors,
+Pantone's annual colors...and so on.
 
-(zh: SFStyleKit是一个支持链式编程写法的swift库，使用它就不需要写很多的属性名和等于号了。)
+(zh: SFStyleKit是一个支持链式编程写法的swift库，使用它就不需要写很多的属性名和等于号了。目前，它支持UIKit和CALayer共22种类型的链式编程写法，同时为UIDevice、UIApplication、UIView、UIImage、UIImageView、UIButton、UIColor等提供了各式扩展。例如UIDevice的设备型号、系统版本、电池、屏幕方向、屏幕亮度、设备音量、是否越狱、磁盘总/可用大小等属性或方法；UIApplication的缓存路径、内存使用情况；UIView的点击事件、动画；UIImage的加载gif数据、保存到系统相册；UIImageView的预览、加载gif图片；UIButton的调整图片和文字相对位置；UIColor的随机色、中国色、潘通年度色...等等。)
 
-At present, it supports 22 types of chain programming methods such as UIKit and CALayer, and provides various extensions for UIDevice, UIApplication, UIView, UIImage, UIImageView, UIButton, UIColor, etc. 
-
-(zh: 目前，它支持UIKit和CALayer共22种类型的链式编程写法，同时为UIDevice、UIApplication、UIView、UIImage、UIImageView、UIButton、UIColor等提供了各式扩展。)
-
-such as UIDevice's device model, system version, battery, screen orientation, screen brightness, device volume, jailbreak status, total/available disk size and other properties or methods; 
-
-(zh: 例如UIDevice的设备型号、系统版本、电池、屏幕方向、屏幕亮度、设备音量、是否越狱、磁盘总/可用大小等属性或方法;)
-
-UIApplication's cache path and memory usage;
-
-(zh: UIApplication的缓存路径、内存使用情况；)
-
-UIView's click events and animations;
-
-(zh: UIView的点击事件、动画；)
-
-UIImage's loading of gif data and saving to system albums;
-
-(zh: UIImage的加载gif数据、保存到系统相册；)
-
-UIImageView's preview and loading of gif images;
-
-(zh: UIImageView的预览、加载gif图片；)
-
-UIButton's adjustment the relative position of images and text;
-
-(zh: UIButton的调整图片和文字相对位置；)
-
-UIColor's random colors, Chinese colors, Pantone's annual colors...and so on.
-
-(zh: UIColor的随机色、中国色、潘通年度色...等等。)
 
 
 
