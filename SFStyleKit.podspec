@@ -27,7 +27,8 @@ Pod::Spec.new do |s|
   s.author           = { 'Sfh03031' => 'sfh894645252@163.com' }
   s.source           = { :git => 'https://github.com/Sfh03031/SFStyleKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
+  
+  s.swift_versions = '5'
   s.ios.deployment_target = '12.0'
 
   s.source_files = 'SFStyleKit/Classes/**/*'
