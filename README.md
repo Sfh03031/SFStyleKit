@@ -294,6 +294,15 @@ UIKit
 
 ## Change log
 
+2024.07.11, 0.1.3
+- 1.Fix bugs
+
+    (zh:修复bug)
+
+- 2.Add new extensions with UICollectionView and UITableView
+
+    (zh:为UICollectionView和UITableView扩展新的注册方法)
+
 2024.05.15, 0.1.2
 - 1.Add new common color extensions
 
