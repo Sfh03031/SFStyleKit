@@ -168,13 +168,13 @@ public extension SFExStyle where Base: UIView {
 
     @discardableResult
     func bringSubviewToFront(_ view: UIView) -> SFExStyle {
-        base.bringSubview(toFront: view)
+        base.bringSubviewToFront(view)
         return self
     }
 
     @discardableResult
     func sendSubviewToBack(_ view: UIView) -> SFExStyle {
-        base.sendSubview(toBack: view)
+        base.sendSubviewToBack(view)
         return self
     }
     
@@ -734,13 +734,13 @@ public extension SFExStyle where Base: UIView {
         }
         switch animationType {
         case .linear:
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         case .easeIn:
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
         case .easeOut:
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         case .easeInOut:
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         }
         CATransaction.setCompletionBlock(completion)
         animation.duration = duration
@@ -821,7 +821,7 @@ public extension SFExStyle where Base: UIView {
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = color.cgColor
         shapeLayer.lineWidth = with
-        shapeLayer.lineJoin = kCALineJoinRound
+        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
         
         // 每一段虚线长度和每两段虚线之间的间隔
         if isDash {

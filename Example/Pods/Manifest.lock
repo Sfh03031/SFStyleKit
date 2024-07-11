@@ -4,7 +4,7 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - SFStyleKit (0.1.0)
+  - SFStyleKit (0.1.2)
 
 DEPENDENCIES:
   - FBSnapshotTestCase (~> 2.1.4)
@@ -20,8 +20,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  SFStyleKit: c3d54275bb1eb4e555df6020c1eea99f028aa9ea
+  SFStyleKit: 394781df50260e0c659c84437a21d226a686636f
 
 PODFILE CHECKSUM: 09cbd9df34cffd909c010cdd3b07802da9fd49ac
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0

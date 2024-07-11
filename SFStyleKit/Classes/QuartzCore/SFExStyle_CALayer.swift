@@ -5,7 +5,7 @@
 //  Created by sfh on 2024/4/12.
 //
 
-import Foundation
+import QuartzCore
 
 //MARK: - 系统Api支持
 
@@ -151,7 +151,7 @@ public extension SFExStyle where Base: CALayer {
 
     @discardableResult 
     func contentsGravity(_ contentsGravity: CALayerContentsGravity) -> SFExStyle {
-        base.contentsGravity = contentsGravity as String
+        base.contentsGravity = contentsGravity
         return self
     }
 
@@ -170,7 +170,7 @@ public extension SFExStyle where Base: CALayer {
     @available(iOS 10.0, *)
     @discardableResult 
     func contentsFormat(_ contentsFormat: CALayerContentsFormat) -> SFExStyle {
-        base.contentsFormat = contentsFormat as String
+        base.contentsFormat = contentsFormat
         return self
     }
     
@@ -183,13 +183,13 @@ public extension SFExStyle where Base: CALayer {
 
     @discardableResult 
     func minificationFilter(_ minificationFilter: CALayerContentsFilter) -> SFExStyle {
-        base.minificationFilter = minificationFilter as String
+        base.minificationFilter = minificationFilter
         return self
     }
 
     @discardableResult 
     func magnificationFilter(_ magnificationFilter: CALayerContentsFilter) -> SFExStyle {
-        base.magnificationFilter = magnificationFilter as String
+        base.magnificationFilter = magnificationFilter
         return self
     }
 
