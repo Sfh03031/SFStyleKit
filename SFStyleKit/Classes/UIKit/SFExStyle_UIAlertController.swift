@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: - 扩展
+// MARK: 扩展
 
 public extension SFExStyle where Base: UIAlertController {
     
@@ -153,7 +153,6 @@ public extension SFExStyle where Base: UIAlertController {
 }
 
 public extension UIAlertController {
-    
     
     /// 封装系统弹窗
     /// - Parameters:

@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: - 扩展
+// MARK: 扩展
 
 public extension SFExStyle where Base: UIApplication {
     

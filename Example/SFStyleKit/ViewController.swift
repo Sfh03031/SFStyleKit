@@ -59,6 +59,9 @@ class ViewController: UIViewController {
                 // 右上角不显示小红点
                 view?.sf.hiddenBadgePoint()
             }
+            .addTapsAction(tapsRequired: 2, handler: { view in
+                print("点击了两下")
+            })
         // 添加子视图
             .add(subview: alphaLabel)
             .add(subview: broveLabel)

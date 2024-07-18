@@ -153,7 +153,6 @@ public extension SFExStyle where Base == String {
     }
     
     /// 时间戳 转 0000-00-00 00:00:00
-    ///
     /// - Parameter timeStamp: 时间戳
     /// - Returns: 年月日时分秒
     var timeStampToData: String {
@@ -306,7 +305,6 @@ public extension SFExStyle where Base == String {
         }
         return true
     }
-    
     
 }
 

@@ -8,15 +8,13 @@
 
 import UIKit
 
-//MARK: - 扩展
+// MARK: 扩展
 
 public extension SFExStyle where Base: UIColor {
     /// 十六进制颜色
-    ///
     /// - Parameter 
     ///   - hex: 16进制字符串，带不带“#”都可以
     ///   - alpha: [0, 1]
-    ///
     /// - Returns: UIColor
     static func hexColor(hex: String, alpha: Float = 1) -> UIColor {
         // 去除空格等
@@ -43,7 +41,6 @@ public extension SFExStyle where Base: UIColor {
     }
     
     /// 十六进制颜色
-    ///
     /// - Parameter hex: 16进制数字 类似 0xFF0000
     /// - Returns: UIColor
     static func hex(hex: uint) -> UIColor {
@@ -54,7 +51,6 @@ public extension SFExStyle where Base: UIColor {
     }
     
     /// 随机颜色
-    ///
     /// - Returns: UIColor
     static var random: UIColor {
         return RGB(R: Float(arc4random_uniform(256)),
@@ -63,7 +59,6 @@ public extension SFExStyle where Base: UIColor {
     }
     
     /// RGB颜色
-    ///
     /// - Parameters:
     ///   - R: red
     ///   - G: green
@@ -106,7 +101,7 @@ public extension SFExStyle where Base: UIColor {
     }
 }
 
-//MARK: 常用色
+// MARK: - 常用色
 public extension UIColor {
     class var random: UIColor { sf.random }
     
@@ -141,7 +136,7 @@ public extension UIColor {
     class var hex_E6FFF0: UIColor { sf.hexColor(hex: "#E6FFF0") }
 }
 
-//MARK: 中国色彩
+// MARK: - 中国色彩
 public extension UIColor {
     /// 丁香色
     class var hex_cca4e3: UIColor { sf.hexColor(hex: "#cca4e3") }
@@ -508,7 +503,7 @@ public extension UIColor {
     
 }
 
-//MARK: 潘通年度色
+// MARK: - 潘通年度色
 public extension UIColor {
     /// 2024 - 柔和桃
     class var hex_PT_FFBE98: UIColor { sf.hexColor(hex: "#FFBE98") }

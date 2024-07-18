@@ -14,7 +14,7 @@ import Haptica
 import SVProgressHUD
 #endif
 
-// MARK: - 扩展
+// MARK: 扩展
 
 public extension SFExStyle where Base: UIImage {
     /// 保存图片到相册

@@ -4,6 +4,9 @@ platform :ios, '10.0'
 
 target 'SFStyleKit_Example' do
   pod 'SFStyleKit', :path => '../'
+  
+  pod 'RxSwift'
+  pod 'RxCocoa'
 
   target 'SFStyleKit_Tests' do
     inherit! :search_paths

@@ -10,7 +10,6 @@ import Foundation
 
 public extension Array {
     /// 数组去重，传入数组元素
-    ///
     /// 泛型E，约束类型为Equatable协议，
     /// 数组的完整写法为 Array<Element>，其中 Element 是这个数组中唯一允许存在的数据类型。也可以使用像 [Element]这样的简单语法
     func filterDuplicates<E: Equatable>(_ filter: (Element) -> E) -> [Element] {

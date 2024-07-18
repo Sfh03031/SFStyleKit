@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: - 系统Api支持
+// MARK: 系统Api支持
 
 public extension SFExStyle where Base: UILabel {
     
@@ -125,16 +125,14 @@ public extension SFExStyle where Base: UILabel {
         base.preferredMaxLayoutWidth = preferredMaxLayoutWidth
         return self
     }
-    
-    
+        
 }
 
-//MARK: - 扩展
+// MARK: - 扩展
 
 public extension SFExStyle where Base: UILabel {
     
     /// label添加中划线
-    ///
     /// - Parameters:
     ///   - text: 内容
     ///   - value: value 越大,划线越粗

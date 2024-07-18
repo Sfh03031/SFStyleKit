@@ -35,8 +35,7 @@ public extension SFExStyle where Base: Bundle {
         return base.infoDictionary?["CFBundleName"] as? String ?? ""
     }
     
-    
-    /// 获取资源bundle， 加载图片、文件等资源
+    /// 获取资源bundle，加载图片、文件等资源
     /// - Parameters:
     ///   - cls: 任意类
     ///   - bundleName: bundle名字
@@ -46,7 +45,6 @@ public extension SFExStyle where Base: Bundle {
         guard let path = bundle.path(forResource: bundleName, ofType: "bundle") else { return nil }
         return Bundle(path: path)
     }
-    
     
     /// 跨模块获取bundle, 获取xib storyboard
     /// - Parameters:

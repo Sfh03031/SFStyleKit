@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 #endif
 
-//MARK: -  系统Api支持
+// MARK: 系统Api支持
 
 public extension SFExStyle where Base: UIView {
     
@@ -450,7 +450,7 @@ public extension SFExStyle where Base: UIView {
     }
 }
 
-//MARK: - 扩展
+// MARK: - 扩展
 
 public extension SFExStyle where Base: UIView {
     
@@ -562,6 +562,21 @@ public extension SFExStyle where Base: UIView {
     func addTapAction(handler: ((_ view: UIView?) -> Void)?) -> SFExStyle {
         base.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: base) { tap in
+            handler?(tap.view)
+        }
+        base.addGestureRecognizer(tap)
+        return self
+    }
+    
+    /// 添加点击事件回调
+    /// - Parameters:
+    ///   - tapsRequired: 点击次数
+    ///   - handler: 回调
+    /// - Returns: self
+    @discardableResult
+    func addTapsAction(tapsRequired:Int, handler: ((_ view: UIView?) -> Void)?) -> SFExStyle {
+        base.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer.init(target: base, tapRequired: tapsRequired) { tap in
             handler?(tap.view)
         }
         base.addGestureRecognizer(tap)
@@ -712,7 +727,6 @@ public enum ShakeAnimationType {
 public extension SFExStyle where Base: UIView {
     
     /// 摇动视图
-    ///
     /// - Parameters:
     ///   - direction: 摇动方向，default = .horizontal
     ///   - duration: 以秒为单位的动画持续时间，default = 0.6
@@ -870,7 +884,8 @@ public extension SFExStyle where Base: UIView {
     
 }
 
-//MARK: -  get/set
+// MARK: - get/set
+
 public extension SFExStyle where Base: UIView {
     var size: CGSize {
         get {
@@ -1000,11 +1015,13 @@ public extension SFExStyle where Base: UIView {
     }
 }
 
-//MARK: - 扩展UITapGestureRecognizer，添加回调
+// MARK: - 扩展UITapGestureRecognizer，添加回调
+
 public extension UITapGestureRecognizer {
     
-    convenience init(target: Any?, handler: ((_ tap: UITapGestureRecognizer) -> Void)?) {
+    convenience init(target: Any?, tapRequired: Int = 1, handler: ((_ tap: UITapGestureRecognizer) -> Void)?) {
         self.init(target: nil, action: nil)
+        self.numberOfTapsRequired = tapRequired
         self.addTarget(self, action: #selector(didTaped))
         self.sf_tapHandler = handler
     }

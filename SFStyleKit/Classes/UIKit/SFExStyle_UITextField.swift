@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 #endif
 
-//MARK: - 系统Api支持
+// MARK: 系统Api支持
 
 public extension SFExStyle where Base: UITextField {
     
@@ -52,11 +52,11 @@ public extension SFExStyle where Base: UITextField {
         return self
     }
 
-//    @discardableResult
-//    func defaultTextAttributes(_ defaultTextAttributes: [NSAttributedString.Key : Any]) -> SFExStyle {
-//        base.defaultTextAttributes = defaultTextAttributes
-//        return self
-//    }
+    @discardableResult
+    func defaultTextAttributes(_ defaultTextAttributes: [NSAttributedString.Key : Any]) -> SFExStyle {
+        base.defaultTextAttributes = defaultTextAttributes
+        return self
+    }
 
     @discardableResult
     func placeholder(_ placeholder: String?) -> SFExStyle {
@@ -112,11 +112,11 @@ public extension SFExStyle where Base: UITextField {
         return self
     }
 
-//    @discardableResult
-//    func typingAttributes(_ typingAttributes: [NSAttributedString.Key : Any]?) -> SFExStyle {
-//        base.typingAttributes = typingAttributes
-//        return self
-//    }
+    @discardableResult
+    func typingAttributes(_ typingAttributes: [NSAttributedString.Key : Any]?) -> SFExStyle {
+        base.typingAttributes = typingAttributes
+        return self
+    }
 
     @discardableResult
     func clearButtonMode(_ clearButtonMode: UITextField.ViewMode) -> SFExStyle {
@@ -188,7 +188,7 @@ public extension SFExStyle where Base: UITextField {
 }
 
 
-//MARK: - 没有复制,粘贴,选择等的输入框
+// MARK: 没有复制,粘贴,选择等的输入框
 public class SFNoPasteTextField: UITextField {
     
     @IBInspectable public dynamic var perform: Bool = true
@@ -203,7 +203,8 @@ public class SFNoPasteTextField: UITextField {
     }
 }
 
-//MARK: - 扩展
+// MARK: - 扩展
+
 #if canImport(RxSwift) && canImport(RxCocoa)
 
 public extension SFExStyle where Base: UITextField {

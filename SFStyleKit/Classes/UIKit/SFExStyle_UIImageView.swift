@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: - 系统Api支持
+// MARK: 系统Api支持
 
 public extension SFExStyle where Base: UIImageView {
     
@@ -87,7 +87,7 @@ public extension SFExStyle where Base: UIImageView {
 #endif
 }
 
-//MARK: - 扩展
+// MARK: - 扩展
 
 public extension UIImageView {
     

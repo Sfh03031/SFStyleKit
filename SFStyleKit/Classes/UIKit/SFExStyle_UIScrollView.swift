@@ -11,7 +11,7 @@ import UIKit
 import MJRefresh
 #endif
 
-//MARK: - 系统Api支持
+// MARK: 系统Api支持
 
 public extension SFExStyle where Base: UIScrollView {
     
@@ -296,7 +296,7 @@ public extension SFExStyle where Base: UIScrollView {
     }
 }
 
-//MARK: - 扩展
+// MARK: - 扩展
 
 #if canImport(MJRefresh)
 

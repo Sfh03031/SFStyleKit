@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 #endif
 
-//MARK: - 系统Api支持
+// MARK: 系统Api支持
 
 public extension SFExStyle where Base: UITextView {
     
@@ -82,11 +82,11 @@ public extension SFExStyle where Base: UITextView {
         return self
     }
     
-//    @discardableResult
-//    func typingAttributes(_ typingAttributes: [NSAttributedString.Key : Any]) -> SFExStyle {
-//        base.typingAttributes = typingAttributes
-//        return self
-//    }
+    @discardableResult
+    func typingAttributes(_ typingAttributes: [NSAttributedString.Key : Any]) -> SFExStyle {
+        base.typingAttributes = typingAttributes
+        return self
+    }
 
     @discardableResult
     func scrollRangeToVisible(_ range: NSRange) -> SFExStyle {
@@ -118,11 +118,11 @@ public extension SFExStyle where Base: UITextView {
         return self
     }
 
-//    @discardableResult
-//    func linkTextAttributes(_ linkTextAttributes: [NSAttributedString.Key : Any]!) -> SFExStyle {
-//        base.linkTextAttributes = linkTextAttributes
-//        return self
-//    }
+    @discardableResult
+    func linkTextAttributes(_ linkTextAttributes: [NSAttributedString.Key : Any]!) -> SFExStyle {
+        base.linkTextAttributes = linkTextAttributes
+        return self
+    }
 
     @available(iOS 13.0, *)
     @discardableResult
@@ -154,7 +154,8 @@ public extension SFExStyle where Base: UITextView {
 
 }
 
-//MARK: - 没有复制,粘贴,选择等的输入框
+// MARK: 没有复制,粘贴,选择等的输入框
+
 public class SFNoPasteTextView: UITextView {
     
     @IBInspectable public dynamic var perform: Bool = true
@@ -169,7 +170,7 @@ public class SFNoPasteTextView: UITextView {
     }
 }
 
-//MARK: - 扩展
+// MARK: 扩展
 
 #if canImport(RxSwift) && canImport(RxCocoa)
 
