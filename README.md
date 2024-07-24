@@ -147,6 +147,19 @@ If you want to use the latest features of SFStyleKit use normal external source 
 pod 'SFStyleKit', :git => 'https://github.com/Sfh03031/SFStyleKit.git'
 ```
 
+SFStyleKit has created sub library about core protocal, if you only want to use it, simply add the following line to your Podfile: 
+
+```ruby
+pod 'SFStyleKit/Core'
+```
+
+also you can use subspecs, simply add the following line to your Podfile:
+
+```swift
+pod 'SFStyleKit', :subspecs => ['Core']
+```
+
+
 ## Usage
 
 ```swift
