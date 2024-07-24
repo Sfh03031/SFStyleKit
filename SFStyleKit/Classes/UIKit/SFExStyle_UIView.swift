@@ -574,7 +574,7 @@ public extension SFExStyle where Base: UIView {
     ///   - handler: 回调
     /// - Returns: self
     @discardableResult
-    func addTapsAction(tapsRequired:Int, handler: ((_ view: UIView?) -> Void)?) -> SFExStyle {
+    func addTapsAction(tapsRequired: Int, handler: ((_ view: UIView?) -> Void)?) -> SFExStyle {
         base.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: base, tapRequired: tapsRequired) { tap in
             handler?(tap.view)

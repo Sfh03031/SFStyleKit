@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SFStyleKit'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'SFStyleKit is a swift library that supports chain programming and provides many useful extensions for iOS apps. (zh: SFStyleKit是一个为支持链式编程的swift库，同时提供了许多有用的扩展。)'
 
 # This description is used to generate tags and improve search results.
@@ -36,9 +36,14 @@ Pod::Spec.new do |s|
   # s.resource_bundles = {
   #   'SFStyleKit' => ['SFStyleKit/Assets/*.png']
   # }
+  s.static_framework = true
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit', 'Foundation', 'QuartzCore'
   # s.dependency 'AFNetworking', '~> 2.3'
+  
+  s.subspec 'Core' do |ss|
+      ss.source_files = 'SFStyleKit/Classes/SFExStyle.swift'
+  end
   
 end
