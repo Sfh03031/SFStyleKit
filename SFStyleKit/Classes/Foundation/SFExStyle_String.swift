@@ -9,10 +9,6 @@
 import Foundation
 import UIKit
 
-#if canImport(SwiftDate)
-import SwiftDate
-#endif
-
 public let dateFormatter = DateFormatter()
 
 public extension SFExStyle where Base == String {
@@ -168,18 +164,6 @@ public extension SFExStyle where Base == String {
         dateFormatter.dateFormat = "yyyy-MM"
         return dateFormatter.date(from: base)
     }
-    
-    #if canImport(SwiftDate)
-    /// 时间, 距今多久
-    func dateBeforeNow() -> String? {
-        return base.toDate()?.convertTo(timezone: Zones.asiaShanghai).toRelative(since: DateInRegion(Date(), region: .current))
-    }
-
-    /// 时间转换
-    func date(_ format: String = "yyyy-MM-dd HH:mm:ss") -> String? {
-        return base.toDate()?.convertTo(timezone: Zones.asiaShanghai).toFormat(format, locale: Locales.chinese)
-    }
-    #endif
     
     /// base64转image
     func base64StringToImage() -> UIImage? {

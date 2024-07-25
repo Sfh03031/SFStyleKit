@@ -9,37 +9,6 @@
 import UIKit
 import ImageIO
 
-#if canImport(Haptica) && canImport(SVProgressHUD)
-import Haptica
-import SVProgressHUD
-#endif
-
-// MARK: 扩展
-
-public extension SFExStyle where Base: UIImage {
-    /// 保存图片到相册
-    /// - Parameter complete: 成功或失败
-    @discardableResult
-    func save2PhotoAlbum() -> SFExStyle {
-        UIImageWriteToSavedPhotosAlbum(base, base, #selector(base.saveImage(image:didFinishSavingWithError:contextInfo:)), nil)
-        return self
-    }
-}
-
-private extension UIImage {
-    @objc func saveImage(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
-        if error != nil {
-            print("保存失败")
-        } else {
-            print("保存成功")
-            #if canImport(Haptica) && canImport(SVProgressHUD)
-            Haptic.impact(.light).generate()
-            SVProgressHUD.showSuccess(withStatus: "保存成功")
-            #endif
-        }
-    }
-}
-
 // MARK: - 加载gift
 
 public extension UIImage {

@@ -8,11 +8,6 @@
 
 import UIKit
 
-#if canImport(RxSwift) && canImport(RxCocoa)
-import RxCocoa
-import RxSwift
-#endif
-
 // MARK: 系统Api支持
 
 public extension SFExStyle where Base: UIView {
@@ -488,15 +483,6 @@ public extension SFExStyle where Base: UIView {
         }
         return nil
     }
-    
-#if canImport(RxSwift) && canImport(RxCocoa)
-    var tap: ControlEvent<UITapGestureRecognizer> {
-        base.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer()
-        base.addGestureRecognizer(tap)
-        return tap.rx.event
-    }
-#endif
     
     /// 返回该视图所在的父视图
     /// - Parameter of: 父视图Type
