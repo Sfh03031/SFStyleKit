@@ -312,28 +312,33 @@ UIKit
 
 ## Change log
 
+2024.07.25, 0.1.6
+- update extensions
+
+    (zh: 修改一些扩展)
+
 2024.07.11, 0.1.3
 - 1.Fix bugs
 
-    (zh:修复bug)
+    (zh: 修复bug)
 
 - 2.Add new extensions with UICollectionView and UITableView
 
-    (zh:为UICollectionView和UITableView扩展新的注册方法)
+    (zh: 为UICollectionView和UITableView扩展新的注册方法)
 
 2024.05.15, 0.1.2
 - 1.Add new common color extensions
 
-    (zh:增加新的常用色扩展)
+    (zh: 增加新的常用色扩展)
     
 - 2.Adjust the hierarchical structure of UIView extension and update several comments
 
-    (zh:调整UIView扩展的层级结构，更新若干注释)
+    (zh: 调整UIView扩展的层级结构，更新若干注释)
 
 2024.04.15, 0.1.1
 - Initial version
 
-    (zh:初始版本)
+    (zh: 初始版本)
 
 ## Warning
 If the system native method has a return value or a property that is read-only, this extension is not suitable for use.
