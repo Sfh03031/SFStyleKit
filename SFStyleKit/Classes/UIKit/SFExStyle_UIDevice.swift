@@ -253,6 +253,14 @@ public extension SFExStyle where Base: UIDevice {
             return "iPhone 15 Pro"
         case "iPhone16,2":
             return "iPhone 15 Pro Max"
+        case "iPhone17,3":
+            return "iPhone 16"
+        case "iPhone17,4":
+            return "iPhone 16 Plus"
+        case "iPhone17,1":
+            return "iPhone 16 Pro"
+        case "iPhone17,2":
+            return "iPhone 16 Pro Max"
             //iPod系列
         case "iPod1,1":
             return "iPod touch"
@@ -300,6 +308,10 @@ public extension SFExStyle where Base: UIDevice {
             return "iPad Air (4th generation)"
         case "iPad13,16", "iPad13,17":
             return "iPad Air (5th generation)"
+        case "iPad14,8", "iPad14,9":
+            return "iPad Air 11-inch (M2)"
+        case "iPad14,10", "iPad14,11":
+            return "iPad Air 13-inch (M2)"
             //iPad Pro系列
         case "iPad6,7", "iPad6,8":
             return "iPad Pro (12.9-inch)"
@@ -321,6 +333,10 @@ public extension SFExStyle where Base: UIDevice {
             return "iPad Pro (11-inch)(3rd generation)"
         case "iPad13,8", "iPad13,9", "iPad13,10", "iPad13,11":
             return "iPad Pro (12.9-inch)(5th generation)"
+        case "iPad16,3", "iPad16,4":
+            return "iPad Pro 11-inch (M4)"
+        case "iPad16,5", "iPad16,6":
+            return "iPad Pro 13-inch (M4)"
             //iPad mini系列
         case "iPad2,5", "iPad2,6", "iPad2,7":
             return "iPad mini"
@@ -345,26 +361,31 @@ public extension SFExStyle where Base: UIDevice {
     /// 获取wifi网络的IPAddress
     var ipAddress: String? {
         var address: String?
-        var ifaddr: UnsafeMutablePointer<ifaddrs>? = nil
-        guard getifaddrs(&ifaddr) == 0 else { return nil }
-        guard let firstAddr = ifaddr else { return nil }
-        defer { freeifaddrs(ifaddr) }
-        for ptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
-            let flags = Int32(ptr.pointee.ifa_flags)
-            let addr = ptr.pointee.ifa_addr.pointee
-            guard (flags & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING) else { continue }
-            if addr.sa_family == UInt8(AF_INET) || addr.sa_family == UInt8(AF_INET6) {
-                var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
-                if (getnameinfo(ptr.pointee.ifa_addr, socklen_t(addr.sa_len), &hostname, socklen_t(hostname.count),
-                                nil, socklen_t(0), NI_NUMERICHOST) == 0) {
-                    guard let addr = String(cString: hostname, encoding: .ascii) else { continue }
-                    // 过滤一下，一般公司都算小公司，分配C类网段，192打头，A类网段10打头，B类网段172打头
-                    if addr.hasPrefix("192.") {
-                        address = addr
-                        break
+        var ifaddr: UnsafeMutablePointer<ifaddrs>?
+        if getifaddrs(&ifaddr) == 0 {
+            var ptr = ifaddr
+            while ptr != nil {
+                // memory has been renamed to pointee in swift 3 so changed memory to pointee
+                defer { ptr = ptr?.pointee.ifa_next }
+                guard let interface = ptr?.pointee else {
+                    return nil
+                }
+                let addrFamily = interface.ifa_addr.pointee.sa_family
+                if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
+                    guard let ifa_name = interface.ifa_name else {
+                        return nil
+                    }
+                    let name: String = String(cString: ifa_name)
+                    // String.fromCString() is deprecated in Swift 3. So use the following code inorder to get the exact IP Address.
+                    if name == "en0" {
+                        var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                        getnameinfo(interface.ifa_addr, socklen_t((interface.ifa_addr.pointee.sa_len)), &hostname, socklen_t(hostname.count), nil, socklen_t(0), NI_NUMERICHOST)
+                        // 一般公司都算小公司，被分配C类网段，192打头，A类网段10打头，B类网段172打头
+                        address = String(cString: hostname)
                     }
                 }
             }
+            freeifaddrs(ifaddr)
         }
         return address
     }

@@ -331,4 +331,17 @@ public extension String {
         
         return htmlString
     }
+    
+    /// 手机号中间变*
+    func maskedPhoneNumber() -> String {
+        let phoneCount = self.count
+        if phoneCount < 4 {
+            return self
+        } else {
+            let startIndex = self.index(self.startIndex, offsetBy: 3)
+            let endIndex = self.index(self.startIndex, offsetBy: phoneCount - 4)
+            let range = startIndex..<endIndex
+            return self.replacingCharacters(in: range, with: String(repeating: "*", count: phoneCount - 7))
+        }
+    }
 }

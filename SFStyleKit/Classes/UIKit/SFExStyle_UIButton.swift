@@ -290,6 +290,7 @@ public extension SFExStyle where Base: UIButton {
         
         base.titleEdgeInsets = titleInsets
         base.imageEdgeInsets = imageInsets
+        
         return self
     }
 }
