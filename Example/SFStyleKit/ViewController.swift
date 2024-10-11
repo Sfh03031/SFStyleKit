@@ -10,9 +10,13 @@ import UIKit
 import SFStyleKit
 
 class ViewController: UIViewController {
+    
+    let SCREENW: CGFloat = UIScreen.main.bounds.width
+    let SCREENH: CGFloat = UIScreen.main.bounds.height
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.sf.add(subview: backView).backgroundColor(.white)
         
         print("idfv: \(UIDevice.current.sf.idfv)")
         print("StringWithUUID: \(UIDevice.current.sf.StringWithUUID)")
@@ -40,37 +44,31 @@ class ViewController: UIViewController {
         
         print("memoryUsage: \(UIApplication.shared.sf.memoryUsage)")
         
-        let backView = UIView()
-        backView.sf
-        // 位置和尺寸
-            .frame(CGRect(x: 10, y: 50, width: self.view.bounds.width - 20, height: self.view.bounds.height / 2 - 50))
-        // 背景色
+        print("13000000000".maskedPhoneNumber())
+    }
+    
+    lazy var backView: UIView = {
+        let view = UIView()
+        view.sf.frame(CGRect(x: 10, y: 100, width: SCREENW - 20, height: SCREENH - 200))
             .backgroundColor(.random)
-        // 设置边框
             .makeBorder(color: .brown, with: 1.0)
-        // 设置圆角
-            .makeCornerRadius(corners: [.topLeft, .topRight], radius: 10.0)
-        // 设置阴影
+            .makeCornerRadius(corners: [.topLeft, .bottomRight], radius: 10.0)
             .makeShadow(5, color: .hex_bbcdc5, offset: CGSize(width: 5, height: 10), opacity: 1)
-        // 右上角显示小红点
             .showBadgePoint()
-        // 点击事件回调
             .addTapAction { view in
-                // 右上角不显示小红点
                 view?.sf.hiddenBadgePoint()
             }
-            .addTapsAction(tapsRequired: 2, handler: { view in
-                print("点击了两下")
-            })
-        // 添加子视图
+            .addTapsAction(tapsRequired: 2) { view in
+                UIAlertController().sf.message("点击了两下").show(self).hidden(2)
+            }
             .add(subview: alphaLabel)
             .add(subview: broveLabel)
             .add(subview: btn)
-        self.view.sf.backgroundColor(.white).add(subview: backView)
-    }
+        return view
+    }()
     
     lazy var alphaLabel: UILabel = {
-        let label = UILabel.init(frame: CGRect(x: 150, y: 50, width: self.view.bounds.width - 300, height: 40),
+        let label = UILabel.init(frame: CGRect(x: 15, y: 50, width: SCREENW - 20 - 30, height: 40),
                                  bgColor: .white,
                                  text: "鹊桥二号",
                                  textColor: .red,
@@ -88,7 +86,7 @@ class ViewController: UIViewController {
         
         let label = UILabel()
         label.sf
-            .frame(CGRect(x: 50, y: 100, width: self.view.bounds.width - 100, height: 60))
+            .frame(CGRect(x: 50, y: 100, width: SCREENW - 20 - 100, height: 60))
             .bgColor(UIColor.hex_PT_FFBE98)
             .text(value)
             .textColor(.white)
@@ -106,7 +104,7 @@ class ViewController: UIViewController {
     
     lazy var btn: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.sf.frame(CGRect(x: 50, y: 180, width: self.view.bounds.width - 100, height: 60))
+        btn.sf.frame(CGRect(x: 50, y: 180, width: SCREENW - 20 - 100, height: 60))
             .imagePosition(title: "click me click me click me click me click me", image: UIImage(named: "img_block"), state: .normal, space: 15.0, position: .bottom)
             .backgroundColor(.hex_0c8918)
             .makeRadius(10.0)
