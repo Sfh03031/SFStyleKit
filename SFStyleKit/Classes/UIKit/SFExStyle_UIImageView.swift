@@ -6,10 +6,11 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
-// MARK: 系统Api支持
-
+// MARK: support SFExStyle for system Api of UIImageView
 public extension SFExStyle where Base: UIImageView {
     
     @discardableResult
@@ -73,47 +74,4 @@ public extension SFExStyle where Base: UIImageView {
     }
 }
 
-// MARK: - 扩展
-
-public extension UIImageView {
-    
-    /// 通过Data加载gif
-    func loadGif(data: Data) {
-        DispatchQueue.global().async {
-            let image = UIImage.gif(data: data)
-            DispatchQueue.main.async {
-                self.image = image
-            }
-        }
-    }
-    
-    /// 通过URL加载gif
-    func loadGif(url: String) {
-        DispatchQueue.global().async {
-            let image = UIImage.gif(url: url)
-            DispatchQueue.main.async {
-                self.image = image
-            }
-        }
-    }
-    
-    /// 通过NSDataAsset加载gif
-    func loadGif(asset: String) {
-        DispatchQueue.global().async {
-            let image = UIImage.gif(asset: asset)
-            DispatchQueue.main.async {
-                self.image = image
-            }
-        }
-    }
-    
-    /// 通过name加载gif
-    func loadGif(name: String) {
-        DispatchQueue.global().async {
-            let image = UIImage.gif(name: name)
-            DispatchQueue.main.async {
-                self.image = image
-            }
-        }
-    }
-}
+#endif

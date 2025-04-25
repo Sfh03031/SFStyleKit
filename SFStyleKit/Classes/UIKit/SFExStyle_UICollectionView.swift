@@ -6,10 +6,11 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
-// MARK: 系统Api支持
-
+// MARK: support SFExStyle for system Api of UICollectionView
 public extension SFExStyle where Base: UICollectionView {
     
     @discardableResult
@@ -297,7 +298,7 @@ public extension SFExStyle where Base: UICollectionView {
     }
 }
 
-
+// MARK: add register Selectors about UICollectionViewCell
 public extension SFExStyle where Base: UICollectionView {
     
     @discardableResult
@@ -312,6 +313,11 @@ public extension SFExStyle where Base: UICollectionView {
         base.register(T.self, forCellWithReuseIdentifier: T.sf.reuseIdentifier)
         return self
     }
+    
+}
+
+// MARK: add register Selectors about UICollectionReusableView
+public extension SFExStyle where Base: UICollectionView {
     
     @discardableResult
     func registerHeaderNib<T: UICollectionReusableView>(_: T.Type) -> SFExStyle {
@@ -339,3 +345,5 @@ public extension SFExStyle where Base: UICollectionView {
         return self
     }
 }
+
+#endif

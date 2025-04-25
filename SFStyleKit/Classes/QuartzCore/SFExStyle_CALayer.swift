@@ -5,6 +5,8 @@
 //  Created by sfh on 2024/4/12.
 //
 
+#if canImport(QuartzCore)
+
 import QuartzCore
 
 // MARK: 系统Api支持
@@ -435,3 +437,6 @@ public extension SFExStyle where Base: CALayer {
         return self
     }
 }
+
+
+#endif

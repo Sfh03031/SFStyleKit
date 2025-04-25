@@ -1,49 +1,48 @@
 //
-//  SFExStyle_UIApplication.swift
-//  SFStyleKit_Example
+//  UIApplication++.swift
+//  Pods
 //
-//  Created by sfh on 2024/4/8.
-//  Copyright © 2024 CocoaPods. All rights reserved.
+//  Created by sfh on 2025/4/25.
 //
+
+#if canImport(UIKit)
 
 import UIKit
 
-// MARK: 扩展
-
-public extension SFExStyle where Base: UIApplication {
+public extension UIApplication {
     
     /// documents的URL
-    var documentsURL: URL? {
+    var DocumentsURL: URL? {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
     }
     
     /// documents的路径
-    var documentsPath: String? {
+    var DocumentsPath: String? {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
     }
     
     /// caches的URL
-    var cachesURL: URL? {
+    var CachesURL: URL? {
         return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).last
     }
     
     /// caches的路径
-    var cachesPath: String? {
+    var CachesPath: String? {
         return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
     }
     
     /// library的URL
-    var libraryURL: URL? {
+    var LibraryURL: URL? {
         return FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last
     }
     
     /// library的路径
-    var libraryPath: String? {
+    var LibraryPath: String? {
         return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
     }
     
     /// 内存使用情况
-    var memoryUsage: String {
+    var MemoryUsage: String {
         var info = mach_task_basic_info()
         var count = mach_msg_type_number_t(MemoryLayout.size(ofValue: info) / MemoryLayout<integer_t>.size)
         let kerr = withUnsafeMutablePointer(to: &info) { infoPtr in
@@ -76,3 +75,5 @@ public extension SFExStyle where Base: UIApplication {
     }
     
 }
+
+#endif

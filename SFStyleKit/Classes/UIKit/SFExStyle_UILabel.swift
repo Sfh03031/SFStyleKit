@@ -6,10 +6,11 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
-// MARK: 系统Api支持
-
+// MARK: support SFExStyle for system Api of UILabel
 public extension SFExStyle where Base: UILabel {
     
     @discardableResult
@@ -128,44 +129,4 @@ public extension SFExStyle where Base: UILabel {
         
 }
 
-// MARK: - 扩展
-
-public extension SFExStyle where Base: UILabel {
-    
-    /// label添加中划线
-    /// - Parameters:
-    ///   - text: 内容
-    ///   - value: value 越大,划线越粗
-    func centerLine(_ text: String, value: Int = 2) {
-        let attStr = NSMutableAttributedString(string: text)
-        attStr.addAttribute(NSAttributedString.Key.strikethroughStyle, value: value, range: NSMakeRange(0, attStr.length))
-        base.attributedText = attStr
-    }
-}
-
-public extension UILabel {
-    
-    /// 便利构造方法
-    convenience init(frame: CGRect = CGRectZero,
-                     bgColor: UIColor = .clear,
-                     text: String = "",
-                     textColor: UIColor = .hex_222222,
-                     font: UIFont = UIFont.systemFont(ofSize: 14.0),
-                     aligment: NSTextAlignment = .natural,
-                     lines: Int = 1,
-                     radius: CGFloat = 0) {
-        // 便利构造方法必须依赖于指定构造方法
-        self.init()
-        
-        self.frame = frame
-        self.backgroundColor = bgColor
-        self.text = text
-        self.textColor = textColor
-        self.font = font
-        self.textAlignment = aligment
-        self.numberOfLines = lines
-        self.layer.cornerRadius = radius
-        self.layer.masksToBounds = radius > 0
-    }
-    
-}
+#endif

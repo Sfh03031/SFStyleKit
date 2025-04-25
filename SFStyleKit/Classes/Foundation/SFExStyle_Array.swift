@@ -6,9 +6,12 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(Foundation)
+
 import Foundation
 
 public extension Array {
+    
     /// 数组去重，传入数组元素
     /// 泛型E，约束类型为Equatable协议，
     /// 数组的完整写法为 Array<Element>，其中 Element 是这个数组中唯一允许存在的数据类型。也可以使用像 [Element]这样的简单语法
@@ -16,10 +19,12 @@ public extension Array {
         var result = [Element]()
         self.forEach { (e) in
             let key = filter(e)
-            let keys = result.map{filter($0)}
+            let keys = result.map { filter($0) }
             guard !keys.contains(key) else { return }
             result.append(e)
         }
         return result
     }
 }
+
+#endif

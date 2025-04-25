@@ -6,6 +6,8 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(MapKit)
+
 import MapKit
 
 // MARK: 扩展
@@ -46,3 +48,5 @@ public extension CLLocationCoordinate2D {
         return str
     }
 }
+
+#endif

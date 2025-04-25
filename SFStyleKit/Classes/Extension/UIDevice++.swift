@@ -1,49 +1,50 @@
 //
-//  SFExStyle_UIDevice.swift
-//  SFStyleKit_Example
+//  UIDevice++.swift
+//  Pods
 //
-//  Created by sfh on 2024/4/8.
-//  Copyright © 2024 CocoaPods. All rights reserved.
+//  Created by sfh on 2025/4/25.
 //
+
+#if canImport(UIKit)
 
 import UIKit
 import CoreTelephony
 import AVFoundation
 
-public extension SFExStyle where Base: UIDevice {
+public extension UIDevice {
     
     /// 设备idfv
-    var idfv: String {
+    var Idfv: String {
         return UIDevice.current.identifierForVendor?.uuidString ?? ""
     }
     
     /// 设备系列名称，iPhone, iPod touch, iPad...
-    var model: String {
+    var Model: String {
         return UIDevice.current.model
     }
     
     /// 设备系列简称
-    var localizedModel: String {
+    var LocalizedModel: String {
         return UIDevice.current.localizedModel
     }
     
     /// 设备名称，如 XXX的iPhone...
-    var name: String {
+    var Name: String {
         return UIDevice.current.name
     }
     
     /// 设备运行的系统名称
-    var systemName: String {
+    var SystemName: String {
         return UIDevice.current.systemName
     }
     
     /// 设备运行的系统版本
-    var systemVersion: String {
+    var SystemVersion: String {
         return UIDevice.current.systemVersion
     }
 
     /// 获取UUID
-    var StringWithUUID: String {
+    var UUIDCreated: String {
         let uuid = CFUUIDCreate(nil)
         let value = CFUUIDCreateString(nil, uuid)
         return String(describing: value)
@@ -59,18 +60,18 @@ public extension SFExStyle where Base: UIDevice {
     }
     
     /// 剪切板第一个字符串类型的内容
-    var pasteBoardValue: String {
+    var PasteBoardValue: String {
         return UIPasteboard.general.string ?? ""
     }
     
     /// 电池电量
-    var batteryLevel: String {
+    var BatteryLevel: String {
         UIDevice.current.isBatteryMonitoringEnabled = true
         return String(format: "%.2f", UIDevice.current.batteryLevel)
     }
     
     /// 电池状态
-    var batteryState: String {
+    var BatteryState: String {
         UIDevice.current.isBatteryMonitoringEnabled = true
         let state = UIDevice.current.batteryState
         switch state {
@@ -86,7 +87,7 @@ public extension SFExStyle where Base: UIDevice {
     }
     
     /// 方向
-    var orientation: String {
+    var Orientation: String {
         let state = UIDevice.current.orientation
         switch state {
         case .portrait:
@@ -107,7 +108,7 @@ public extension SFExStyle where Base: UIDevice {
     }
     
     /// 屏幕分辨率
-    var screenResolution: CGSize {
+    var Resolution: CGSize {
         let bounds = UIScreen.main.bounds
         let scale = UIScreen.main.scale
         let size = CGSizeMake(bounds.size.width * scale, bounds.size.height * scale)
@@ -115,12 +116,12 @@ public extension SFExStyle where Base: UIDevice {
     }
     
     /// 屏幕亮度
-    var screenBrightness: CGFloat {
+    var Brightness: CGFloat {
         return UIScreen.main.brightness
     }
     
     /// 设备音量
-    var deviceVolume: String {
+    var Volume: String {
         let volume: Float = AVAudioSession.sharedInstance().outputVolume
         return String(format: "%.2f", volume)
     }
@@ -142,7 +143,7 @@ public extension SFExStyle where Base: UIDevice {
             }
         }
         
-        let path = "/private/\(StringWithUUID)"
+        let path = "/private/\(UUIDCreated)"
         do {
             try "test".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
             try FileManager.default.removeItem(atPath: path)
@@ -153,7 +154,7 @@ public extension SFExStyle where Base: UIDevice {
     }
     
     /// 机型
-    var deviceType: String {
+    var DeviceType: String {
         var systemInfo = utsname()
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
@@ -165,8 +166,8 @@ public extension SFExStyle where Base: UIDevice {
     }
     
     /// 设备型号名称
-    var deviceName: String {
-        let machine = deviceType
+    var DeviceName: String {
+        let machine = DeviceType
         switch machine {
             //iPhone系列
         case "iPhone1,1":
@@ -359,7 +360,7 @@ public extension SFExStyle where Base: UIDevice {
     }
     
     /// 获取wifi网络的IPAddress
-    var ipAddress: String? {
+    var IpAddress: String? {
         var address: String?
         var ifaddr: UnsafeMutablePointer<ifaddrs>?
         if getifaddrs(&ifaddr) == 0 {
@@ -392,7 +393,7 @@ public extension SFExStyle where Base: UIDevice {
     
     /// 获取运营商信息
     /// - CTCarrier已在16.0被废弃，固定返回 “--”
-    var simProvider: String {
+    var SimProvider: String {
 //        var supplier:String?
 //        let info = CTTelephonyNetworkInfo()
 //        if #available(iOS 12.0, *) {
@@ -408,13 +409,13 @@ public extension SFExStyle where Base: UIDevice {
 //                supplier = carrier.carrierName
 //            }
 //        }
-//        
+//
 //        return supplier ?? ""
         return "--"
     }
     
     /// 设备cpu核数
-    var cpuCoreNum: String {
+    var CpuCoreNum: String {
         var ncpu = UInt(0)
         var len = MemoryLayout.size(ofValue: ncpu)
         sysctlbyname("hw.ncpu", &ncpu, &len, nil, 0)
@@ -422,7 +423,7 @@ public extension SFExStyle where Base: UIDevice {
     }
     
     /// 设备cpu类型
-    var cpuType: String {
+    var CpuType: String {
         let HOST_BASIC_INFO_COUNT = MemoryLayout<host_basic_info>.stride/MemoryLayout<integer_t>.stride
         var size = mach_msg_type_number_t(HOST_BASIC_INFO_COUNT)
         var hostInfo = host_basic_info()
@@ -470,7 +471,7 @@ public extension SFExStyle where Base: UIDevice {
     }
     
     /// 设备磁盘总大小
-    var diskTotalSize: String {
+    var DiskTotalSize: String {
         let ptr = UnsafeMutablePointer<statfs>.allocate(capacity: MemoryLayout<statfs>.size)
         var fs = ptr.pointee
         if statfs("/var",&fs) >= 0 {
@@ -482,7 +483,7 @@ public extension SFExStyle where Base: UIDevice {
     }
     
     /// 设备磁盘可用大小
-    var diskAvailableSize: String {
+    var DiskAvailableSize: String {
         let ptr = UnsafeMutablePointer<statfs>.allocate(capacity: MemoryLayout<statfs>.size)
         var fs = ptr.pointee
         if statfs("/var",&fs) >= 0 {
@@ -512,3 +513,5 @@ public extension SFExStyle where Base: UIDevice {
         }
     }
 }
+
+#endif

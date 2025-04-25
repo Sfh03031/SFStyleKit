@@ -6,6 +6,8 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
 // MARK: 扩展
@@ -53,9 +55,8 @@ public extension SFExStyle where Base: UIColor {
     /// 随机颜色
     /// - Returns: UIColor
     static var random: UIColor {
-        return RGB(R: Float(arc4random_uniform(256)),
-                   G: Float(arc4random_uniform(256)),
-                   B: Float(arc4random_uniform(256)))
+        // [0, 256)，左开右闭
+        return UIColor(red: CGFloat(arc4random_uniform(256)) / 255.0, green: CGFloat(arc4random_uniform(256)) / 255.0, blue: CGFloat(arc4random_uniform(256)) / 255.0, alpha: 1.0)
     }
     
     /// RGB颜色
@@ -66,7 +67,7 @@ public extension SFExStyle where Base: UIColor {
     ///   - alpha: 透明度
     /// - Returns: UIColor
     static func RGB(R: Float, G: Float, B: Float, alpha: Float = 1) -> UIColor {
-        return Base(red: CGFloat(R/255.0), green: CGFloat(G/255.0), blue: CGFloat(B/255.0), alpha: 1)
+        return Base(red: CGFloat(R/255.0), green: CGFloat(G/255.0), blue: CGFloat(B/255.0), alpha: CGFloat(alpha))
     }
     
     /// 颜色生成纯色图片
@@ -105,464 +106,467 @@ public extension SFExStyle where Base: UIColor {
 public extension UIColor {
     class var random: UIColor { sf.random }
     
-    class var hex_222222: UIColor { sf.hexColor(hex: "#222222") }
-    class var hex_AFB3BF: UIColor { sf.hexColor(hex: "#AFB3BF") }
-    class var hex_C4CBDE: UIColor { sf.hexColor(hex: "#C4CBDE") }
-    class var hex_FFC800: UIColor { sf.hexColor(hex: "#FFC800") }
+    class var hex_222222: UIColor { #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1) }
+    class var hex_AFB3BF: UIColor { #colorLiteral(red: 0.6862745098, green: 0.7019607843, blue: 0.7490196078, alpha: 1) }
+    class var hex_C4CBDE: UIColor { #colorLiteral(red: 0.768627451, green: 0.7960784314, blue: 0.8705882353, alpha: 1) }
+    class var hex_FFC800: UIColor { #colorLiteral(red: 1, green: 0.7843137255, blue: 0, alpha: 1) }
     
-    class var hex_F5F6F9: UIColor { sf.hexColor(hex: "#F5F6F9") }
-    class var hex_F9FAFC: UIColor { sf.hexColor(hex: "#F9FAFC") }
-    class var hex_F5F5F9: UIColor { sf.hexColor(hex: "#F5F5F9") }
-    class var hex_FFEA00: UIColor { sf.hexColor(hex: "#FFEA00") }
+    class var hex_F5F6F9: UIColor { #colorLiteral(red: 0.9607843137, green: 0.9647058824, blue: 0.9764705882, alpha: 1) }
+    class var hex_F9FAFC: UIColor { #colorLiteral(red: 0.9764705882, green: 0.9803921569, blue: 0.9882352941, alpha: 1) }
+    class var hex_F5F5F9: UIColor { #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9764705882, alpha: 1) }
+    class var hex_FFEA00: UIColor { #colorLiteral(red: 1, green: 0.9176470588, blue: 0, alpha: 1) }
     
-    class var hex_FFF2EB: UIColor { sf.hexColor(hex: "#FFF2EB") }
-    class var hex_008AFF: UIColor { sf.hexColor(hex: "#008AFF") }
-    class var hex_E7F4FF: UIColor { sf.hexColor(hex: "#E7F4FF") }
-    class var hex_32D2FF: UIColor { sf.hexColor(hex: "#32D2FF") }
+    class var hex_FFF2EB: UIColor { #colorLiteral(red: 1, green: 0.9490196078, blue: 0.9215686275, alpha: 1) }
+    class var hex_008AFF: UIColor { #colorLiteral(red: 0, green: 0.5411764706, blue: 1, alpha: 1) }
+    class var hex_E7F4FF: UIColor { #colorLiteral(red: 0.9058823529, green: 0.9568627451, blue: 1, alpha: 1) }
+    class var hex_32D2FF: UIColor { #colorLiteral(red: 0.1960784314, green: 0.8235294118, blue: 1, alpha: 1) }
     
-    class var hex_62CA00: UIColor { sf.hexColor(hex: "#62CA00") }
-    class var hex_DFFADC: UIColor { sf.hexColor(hex: "#DFFADC") }
-    class var hex_FF2E00: UIColor { sf.hexColor(hex: "#FF2E00") }
-    class var hex_FFE6E0: UIColor { sf.hexColor(hex: "#FFE6E0") }
+    class var hex_62CA00: UIColor { #colorLiteral(red: 0.3843137255, green: 0.7921568627, blue: 0, alpha: 1) }
+    class var hex_DFFADC: UIColor { #colorLiteral(red: 0.8745098039, green: 0.9803921569, blue: 0.862745098, alpha: 1) }
+    class var hex_FF2E00: UIColor { #colorLiteral(red: 1, green: 0.1803921569, blue: 0, alpha: 1) }
+    class var hex_FFE6E0: UIColor { #colorLiteral(red: 1, green: 0.9019607843, blue: 0.8784313725, alpha: 1) }
     
-    class var hex_FF3B00: UIColor { sf.hexColor(hex: "#FF3B00") }
-    class var hex_FF5200: UIColor { sf.hexColor(hex: "#FF5200") }
-    class var hex_FFAF00: UIColor { sf.hexColor(hex: "#FFAF00") }
-    class var hex_FFFAC8: UIColor { sf.hexColor(hex: "#FFFAC8") }
+    class var hex_FF3B00: UIColor { #colorLiteral(red: 1, green: 0.231372549, blue: 0, alpha: 1) }
+    class var hex_FF5200: UIColor { #colorLiteral(red: 1, green: 0.3215686275, blue: 0, alpha: 1) }
+    class var hex_FFAF00: UIColor { #colorLiteral(red: 1, green: 0.6862745098, blue: 0, alpha: 1) }
+    class var hex_FFFAC8: UIColor { #colorLiteral(red: 1, green: 0.9803921569, blue: 0.7843137255, alpha: 1) }
     
-    class var hex_FF7800: UIColor { sf.hexColor(hex: "#FF7800") }
-    class var hex_FFF6E3: UIColor { sf.hexColor(hex: "#FFF6E3") }
-    class var hex_15D25F: UIColor { sf.hexColor(hex: "#15D25F") }
-    class var hex_E6FFF0: UIColor { sf.hexColor(hex: "#E6FFF0") }
+    class var hex_FF7800: UIColor { #colorLiteral(red: 1, green: 0.4705882353, blue: 0, alpha: 1) }
+    class var hex_FFF6E3: UIColor { #colorLiteral(red: 1, green: 0.9647058824, blue: 0.8901960784, alpha: 1) }
+    class var hex_15D25F: UIColor { #colorLiteral(red: 0.08235294118, green: 0.8235294118, blue: 0.3725490196, alpha: 1) }
+    class var hex_E6FFF0: UIColor { #colorLiteral(red: 0.9019607843, green: 1, blue: 0.9411764706, alpha: 1) }
 }
 
 // MARK: - 中国色彩
 public extension UIColor {
     /// 丁香色
-    class var hex_cca4e3: UIColor { sf.hexColor(hex: "#cca4e3") }
+    class var hex_CCA4E3: UIColor { #colorLiteral(red: 0.8, green: 0.6431372549, blue: 0.8901960784, alpha: 1) }
     /// 雪青
-    class var hex_b0a4e3: UIColor { sf.hexColor(hex: "#b0a4e3") }
+    class var hex_B0A4E3: UIColor { #colorLiteral(red: 0.6901960784, green: 0.6431372549, blue: 0.8901960784, alpha: 1) }
     /// 群青
-    class var hex_4c8dae: UIColor { sf.hexColor(hex: "#4c8dae") }
+    class var hex_4C8DAE: UIColor { #colorLiteral(red: 0.2980392157, green: 0.5529411765, blue: 0.6823529412, alpha: 1) }
     /// 紫棠
-    class var hex_56004f: UIColor { sf.hexColor(hex: "#56004f") }
+    class var hex_56004F: UIColor { #colorLiteral(red: 0.337254902, green: 0, blue: 0.3098039216, alpha: 1) }
     
     /// 绀青
-    class var hex_003371: UIColor { sf.hexColor(hex: "#003371") }
+    class var hex_003371: UIColor { #colorLiteral(red: 0, green: 0.2, blue: 0.4431372549, alpha: 1) }
     /// 紫檀
-    class var hex_4c221b: UIColor { sf.hexColor(hex: "#4c221b") }
+    class var hex_4C221B: UIColor { #colorLiteral(red: 0.2980392157, green: 0.1333333333, blue: 0.1058823529, alpha: 1) }
     /// 酱紫
-    class var hex_815476: UIColor { sf.hexColor(hex: "#815476") }
+    class var hex_815476: UIColor { #colorLiteral(red: 0.5058823529, green: 0.3294117647, blue: 0.462745098, alpha: 1) }
     /// 紫酱
-    class var hex_815463: UIColor { sf.hexColor(hex: "#815463") }
+    class var hex_815463: UIColor { #colorLiteral(red: 0.5058823529, green: 0.3294117647, blue: 0.3882352941, alpha: 1) }
     
     /// 紫色
-    class var hex_8d4bbb: UIColor { sf.hexColor(hex: "#8d4bbb") }
+    class var hex_8D4BBB: UIColor { #colorLiteral(red: 0.5529411765, green: 0.2941176471, blue: 0.7333333333, alpha: 1) }
     /// 黛紫
-    class var hex_574266: UIColor { sf.hexColor(hex: "#574266") }
+    class var hex_574266: UIColor { #colorLiteral(red: 0.3411764706, green: 0.2588235294, blue: 0.4, alpha: 1) }
     /// 黛蓝
-    class var hex_425066: UIColor { sf.hexColor(hex: "#425066") }
+    class var hex_425066: UIColor { #colorLiteral(red: 0.2588235294, green: 0.3137254902, blue: 0.4, alpha: 1) }
     /// 黛绿
-    class var hex_426666: UIColor { sf.hexColor(hex: "#426666") }
+    class var hex_426666: UIColor { #colorLiteral(red: 0.2588235294, green: 0.4, blue: 0.4, alpha: 1) }
     
     /// 黛
-    class var hex_4a4266: UIColor { sf.hexColor(hex: "#4a4266") }
+    class var hex_4A4266: UIColor { #colorLiteral(red: 0.2901960784, green: 0.2588235294, blue: 0.4, alpha: 1) }
     /// 藏蓝
-    class var hex_3b2e7e: UIColor { sf.hexColor(hex: "#3b2e7e") }
+    class var hex_3B2E7E: UIColor { #colorLiteral(red: 0.231372549, green: 0.1803921569, blue: 0.4941176471, alpha: 1) }
     /// 藏青
-    class var hex_2e4e7e: UIColor { sf.hexColor(hex: "#2e4e7e") }
+    class var hex_2E4E7E: UIColor { #colorLiteral(red: 0.1803921569, green: 0.3058823529, blue: 0.4941176471, alpha: 1) }
     /// 蓝灰
-    class var hex_a1afc9: UIColor { sf.hexColor(hex: "#a1afc9") }
+    class var hex_A1AFC9: UIColor { #colorLiteral(red: 0.631372549, green: 0.6862745098, blue: 0.7882352941, alpha: 1) }
     
     /// 宝蓝
-    class var hex_4b5cc4: UIColor { sf.hexColor(hex: "#4b5cc4") }
+    class var hex_4B5CC4: UIColor { #colorLiteral(red: 0.2941176471, green: 0.3607843137, blue: 0.768627451, alpha: 1) }
     /// 花青
-    class var hex_003472: UIColor { sf.hexColor(hex: "#003472") }
+    class var hex_003472: UIColor { #colorLiteral(red: 0, green: 0.2039215686, blue: 0.4470588235, alpha: 1) }
     /// 靛蓝
-    class var hex_065279: UIColor { sf.hexColor(hex: "#065279") }
+    class var hex_065279: UIColor { #colorLiteral(red: 0.02352941176, green: 0.3215686275, blue: 0.4745098039, alpha: 1) }
     /// 靛青
-    class var hex_177cb0: UIColor { sf.hexColor(hex: "#177cb0") }
+    class var hex_177CB0: UIColor { #colorLiteral(red: 0.09019607843, green: 0.4862745098, blue: 0.6901960784, alpha: 1) }
     
     /// 石青
-    class var hex_1685a9: UIColor { sf.hexColor(hex: "#1685a9") }
+    class var hex_1685A9: UIColor { #colorLiteral(red: 0.0862745098, green: 0.5215686275, blue: 0.662745098, alpha: 1) }
     /// 碧蓝
-    class var hex_3eede7: UIColor { sf.hexColor(hex: "#3eede7") }
+    class var hex_3EEDE7: UIColor { #colorLiteral(red: 0.2431372549, green: 0.9294117647, blue: 0.9058823529, alpha: 1) }
     /// 蓝
-    class var hex_44cef6: UIColor { sf.hexColor(hex: "#44cef6") }
+    class var hex_44CEF6: UIColor { #colorLiteral(red: 0.2666666667, green: 0.8078431373, blue: 0.9647058824, alpha: 1) }
     /// 蔚蓝
-    class var hex_70f3ff: UIColor { sf.hexColor(hex: "#70f3ff") }
+    class var hex_70F3FF: UIColor { #colorLiteral(red: 0.4392156863, green: 0.9529411765, blue: 1, alpha: 1) }
     
     /// 玄色
-    class var hex_622a1d: UIColor { sf.hexColor(hex: "#622a1d") }
+    class var hex_622A1D: UIColor { #colorLiteral(red: 0.3843137255, green: 0.1647058824, blue: 0.1137254902, alpha: 1) }
     /// 栗色
-    class var hex_60281e: UIColor { sf.hexColor(hex: "#60281e") }
+    class var hex_60281E: UIColor { #colorLiteral(red: 0.3764705882, green: 0.1568627451, blue: 0.1176470588, alpha: 1) }
     /// 胭脂
-    class var hex_9d2933: UIColor { sf.hexColor(hex: "#9d2933") }
+    class var hex_9D2933: UIColor { #colorLiteral(red: 0.6156862745, green: 0.1607843137, blue: 0.2, alpha: 1) }
     /// 赤
-    class var hex_c3272b: UIColor { sf.hexColor(hex: "#c3272b") }
+    class var hex_C3272B: UIColor { #colorLiteral(red: 0.7647058824, green: 0.1529411765, blue: 0.168627451, alpha: 1) }
     
     /// 银朱
-    class var hex_bf242a: UIColor { sf.hexColor(hex: "#bf242a") }
+    class var hex_BF242A: UIColor { #colorLiteral(red: 0.7490196078, green: 0.1411764706, blue: 0.1647058824, alpha: 1) }
     /// 赫赤
-    class var hex_c91f37: UIColor { sf.hexColor(hex: "#c91f37") }
+    class var hex_C91F37: UIColor { #colorLiteral(red: 0.7882352941, green: 0.1215686275, blue: 0.2156862745, alpha: 1) }
     /// 殷红
-    class var hex_be002f: UIColor { sf.hexColor(hex: "#be002f") }
+    class var hex_BE002F: UIColor { #colorLiteral(red: 0.7450980392, green: 0, blue: 0.1843137255, alpha: 1) }
     /// 枣红
-    class var hex_c32136: UIColor { sf.hexColor(hex: "#c32136") }
+    class var hex_C32136: UIColor { #colorLiteral(red: 0.7647058824, green: 0.1294117647, blue: 0.2117647059, alpha: 1) }
     
     /// 洋红
-    class var hex_ff0097: UIColor { sf.hexColor(hex: "#ff0097") }
+    class var hex_FF0097: UIColor { #colorLiteral(red: 1, green: 0, blue: 0.5921568627, alpha: 1) }
     /// 嫣红
-    class var hex_ef7a82: UIColor { sf.hexColor(hex: "#ef7a82") }
+    class var hex_EF7A82: UIColor { #colorLiteral(red: 0.937254902, green: 0.4784313725, blue: 0.5098039216, alpha: 1) }
     /// 檀
-    class var hex_b36d61: UIColor { sf.hexColor(hex: "#b36d61") }
+    class var hex_B36D61: UIColor { #colorLiteral(red: 0.7019607843, green: 0.4274509804, blue: 0.3803921569, alpha: 1) }
     /// 绾
-    class var hex_a98175: UIColor { sf.hexColor(hex: "#a98175") }
+    class var hex_A98175: UIColor { #colorLiteral(red: 0.662745098, green: 0.5058823529, blue: 0.4588235294, alpha: 1) }
     
     /// 茜色
-    class var hex_cb3a56: UIColor { sf.hexColor(hex: "#cb3a56") }
+    class var hex_CB3A56: UIColor { #colorLiteral(red: 0.7960784314, green: 0.2274509804, blue: 0.337254902, alpha: 1) }
     /// 炎
-    class var hex_ff3300: UIColor { sf.hexColor(hex: "#ff3300") }
+    class var hex_FF3300: UIColor { #colorLiteral(red: 1, green: 0.2, blue: 0, alpha: 1) }
     /// 酡红
-    class var hex_dc3023: UIColor { sf.hexColor(hex: "#dc3023") }
+    class var hex_DC3023: UIColor { #colorLiteral(red: 0.862745098, green: 0.1882352941, blue: 0.137254902, alpha: 1) }
     /// 彤
-    class var hex_f35336: UIColor { sf.hexColor(hex: "#f35336") }
+    class var hex_F35336: UIColor { #colorLiteral(red: 0.9529411765, green: 0.3254901961, blue: 0.2117647059, alpha: 1) }
     
     /// 丹
-    class var hex_ff4e20: UIColor { sf.hexColor(hex: "#ff4e20") }
+    class var hex_FF4E20: UIColor { #colorLiteral(red: 1, green: 0.3058823529, blue: 0.1254901961, alpha: 1) }
     /// 朱红
-    class var hex_ff4c00: UIColor { sf.hexColor(hex: "#ff4c00") }
+    class var hex_FF4C00: UIColor { #colorLiteral(red: 1, green: 0.2980392157, blue: 0, alpha: 1) }
     /// 绯红
-    class var hex_c83c23: UIColor { sf.hexColor(hex: "#c83c23") }
+    class var hex_C83C23: UIColor { #colorLiteral(red: 0.7843137255, green: 0.2352941176, blue: 0.137254902, alpha: 1) }
     
     /// 绛紫
-    class var hex_8c4356: UIColor { sf.hexColor(hex: "#8c4356") }
+    class var hex_8C4356: UIColor { #colorLiteral(red: 0.5490196078, green: 0.262745098, blue: 0.337254902, alpha: 1) }
     /// 石榴红
-    class var hex_f20c00: UIColor { sf.hexColor(hex: "#f20c00") }
+    class var hex_F20C00: UIColor { #colorLiteral(red: 0.9490196078, green: 0.04705882353, blue: 0, alpha: 1) }
     /// 大红
-    class var hex_ff2121: UIColor { sf.hexColor(hex: "#ff2121") }
+    class var hex_FF2121: UIColor { #colorLiteral(red: 1, green: 0.1294117647, blue: 0.1294117647, alpha: 1) }
     /// 银红
-    class var hex_f05654: UIColor { sf.hexColor(hex: "#f05654") }
+    class var hex_F05654: UIColor { #colorLiteral(red: 0.9411764706, green: 0.337254902, blue: 0.3294117647, alpha: 1) }
     
     /// 酡颜
-    class var hex_f9906f: UIColor { sf.hexColor(hex: "#f9906f") }
+    class var hex_F9906F: UIColor { #colorLiteral(red: 0.9764705882, green: 0.5647058824, blue: 0.4352941176, alpha: 1) }
     /// 樱桃色
-    class var hex_c93756: UIColor { sf.hexColor(hex: "#c93756") }
+    class var hex_C93756: UIColor { #colorLiteral(red: 0.7882352941, green: 0.2156862745, blue: 0.337254902, alpha: 1) }
     /// 海棠红
-    class var hex_db5a6b: UIColor { sf.hexColor(hex: "#db5a6b") }
+    class var hex_DB5A6B: UIColor { #colorLiteral(red: 0.8588235294, green: 0.3529411765, blue: 0.4196078431, alpha: 1) }
     /// 桃红
-    class var hex_f47983: UIColor { sf.hexColor(hex: "#f47983") }
+    class var hex_F47983: UIColor { #colorLiteral(red: 0.9568627451, green: 0.4745098039, blue: 0.5137254902, alpha: 1) }
     
     /// 粉红
-    class var hex_ffb3a7: UIColor { sf.hexColor(hex: "#ffb3a7") }
+    class var hex_FFB3A7: UIColor { #colorLiteral(red: 1, green: 0.7019607843, blue: 0.6549019608, alpha: 1) }
     /// 品红
-    class var hex_f00056: UIColor { sf.hexColor(hex: "#f00056") }
+    class var hex_F00056: UIColor { #colorLiteral(red: 0.9411764706, green: 0, blue: 0.337254902, alpha: 1) }
     /// 洋红
-    class var hex_ff4777: UIColor { sf.hexColor(hex: "#ff4777") }
+    class var hex_FF4777: UIColor { #colorLiteral(red: 1, green: 0.2784313725, blue: 0.4666666667, alpha: 1) }
     /// 妃色
-    class var hex_ed5736: UIColor { sf.hexColor(hex: "#ed5736") }
+    class var hex_ED5736: UIColor { #colorLiteral(red: 0.9294117647, green: 0.3411764706, blue: 0.2117647059, alpha: 1) }
     
     /// 朱膘
-    class var hex_f36838: UIColor { sf.hexColor(hex: "#f36838") }
+    class var hex_F36838: UIColor { #colorLiteral(red: 0.9529411765, green: 0.4078431373, blue: 0.2196078431, alpha: 1) }
     /// 火红
-    class var hex_ff2d51: UIColor { sf.hexColor(hex: "#ff2d51") }
+    class var hex_FF2D51: UIColor { #colorLiteral(red: 1, green: 0.1764705882, blue: 0.3176470588, alpha: 1) }
     /// 朱砂
-    class var hex_ff461f: UIColor { sf.hexColor(hex: "#ff461f") }
+    class var hex_FF461F: UIColor { #colorLiteral(red: 1, green: 0.2745098039, blue: 0.1215686275, alpha: 1) }
     /// 酒红
-    class var hex_f04155: UIColor { sf.hexColor(hex: "#f04155") }
+    class var hex_F04155: UIColor { #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.3333333333, alpha: 1) }
     
     /// 黯
-    class var hex_41555d: UIColor { sf.hexColor(hex: "#41555d") }
+    class var hex_41555D: UIColor { #colorLiteral(red: 0.2549019608, green: 0.3333333333, blue: 0.3647058824, alpha: 1) }
     /// 鸦青
-    class var hex_424c50: UIColor { sf.hexColor(hex: "#424c50") }
+    class var hex_424C50: UIColor { #colorLiteral(red: 0.2588235294, green: 0.2980392157, blue: 0.3137254902, alpha: 1) }
     /// 墨色
-    class var hex_50616d: UIColor { sf.hexColor(hex: "#50616d") }
+    class var hex_50616D: UIColor { #colorLiteral(red: 0.3137254902, green: 0.3803921569, blue: 0.4274509804, alpha: 1) }
     /// 墨灰
-    class var hex_758a99: UIColor { sf.hexColor(hex: "#758a99") }
+    class var hex_758A99: UIColor { #colorLiteral(red: 0.4588235294, green: 0.5411764706, blue: 0.6, alpha: 1) }
     
     /// 竹青
-    class var hex_789262: UIColor { sf.hexColor(hex: "#789262") }
+    class var hex_789262: UIColor { #colorLiteral(red: 0.4705882353, green: 0.5725490196, blue: 0.3843137255, alpha: 1) }
     /// 铜绿
-    class var hex_549688: UIColor { sf.hexColor(hex: "#549688") }
+    class var hex_549688: UIColor { #colorLiteral(red: 0.3294117647, green: 0.5882352941, blue: 0.5333333333, alpha: 1) }
     /// 青碧
-    class var hex_48c0a3: UIColor { sf.hexColor(hex: "#48c0a3") }
+    class var hex_48C0A3: UIColor { #colorLiteral(red: 0.2823529412, green: 0.7529411765, blue: 0.6392156863, alpha: 1) }
     /// 碧色
-    class var hex_1bd1a5: UIColor { sf.hexColor(hex: "#1bd1a5") }
+    class var hex_1BD1A5: UIColor { #colorLiteral(red: 0.1058823529, green: 0.8196078431, blue: 0.6470588235, alpha: 1) }
     
     /// 石青
-    class var hex_7bcfa6: UIColor { sf.hexColor(hex: "#7bcfa6") }
+    class var hex_7BCFA6: UIColor { #colorLiteral(red: 0.4823529412, green: 0.8117647059, blue: 0.6509803922, alpha: 1) }
     /// 艾绿
-    class var hex_a4e2c6: UIColor { sf.hexColor(hex: "#a4e2c6") }
+    class var hex_A4E2C6: UIColor { #colorLiteral(red: 0.6431372549, green: 0.8862745098, blue: 0.7764705882, alpha: 1) }
     /// 缥
-    class var hex_7fecad: UIColor { sf.hexColor(hex: "#7fecad") }
+    class var hex_7FECAD: UIColor { #colorLiteral(red: 0.4980392157, green: 0.9254901961, blue: 0.6784313725, alpha: 1) }
     /// 玉色
-    class var hex_2edfa3: UIColor { sf.hexColor(hex: "#2edfa3") }
+    class var hex_2EDFA3: UIColor { #colorLiteral(red: 0.1803921569, green: 0.8745098039, blue: 0.6392156863, alpha: 1) }
     
     /// 碧绿
-    class var hex_2add9c: UIColor { sf.hexColor(hex: "#2add9c") }
+    class var hex_2ADD9C: UIColor { #colorLiteral(red: 0.1647058824, green: 0.8666666667, blue: 0.6117647059, alpha: 1) }
     /// 翡翠色
-    class var hex_3de1ad: UIColor { sf.hexColor(hex: "#3de1ad") }
+    class var hex_3DE1AD: UIColor { #colorLiteral(red: 0.2392156863, green: 0.8823529412, blue: 0.6784313725, alpha: 1) }
     /// 青色
-    class var hex_00e09e: UIColor { sf.hexColor(hex: "#00e09e") }
+    class var hex_00E09E: UIColor { #colorLiteral(red: 0, green: 0.8784313725, blue: 0.6196078431, alpha: 1) }
     /// 青翠
-    class var hex_00e079: UIColor { sf.hexColor(hex: "#00e079") }
+    class var hex_00E079: UIColor { #colorLiteral(red: 0, green: 0.8784313725, blue: 0.4745098039, alpha: 1) }
     
     /// 草绿
-    class var hex_40de5a: UIColor { sf.hexColor(hex: "#40de5a") }
+    class var hex_40DE5A: UIColor { #colorLiteral(red: 0.2509803922, green: 0.8705882353, blue: 0.3529411765, alpha: 1) }
     /// 绿色
-    class var hex_00e500: UIColor { sf.hexColor(hex: "#00e500") }
+    class var hex_00E500: UIColor { #colorLiteral(red: 0, green: 0.8980392157, blue: 0, alpha: 1) }
     /// 绿沈
-    class var hex_0c8918: UIColor { sf.hexColor(hex: "#0c8918") }
+    class var hex_0C8918: UIColor { #colorLiteral(red: 0.04705882353, green: 0.537254902, blue: 0.09411764706, alpha: 1) }
     /// 松花绿
-    class var hex_057748: UIColor { sf.hexColor(hex: "#057748") }
+    class var hex_057748: UIColor { #colorLiteral(red: 0.01960784314, green: 0.4666666667, blue: 0.2823529412, alpha: 1) }
     
     /// 松柏绿
-    class var hex_21a675: UIColor { sf.hexColor(hex: "#21a675") }
+    class var hex_21A675: UIColor { #colorLiteral(red: 0.1294117647, green: 0.6509803922, blue: 0.4588235294, alpha: 1) }
     /// 石绿
-    class var hex_16a951: UIColor { sf.hexColor(hex: "#16a951") }
+    class var hex_16A951: UIColor { #colorLiteral(red: 0.0862745098, green: 0.662745098, blue: 0.3176470588, alpha: 1) }
     /// 青葱
-    class var hex_0aa344: UIColor { sf.hexColor(hex: "#0aa344") }
+    class var hex_0AA344: UIColor { #colorLiteral(red: 0.03921568627, green: 0.6392156863, blue: 0.2666666667, alpha: 1) }
     /// 葱青
-    class var hex_0eb83a: UIColor { sf.hexColor(hex: "#0eb83a") }
+    class var hex_0EB83A: UIColor { #colorLiteral(red: 0.05490196078, green: 0.7215686275, blue: 0.2274509804, alpha: 1) }
     
     /// 葱绿
-    class var hex_9ed900: UIColor { sf.hexColor(hex: "#9ed900") }
+    class var hex_9ED900: UIColor { #colorLiteral(red: 0.6196078431, green: 0.8509803922, blue: 0, alpha: 1) }
     /// 油绿
-    class var hex_00bc12: UIColor { sf.hexColor(hex: "#00bc12") }
+    class var hex_00BC12: UIColor { #colorLiteral(red: 0, green: 0.737254902, blue: 0.07058823529, alpha: 1) }
     /// 豆青
-    class var hex_96ce54: UIColor { sf.hexColor(hex: "#96ce54") }
+    class var hex_96CE54: UIColor { #colorLiteral(red: 0.5882352941, green: 0.8078431373, blue: 0.3294117647, alpha: 1) }
     /// 豆绿
-    class var hex_9ed048: UIColor { sf.hexColor(hex: "#9ed048") }
+    class var hex_9ED048: UIColor { #colorLiteral(red: 0.6196078431, green: 0.8156862745, blue: 0.2823529412, alpha: 1) }
     
     /// 葱黄
-    class var hex_a3d900: UIColor { sf.hexColor(hex: "#a3d900") }
+    class var hex_A3D900: UIColor { #colorLiteral(red: 0.6392156863, green: 0.8509803922, blue: 0, alpha: 1) }
     /// 柳绿
-    class var hex_afdd22: UIColor { sf.hexColor(hex: "#afdd22") }
+    class var hex_AFDD22: UIColor { #colorLiteral(red: 0.6862745098, green: 0.8666666667, blue: 0.1333333333, alpha: 1) }
     /// 嫩绿
-    class var hex_bddd22: UIColor { sf.hexColor(hex: "#bddd22") }
+    class var hex_BDDD22: UIColor { #colorLiteral(red: 0.7411764706, green: 0.8666666667, blue: 0.1333333333, alpha: 1) }
     
     /// 嫩黄
-    class var hex_c9dd22: UIColor { sf.hexColor(hex: "#c9dd22") }
+    class var hex_C9DD22: UIColor { #colorLiteral(red: 0.7882352941, green: 0.8666666667, blue: 0.1333333333, alpha: 1) }
     /// 松花色
-    class var hex_bce672: UIColor { sf.hexColor(hex: "#bce672") }
+    class var hex_BCE672: UIColor { #colorLiteral(red: 0.737254902, green: 0.9019607843, blue: 0.4470588235, alpha: 1) }
     /// 赭石
-    class var hex_845a33: UIColor { sf.hexColor(hex: "#845a33") }
+    class var hex_845A33: UIColor { #colorLiteral(red: 0.5176470588, green: 0.3529411765, blue: 0.2, alpha: 1) }
     /// 赭色
-    class var hex_955539: UIColor { sf.hexColor(hex: "#955539") }
+    class var hex_955539: UIColor { #colorLiteral(red: 0.5843137255, green: 0.3333333333, blue: 0.2235294118, alpha: 1) }
     
     /// 棕黑
-    class var hex_7c4b00: UIColor { sf.hexColor(hex: "#7c4b00") }
+    class var hex_7C4B00: UIColor { #colorLiteral(red: 0.4862745098, green: 0.2941176471, blue: 0, alpha: 1) }
     /// 褐色
-    class var hex_6e511e: UIColor { sf.hexColor(hex: "#6e511e") }
+    class var hex_6E511E: UIColor { #colorLiteral(red: 0.431372549, green: 0.3176470588, blue: 0.1176470588, alpha: 1) }
     /// 棕绿
-    class var hex_827100: UIColor { sf.hexColor(hex: "#827100") }
+    class var hex_827100: UIColor { #colorLiteral(red: 0.5098039216, green: 0.4431372549, blue: 0, alpha: 1) }
     /// 秋色
-    class var hex_896c39: UIColor { sf.hexColor(hex: "#896c39") }
+    class var hex_896C39: UIColor { #colorLiteral(red: 0.537254902, green: 0.4235294118, blue: 0.2235294118, alpha: 1) }
     
     /// 驼色
-    class var hex_a88462: UIColor { sf.hexColor(hex: "#a88462") }
+    class var hex_A88462: UIColor { #colorLiteral(red: 0.6588235294, green: 0.5176470588, blue: 0.3843137255, alpha: 1) }
     /// 赭
-    class var hex_9c5333: UIColor { sf.hexColor(hex: "#9c5333") }
+    class var hex_9C5333: UIColor { #colorLiteral(red: 0.6117647059, green: 0.3254901961, blue: 0.2, alpha: 1) }
     /// 棕红
-    class var hex_9b4400: UIColor { sf.hexColor(hex: "#9b4400") }
+    class var hex_9B4400: UIColor { #colorLiteral(red: 0.6078431373, green: 0.2666666667, blue: 0, alpha: 1) }
     /// 茶色
-    class var hex_b35c44: UIColor { sf.hexColor(hex: "#b35c44") }
+    class var hex_B35C44: UIColor { #colorLiteral(red: 0.7019607843, green: 0.3607843137, blue: 0.2666666667, alpha: 1) }
     
     /// 棕色
-    class var hex_b25d25: UIColor { sf.hexColor(hex: "#b25d25") }
+    class var hex_B25D25: UIColor { #colorLiteral(red: 0.6980392157, green: 0.3647058824, blue: 0.1450980392, alpha: 1) }
     /// 琥珀
-    class var hex_ca6924: UIColor { sf.hexColor(hex: "#ca6924") }
+    class var hex_CA6924: UIColor { #colorLiteral(red: 0.7921568627, green: 0.4117647059, blue: 0.1411764706, alpha: 1) }
     /// 棕黄
-    class var hex_ae7000: UIColor { sf.hexColor(hex: "#ae7000") }
+    class var hex_AE7000: UIColor { #colorLiteral(red: 0.6823529412, green: 0.4392156863, blue: 0, alpha: 1) }
     /// 昏黄
-    class var hex_c89b40: UIColor { sf.hexColor(hex: "#c89b40") }
+    class var hex_C89B40: UIColor { #colorLiteral(red: 0.7843137255, green: 0.6078431373, blue: 0.2509803922, alpha: 1) }
     
     /// 乌金
-    class var hex_a78e44: UIColor { sf.hexColor(hex: "#a78e44") }
+    class var hex_A78E44: UIColor { #colorLiteral(red: 0.6549019608, green: 0.5568627451, blue: 0.2666666667, alpha: 1) }
     /// 黄栌
-    class var hex_e29c45: UIColor { sf.hexColor(hex: "#e29c45") }
+    class var hex_E29C45: UIColor { #colorLiteral(red: 0.8862745098, green: 0.6117647059, blue: 0.2705882353, alpha: 1) }
     /// 枯黄
-    class var hex_d3b17d: UIColor { sf.hexColor(hex: "#d3b17d") }
+    class var hex_D3B17D: UIColor { #colorLiteral(red: 0.8274509804, green: 0.6941176471, blue: 0.4901960784, alpha: 1) }
     /// 牙色
-    class var hex_eedeb0: UIColor { sf.hexColor(hex: "#eedeb0") }
+    class var hex_EEDEB0: UIColor { #colorLiteral(red: 0.9333333333, green: 0.8705882353, blue: 0.6901960784, alpha: 1) }
     
     /// 金色
-    class var hex_eacd76: UIColor { sf.hexColor(hex: "#eacd76") }
+    class var hex_EACD76: UIColor { #colorLiteral(red: 0.9176470588, green: 0.8039215686, blue: 0.462745098, alpha: 1) }
     /// 秋香色
-    class var hex_d9b611: UIColor { sf.hexColor(hex: "#d9b611") }
+    class var hex_D9B611: UIColor { #colorLiteral(red: 0.8509803922, green: 0.7137254902, blue: 0.06666666667, alpha: 1) }
     /// 雄黄
-    class var hex_e9bb1d: UIColor { sf.hexColor(hex: "#e9bb1d") }
+    class var hex_E9BB1D: UIColor { #colorLiteral(red: 0.9137254902, green: 0.7333333333, blue: 0.1137254902, alpha: 1) }
     /// 缃色
-    class var hex_f0c239: UIColor { sf.hexColor(hex: "#f0c239") }
+    class var hex_F0C239: UIColor { #colorLiteral(red: 0.9411764706, green: 0.7607843137, blue: 0.2235294118, alpha: 1) }
     
     /// 赤金
-    class var hex_f2be45: UIColor { sf.hexColor(hex: "#f2be45") }
+    class var hex_F2BE45: UIColor { #colorLiteral(red: 0.9490196078, green: 0.7450980392, blue: 0.2705882353, alpha: 1) }
     /// 雌黄
-    class var hex_ffc64b: UIColor { sf.hexColor(hex: "#ffc64b") }
+    class var hex_FFC64B: UIColor { #colorLiteral(red: 1, green: 0.7764705882, blue: 0.2941176471, alpha: 1) }
     /// 姜黄
-    class var hex_ffc773: UIColor { sf.hexColor(hex: "#ffc773") }
+    class var hex_FFC773: UIColor { #colorLiteral(red: 1, green: 0.7803921569, blue: 0.4509803922, alpha: 1) }
     /// 藤黄
-    class var hex_ffb61e: UIColor { sf.hexColor(hex: "#ffb61e") }
+    class var hex_FFB61E: UIColor { #colorLiteral(red: 1, green: 0.7137254902, blue: 0.1176470588, alpha: 1) }
     
     /// 橘红
-    class var hex_ff7500: UIColor { sf.hexColor(hex: "#ff7500") }
+    class var hex_FF7500: UIColor { #colorLiteral(red: 1, green: 0.4588235294, blue: 0, alpha: 1) }
     /// 橘黄
-    class var hex_ff8936: UIColor { sf.hexColor(hex: "#ff8936") }
+    class var hex_FF8936: UIColor { #colorLiteral(red: 1, green: 0.537254902, blue: 0.2117647059, alpha: 1) }
     /// 杏红
-    class var hex_ff8c31: UIColor { sf.hexColor(hex: "#ff8c31") }
+    class var hex_FF8C31: UIColor { #colorLiteral(red: 1, green: 0.5490196078, blue: 0.1921568627, alpha: 1) }
     /// 橙色
-    class var hex_fa8c35: UIColor { sf.hexColor(hex: "#fa8c35") }
+    class var hex_FA8C35: UIColor { #colorLiteral(red: 0.9803921569, green: 0.5490196078, blue: 0.2078431373, alpha: 1) }
     
     /// 橙黄
-    class var hex_ffa400: UIColor { sf.hexColor(hex: "#ffa400") }
+    class var hex_FFA400: UIColor { #colorLiteral(red: 1, green: 0.6431372549, blue: 0, alpha: 1) }
     /// 杏黄
-    class var hex_ffa631: UIColor { sf.hexColor(hex: "#ffa631") }
+    class var hex_FFA631: UIColor { #colorLiteral(red: 1, green: 0.6509803922, blue: 0.1921568627, alpha: 1) }
     /// 鸭黄
-    class var hex_faff72: UIColor { sf.hexColor(hex: "#faff72") }
+    class var hex_FAFF72: UIColor { #colorLiteral(red: 0.9803921569, green: 1, blue: 0.4470588235, alpha: 1) }
     /// 鹅黄
-    class var hex_fff143: UIColor { sf.hexColor(hex: "#fff143") }
+    class var hex_FFF143: UIColor { #colorLiteral(red: 1, green: 0.9450980392, blue: 0.262745098, alpha: 1) }
     
     /// 樱草色
-    class var hex_eaff56: UIColor { sf.hexColor(hex: "#eaff56") }
+    class var hex_EAFF56: UIColor { #colorLiteral(red: 0.9176470588, green: 1, blue: 0.337254902, alpha: 1) }
     /// 黑色
-    class var hex_000000: UIColor { sf.hexColor(hex: "#000000") }
+    class var hex_000000: UIColor { #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1) }
     /// 漆黑
-    class var hex_161823: UIColor { sf.hexColor(hex: "#161823") }
+    class var hex_161823: UIColor { #colorLiteral(red: 0.0862745098, green: 0.09411764706, blue: 0.137254902, alpha: 1) }
     /// 煤黑
-    class var hex_312520: UIColor { sf.hexColor(hex: "#312520") }
+    class var hex_312520: UIColor { #colorLiteral(red: 0.1921568627, green: 0.1450980392, blue: 0.1254901961, alpha: 1) }
     
     /// 缁色
-    class var hex_493131: UIColor { sf.hexColor(hex: "#493131") }
+    class var hex_493131: UIColor { #colorLiteral(red: 0.2862745098, green: 0.1921568627, blue: 0.1921568627, alpha: 1) }
     /// 黝黑
-    class var hex_665757: UIColor { sf.hexColor(hex: "#665757") }
+    class var hex_665757: UIColor { #colorLiteral(red: 0.4, green: 0.3411764706, blue: 0.3411764706, alpha: 1) }
     /// 黧
-    class var hex_5d513c: UIColor { sf.hexColor(hex: "#5d513c") }
+    class var hex_5D513C: UIColor { #colorLiteral(red: 0.3647058824, green: 0.3176470588, blue: 0.2352941176, alpha: 1) }
     /// 黎
-    class var hex_75664d: UIColor { sf.hexColor(hex: "#75664d") }
+    class var hex_75664D: UIColor { #colorLiteral(red: 0.4588235294, green: 0.4, blue: 0.3019607843, alpha: 1) }
     
     /// 乌黑
-    class var hex_392f41: UIColor { sf.hexColor(hex: "#392f41") }
+    class var hex_392F41: UIColor { #colorLiteral(red: 0.2235294118, green: 0.1843137255, blue: 0.2549019608, alpha: 1) }
     /// 玄青
-    class var hex_3d3b4f: UIColor { sf.hexColor(hex: "#3d3b4f") }
+    class var hex_3D3B4F: UIColor { #colorLiteral(red: 0.2392156863, green: 0.231372549, blue: 0.3098039216, alpha: 1) }
     /// 乌色
-    class var hex_725e82: UIColor { sf.hexColor(hex: "#725e82") }
+    class var hex_725E82: UIColor { #colorLiteral(red: 0.4470588235, green: 0.368627451, blue: 0.5098039216, alpha: 1) }
     /// 黝
-    class var hex_6b6882: UIColor { sf.hexColor(hex: "#6b6882") }
+    class var hex_6D6882: UIColor { #colorLiteral(red: 0.4274509804, green: 0.4078431373, blue: 0.5098039216, alpha: 1) }
     
     /// 水色
-    class var hex_88ada6: UIColor { sf.hexColor(hex: "#88ada6") }
+    class var hex_88ADA6: UIColor { #colorLiteral(red: 0.5333333333, green: 0.6784313725, blue: 0.6509803922, alpha: 1) }
     /// 苍色
-    class var hex_75878a: UIColor { sf.hexColor(hex: "#75878a") }
+    class var hex_75878A: UIColor { #colorLiteral(red: 0.4588235294, green: 0.5294117647, blue: 0.5411764706, alpha: 1) }
     /// 灰色
-    class var hex_808080: UIColor { sf.hexColor(hex: "#808080") }
+    class var hex_808080: UIColor { #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1) }
     /// 老银
-    class var hex_bacac6: UIColor { sf.hexColor(hex: "#bacac6") }
+    class var hex_BACAC6: UIColor { #colorLiteral(red: 0.7294117647, green: 0.7921568627, blue: 0.7764705882, alpha: 1) }
     
     /// 花白
-    class var hex_c2ccd0: UIColor { sf.hexColor(hex: "#c2ccd0") }
+    class var hex_C2CCD0: UIColor { #colorLiteral(red: 0.7607843137, green: 0.8, blue: 0.8156862745, alpha: 1) }
     /// 蟹壳青
-    class var hex_bbcdc5: UIColor { sf.hexColor(hex: "#bbcdc5") }
+    class var hex_BBCDC5: UIColor { #colorLiteral(red: 0.7333333333, green: 0.8039215686, blue: 0.7725490196, alpha: 1) }
     /// 青白
-    class var hex_c0ebd7: UIColor { sf.hexColor(hex: "#c0ebd7") }
+    class var hex_C0EBD7: UIColor { #colorLiteral(red: 0.7529411765, green: 0.9215686275, blue: 0.8431372549, alpha: 1) }
     /// 素
-    class var hex_e0f0e9: UIColor { sf.hexColor(hex: "#e0f0e9") }
+    class var hex_E0F0E9: UIColor { #colorLiteral(red: 0.8784313725, green: 0.9411764706, blue: 0.9137254902, alpha: 1) }
     
     /// 鸭卵青
-    class var hex_e0eee8: UIColor { sf.hexColor(hex: "#e0eee8") }
+    class var hex_E0EEE8: UIColor { #colorLiteral(red: 0.8784313725, green: 0.9333333333, blue: 0.9098039216, alpha: 1) }
     /// 茶白
-    class var hex_f3f9f1: UIColor { sf.hexColor(hex: "#f3f9f1") }
+    class var hex_F3F9F1: UIColor { #colorLiteral(red: 0.9529411765, green: 0.9764705882, blue: 0.9450980392, alpha: 1) }
     /// 藕荷色
-    class var hex_e4c6d0: UIColor { sf.hexColor(hex: "#e4c6d0") }
+    class var hex_E4C6D0: UIColor { #colorLiteral(red: 0.8941176471, green: 0.7764705882, blue: 0.8156862745, alpha: 1) }
     /// 藕色
-    class var hex_edd1d8: UIColor { sf.hexColor(hex: "#edd1d8") }
+    class var hex_EDD1D8: UIColor { #colorLiteral(red: 0.9294117647, green: 0.8196078431, blue: 0.8470588235, alpha: 1) }
     
     /// 白粉
-    class var hex_fff2df: UIColor { sf.hexColor(hex: "#fff2df") }
+    class var hex_FFF2DF: UIColor { #colorLiteral(red: 1, green: 0.9490196078, blue: 0.8745098039, alpha: 1) }
     /// 鱼肚白
-    class var hex_fcefe8: UIColor { sf.hexColor(hex: "#fcefe8") }
+    class var hex_FCEFE8: UIColor { #colorLiteral(red: 0.9882352941, green: 0.937254902, blue: 0.9098039216, alpha: 1) }
     /// 缟
-    class var hex_f2ecde: UIColor { sf.hexColor(hex: "#f2ecde") }
+    class var hex_F2ECDE: UIColor { #colorLiteral(red: 0.9490196078, green: 0.9254901961, blue: 0.8705882353, alpha: 1) }
     /// 象牙白
-    class var hex_fffbf0: UIColor { sf.hexColor(hex: "#fffbf0") }
+    class var hex_FFFBF0: UIColor { #colorLiteral(red: 1, green: 0.9843137255, blue: 0.9411764706, alpha: 1) }
     
     /// 月白
-    class var hex_d6ecf0: UIColor { sf.hexColor(hex: "#d6ecf0") }
+    class var hex_D6ECF0: UIColor { #colorLiteral(red: 0.8392156863, green: 0.9254901961, blue: 0.9411764706, alpha: 1) }
     /// 莹白
-    class var hex_e3f9fd: UIColor { sf.hexColor(hex: "#e3f9fd") }
+    class var hex_E3F9FD: UIColor { #colorLiteral(red: 0.8901960784, green: 0.9764705882, blue: 0.9921568627, alpha: 1) }
     /// 雪白
-    class var hex_f0fcff: UIColor { sf.hexColor(hex: "#f0fcff") }
+    class var hex_F0FCFF: UIColor { #colorLiteral(red: 0.9411764706, green: 0.9882352941, blue: 1, alpha: 1) }
     /// 霜色
-    class var hex_e9f1f6: UIColor { sf.hexColor(hex: "#e9f1f6") }
+    class var hex_E9F1F6: UIColor { #colorLiteral(red: 0.9137254902, green: 0.9450980392, blue: 0.9647058824, alpha: 1) }
     
     /// 铅白
-    class var hex_f0f0f4: UIColor { sf.hexColor(hex: "#f0f0f4") }
+    class var hex_F0F0F4: UIColor { #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9568627451, alpha: 1) }
     /// 银白
-    class var hex_e9e7ef: UIColor { sf.hexColor(hex: "#e9e7ef") }
+    class var hex_E9E7EF: UIColor { #colorLiteral(red: 0.9137254902, green: 0.9058823529, blue: 0.937254902, alpha: 1) }
     /// 精白
-    class var hex_ffffff: UIColor { sf.hexColor(hex: "#ffffff") }
+    class var hex_FFFFFF: UIColor { #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }
     
 }
 
 // MARK: - 潘通年度色
 public extension UIColor {
     /// 2024 - 柔和桃
-    class var hex_PT_FFBE98: UIColor { sf.hexColor(hex: "#FFBE98") }
+    class var hex_PT_FFBE98: UIColor { #colorLiteral(red: 1, green: 0.7450980392, blue: 0.5960784314, alpha: 1) }
     /// 2023 - 非凡洋红
-    class var hex_PT_BE3455: UIColor { sf.hexColor(hex: "#BE3455") }
+    class var hex_PT_BE3455: UIColor { #colorLiteral(red: 0.7450980392, green: 0.2039215686, blue: 0.3333333333, alpha: 1) }
     /// 2022 - 长春花蓝
-    class var hex_PT_6667AB: UIColor { sf.hexColor(hex: "#6667AB") }
+    class var hex_PT_6667AB: UIColor { #colorLiteral(red: 0.4, green: 0.4039215686, blue: 0.6705882353, alpha: 1) }
     /// 2021 - 明亮黄
-    class var hex_PT_F5DF4D: UIColor { sf.hexColor(hex: "#F5DF4D") }
+    class var hex_PT_F5DF4D: UIColor { #colorLiteral(red: 0.9607843137, green: 0.8745098039, blue: 0.3019607843, alpha: 1) }
     
     /// 2021 - 极致灰
-    class var hex_PT_939597: UIColor { sf.hexColor(hex: "#939597") }
+    class var hex_PT_939597: UIColor { #colorLiteral(red: 0.5764705882, green: 0.5843137255, blue: 0.5921568627, alpha: 1) }
     /// 2020 - 经典蓝
-    class var hex_PT_0F4C81: UIColor { sf.hexColor(hex: "#0F4C81") }
+    class var hex_PT_0F4C81: UIColor { #colorLiteral(red: 0.05882352941, green: 0.2980392157, blue: 0.5058823529, alpha: 1) }
     /// 2019 - 珊瑚橙
-    class var hex_PT_FF6F61: UIColor { sf.hexColor(hex: "#FF6F61") }
+    class var hex_PT_FF6F61: UIColor { #colorLiteral(red: 1, green: 0.4352941176, blue: 0.3803921569, alpha: 1) }
     /// 2018 - 紫外光
-    class var hex_PT_5F4B8B: UIColor { sf.hexColor(hex: "#5F4B8B") }
+    class var hex_PT_5F4B8B: UIColor { #colorLiteral(red: 0.3725490196, green: 0.2941176471, blue: 0.5450980392, alpha: 1) }
     
     /// 2017 - 草木绿
-    class var hex_PT_88B04B: UIColor { sf.hexColor(hex: "#88B04B") }
+    class var hex_PT_88B04B: UIColor { #colorLiteral(red: 0.5333333333, green: 0.6901960784, blue: 0.2941176471, alpha: 1) }
     /// 2016 - 水晶粉
-    class var hex_PT_F7CAC9: UIColor { sf.hexColor(hex: "#F7CAC9") }
+    class var hex_PT_F7CAC9: UIColor { #colorLiteral(red: 0.968627451, green: 0.7921568627, blue: 0.7882352941, alpha: 1) }
     /// 2016 - 宁静蓝
-    class var hex_PT_92A8D1: UIColor { sf.hexColor(hex: "#92A8D1") }
+    class var hex_PT_92A8D1: UIColor { #colorLiteral(red: 0.5725490196, green: 0.6588235294, blue: 0.8196078431, alpha: 1) }
     /// 2015 - 玛萨拉酒红
-    class var hex_PT_955251: UIColor { sf.hexColor(hex: "#955251") }
+    class var hex_PT_955251: UIColor { #colorLiteral(red: 0.5843137255, green: 0.3215686275, blue: 0.3176470588, alpha: 1) }
     
     /// 2014 - 璀璨紫兰花
-    class var hex_PT_B565A7: UIColor { sf.hexColor(hex: "#B565A7") }
+    class var hex_PT_B565A7: UIColor { #colorLiteral(red: 0.7098039216, green: 0.3960784314, blue: 0.6549019608, alpha: 1) }
     /// 2013 - 翡翠绿
-    class var hex_PT_009B77: UIColor { sf.hexColor(hex: "#009B77") }
+    class var hex_PT_009B77: UIColor { #colorLiteral(red: 0, green: 0.6078431373, blue: 0.4666666667, alpha: 1) }
     /// 2012 - 探戈橘
-    class var hex_PT_E2492F: UIColor { sf.hexColor(hex: "#E2492F") }
+    class var hex_PT_E2492F: UIColor { #colorLiteral(red: 0.8862745098, green: 0.2862745098, blue: 0.1843137255, alpha: 1) }
     /// 2011 - 忍冬红
-    class var hex_PT_CB6586: UIColor { sf.hexColor(hex: "#CB6586") }
+    class var hex_PT_CB6586: UIColor { #colorLiteral(red: 0.7960784314, green: 0.3960784314, blue: 0.5254901961, alpha: 1) }
     
     /// 2010 - 松石绿
-    class var hex_PT_45B5AA: UIColor { sf.hexColor(hex: "#45B5AA") }
+    class var hex_PT_45B5AA: UIColor { #colorLiteral(red: 0.2705882353, green: 0.7098039216, blue: 0.6666666667, alpha: 1) }
     /// 2009 - 含羞草黄
-    class var hex_PT_F0C05A: UIColor { sf.hexColor(hex: "#F0C05A") }
+    class var hex_PT_F0C05A: UIColor { #colorLiteral(red: 0.9411764706, green: 0.7529411765, blue: 0.3529411765, alpha: 1) }
     /// 2008 - 鸢尾蓝
-    class var hex_PT_5A5B9F: UIColor { sf.hexColor(hex: "#5A5B9F") }
+    class var hex_PT_5A5B9F: UIColor { #colorLiteral(red: 0.3529411765, green: 0.3568627451, blue: 0.6235294118, alpha: 1) }
     /// 2007 - 辣椒红
-    class var hex_PT_9B1B30: UIColor { sf.hexColor(hex: "#9B1B30") }
+    class var hex_PT_9B1B30: UIColor { #colorLiteral(red: 0.6078431373, green: 0.1058823529, blue: 0.1882352941, alpha: 1) }
     
     /// 2006 - 沙色金
-    class var hex_PT_DECDBE: UIColor { sf.hexColor(hex: "#DECDBE") }
+    class var hex_PT_DECDBE: UIColor { #colorLiteral(red: 0.8705882353, green: 0.8039215686, blue: 0.7450980392, alpha: 1) }
     /// 2005 - 虎皮百合
-    class var hex_PT_53B0AE: UIColor { sf.hexColor(hex: "#53B0AE") }
+    class var hex_PT_53B0AE: UIColor { #colorLiteral(red: 0.3254901961, green: 0.6901960784, blue: 0.6823529412, alpha: 1) }
     /// 2004 - 蓝色绿松石
-    class var hex_PT_E2583E: UIColor { sf.hexColor(hex: "#E2583E") }
+    class var hex_PT_E2583E: UIColor { #colorLiteral(red: 0.8862745098, green: 0.3450980392, blue: 0.2431372549, alpha: 1) }
     /// 2003 - 水色天空
-    class var hex_PT_7BC4C4: UIColor { sf.hexColor(hex: "#7BC4C4") }
+    class var hex_PT_7BC4C4: UIColor { #colorLiteral(red: 0.4823529412, green: 0.768627451, blue: 0.768627451, alpha: 1) }
     
     /// 2002 - 真实红
-    class var hex_PT_BF1932: UIColor { sf.hexColor(hex: "#BF1932") }
+    class var hex_PT_BF1932: UIColor { #colorLiteral(red: 0.7490196078, green: 0.09803921569, blue: 0.1960784314, alpha: 1) }
     /// 2001 - 桃色玫瑰色
-    class var hex_PT_C74375: UIColor { sf.hexColor(hex: "#C74375") }
+    class var hex_PT_C74375: UIColor { #colorLiteral(red: 0.7803921569, green: 0.262745098, blue: 0.4588235294, alpha: 1) }
     /// 2000 - 蔚蓝
-    class var hex_PT_98B2D1: UIColor { sf.hexColor(hex: "#98B2D1") }
+    class var hex_PT_98B2D1: UIColor { #colorLiteral(red: 0.5960784314, green: 0.6980392157, blue: 0.8196078431, alpha: 1) }
 }
+
+
+#endif

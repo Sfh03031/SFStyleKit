@@ -6,6 +6,8 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
 // MARK: 没有复制,粘贴,选择等的输入框
@@ -24,7 +26,38 @@ public class SFNoPasteTextField: UITextField {
     }
 }
 
-// MARK: 系统Api支持
+public extension UITextField {
+    
+    /// 限制输入内容
+    /// - Parameters:
+    ///   - pattern: 正则表达式
+    ///   - limitCount: 可输入字符长度
+    func limitIntputWithPattern(pattern: String, _ limitCount: Int = -1) {
+        // 非markedText才继续往下处理
+        guard let _: UITextRange = self.markedTextRange else {
+            // 当前光标位置
+            let cursorPosition = self.offset(from: self.endOfDocument, to: self.selectedTextRange!.end)
+            //替换后的字符串
+            var str = ""
+            if pattern == "" {
+                str = self.text!
+            } else {
+                str = self.text!.regularReplace(pattern: pattern, with: "")
+            }
+            // 限制长度
+            if limitCount >= 0, str.count > limitCount {
+                str = String(str.prefix(limitCount))
+            }
+            self.text = str
+            // 让光标停留在正确位置
+            let targetPosition = self.position(from: self.endOfDocument, offset: cursorPosition)!
+            self.selectedTextRange = self.textRange(from: targetPosition, to: targetPosition)
+            return
+        }
+    }
+}
+
+// MARK: support SFExStyle for system Api of UIScrollView
 
 public extension SFExStyle where Base: UITextField {
     
@@ -198,3 +231,5 @@ public extension SFExStyle where Base: UITextField {
     }
 
 }
+
+#endif

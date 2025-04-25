@@ -6,6 +6,8 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(CoreLocation)
+
 import CoreLocation
 
 // MARK: 扩展
@@ -26,3 +28,5 @@ public extension CLPlacemark  {
         String(format: "%@%@%@", locality ?? "", subLocality ?? "", name ?? "")
     }
 }
+
+#endif

@@ -6,10 +6,15 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(Foundation)
+
 import Foundation
 
 public extension SFExStyle where Base == Dictionary<String, Any> {
-    /// 添加可选值
+    
+    /// 筛选目标对象元素，添加可选值，返回新对象
+    /// - Parameter item: 目标对象
+    /// - Returns: 新对象
     @discardableResult
     func addOptional(_ item: [String: Any?]) -> Base {
         let keys = Array(item.keys) as [String]
@@ -22,3 +27,5 @@ public extension SFExStyle where Base == Dictionary<String, Any> {
         return dict
     }
 }
+
+#endif

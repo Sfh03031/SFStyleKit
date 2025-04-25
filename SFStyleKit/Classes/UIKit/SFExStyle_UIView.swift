@@ -6,10 +6,11 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
-// MARK: 系统Api支持
-
+// MARK: support SFExStyle for system Api of UIScrollView
 public extension SFExStyle where Base: UIView {
     
     @discardableResult
@@ -540,19 +541,6 @@ public extension SFExStyle where Base: UIView {
         base.addGestureRecognizer(tap)
         return self
     }
-
-    /// 添加点击事件回调
-    /// - Parameter handler: 回调
-    /// - Returns: self
-    @discardableResult
-    func addTapAction(handler: ((_ view: UIView?) -> Void)?) -> SFExStyle {
-        base.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer.init(target: base) { tap in
-            handler?(tap.view)
-        }
-        base.addGestureRecognizer(tap)
-        return self
-    }
     
     /// 添加点击事件回调
     /// - Parameters:
@@ -560,7 +548,7 @@ public extension SFExStyle where Base: UIView {
     ///   - handler: 回调
     /// - Returns: self
     @discardableResult
-    func addTapsAction(tapsRequired: Int, handler: ((_ view: UIView?) -> Void)?) -> SFExStyle {
+    func addTapAction(_ tapsRequired: Int = 1, handler: ((_ view: UIView?) -> Void)?) -> SFExStyle {
         base.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: base, tapRequired: tapsRequired) { tap in
             handler?(tap.view)
@@ -637,9 +625,12 @@ public extension SFExStyle where Base: UIView {
     /// - Parameter radius: 角度值
     /// - Returns: self
     @discardableResult
-    func makeRadius(_ radius: CGFloat) -> SFExStyle {
+    func makeRadius(_ radius: CGFloat, corners: CACornerMask? = nil) -> SFExStyle {
         base.layer.cornerRadius = radius
         base.layer.masksToBounds = radius > 0
+        if corners != nil {
+            base.layer.maskedCorners = corners!
+        }
         return self
     }
     
@@ -787,7 +778,6 @@ public extension SFExStyle where Base: UIView {
         return self
     }
 
-    
     /// 画边框，支持画一条或多条、支持带圆角边框、支持虚实线
     /// 需要注意：1.画曲线边框并不会切圆角 2.如果视图切圆角了设置 isSuperClip = true
     /// - Parameters:
@@ -1001,43 +991,4 @@ public extension SFExStyle where Base: UIView {
     }
 }
 
-// MARK: - 扩展UITapGestureRecognizer，添加回调
-
-public extension UITapGestureRecognizer {
-    
-    convenience init(target: Any?, tapRequired: Int = 1, handler: ((_ tap: UITapGestureRecognizer) -> Void)?) {
-        self.init(target: nil, action: nil)
-        self.numberOfTapsRequired = tapRequired
-        self.addTarget(self, action: #selector(didTaped))
-        self.sf_tapHandler = handler
-    }
-    
-    @objc private func didTaped() {
-        self.sf_tapHandler?(self)
-    }
-    
-    class SFTapGesBlock {
-        var closure: ((_ tap: UITapGestureRecognizer) -> Void)?
-        
-        init(_ closure: ((_: UITapGestureRecognizer) -> Void)?) {
-            self.closure = closure
-        }
-    }
-    
-    private static let tapHandlerKey = UnsafeRawPointer(bitPattern: "tapHandlerKey".hashValue)!
-    
-    private var sf_tapHandler: ((_ tap: UITapGestureRecognizer) -> ())? {
-        get {
-            var obj = objc_getAssociatedObject(self, Self.tapHandlerKey) as? SFTapGesBlock
-            if obj == nil {
-                obj = SFTapGesBlock(nil)
-                objc_setAssociatedObject(self, Self.tapHandlerKey, obj, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
-            return obj!.closure
-        }
-        
-        set {
-            objc_setAssociatedObject(self, Self.tapHandlerKey, SFTapGesBlock(newValue), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-}
+#endif

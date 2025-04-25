@@ -6,6 +6,8 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
 // MARK: 扩展
@@ -190,3 +192,5 @@ public extension UIAlertController {
         UIAlertController(title: nil, message: nil, preferredStyle: style).sf
     }
 }
+
+#endif

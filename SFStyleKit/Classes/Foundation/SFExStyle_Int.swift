@@ -6,9 +6,13 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(Foundation)
+
 import Foundation
 
 public extension SFExStyle where Base == Int {
     /// Int -> String
     var stringValue: String { String(describing: base) }
 }
+
+#endif

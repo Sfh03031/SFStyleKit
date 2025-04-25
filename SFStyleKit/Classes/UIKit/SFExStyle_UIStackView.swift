@@ -6,10 +6,11 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
-// MARK: 系统Api支持
-
+// MARK: support SFExStyle for system Api of UIScrollView
 public extension SFExStyle where Base: UIStackView {
     
     @discardableResult
@@ -81,3 +82,5 @@ public extension SFExStyle where Base: UIStackView {
         return self
     }
 }
+
+#endif

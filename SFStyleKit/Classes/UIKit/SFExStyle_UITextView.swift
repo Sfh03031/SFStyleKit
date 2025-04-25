@@ -6,6 +6,8 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
 // MARK: 没有复制,粘贴,选择等的输入框
@@ -24,7 +26,7 @@ public class SFNoPasteTextView: UITextView {
     }
 }
 
-// MARK: 系统Api支持
+// MARK: support SFExStyle for system Api of UIScrollView
 
 public extension SFExStyle where Base: UITextView {
     
@@ -165,3 +167,5 @@ public extension SFExStyle where Base: UITextView {
     }
 
 }
+
+#endif

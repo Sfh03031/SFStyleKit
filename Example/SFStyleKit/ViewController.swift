@@ -18,33 +18,40 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.view.sf.add(subview: backView).backgroundColor(.white)
         
-        print("idfv: \(UIDevice.current.sf.idfv)")
-        print("StringWithUUID: \(UIDevice.current.sf.StringWithUUID)")
-        print("batteryLevel: \(UIDevice.current.sf.batteryLevel)")
-        print("batteryState: \(UIDevice.current.sf.batteryState)")
-        print("cpuCoreNum: \(UIDevice.current.sf.cpuCoreNum)")
-        print("cpuType: \(UIDevice.current.sf.cpuType)")
-        print("deviceName: \(UIDevice.current.sf.deviceName)")
-        print("deviceType: \(UIDevice.current.sf.deviceType)")
-        print("deviceVolume: \(UIDevice.current.sf.deviceVolume)")
-        print("diskTotalSize: \(UIDevice.current.sf.diskTotalSize)")
-        print("diskAvailableSize: \(UIDevice.current.sf.diskAvailableSize)")
-        print("ipAddress: \(String(describing: UIDevice.current.sf.ipAddress))")
-        print("isJailbreak: \(UIDevice.current.sf.isJailbreak)")
-        print("isSimulator: \(UIDevice.current.sf.isSimulator)")
-        print("localizedModel: \(UIDevice.current.sf.localizedModel)")
-        print("model: \(UIDevice.current.sf.model)")
-        print("name: \(UIDevice.current.sf.name)")
-        print("pasteBoardValue: \(UIDevice.current.sf.pasteBoardValue)")
-        print("screenBrightness: \(UIDevice.current.sf.screenBrightness)")
-        print("screenSize: \(UIDevice.current.sf.screenResolution)")
-        print("simProvider: \(UIDevice.current.sf.simProvider)")
-        print("systemName: \(UIDevice.current.sf.systemName)")
-        print("systemVersion: \(UIDevice.current.sf.systemVersion)")
+        print("idfv: \(UIDevice.current.Idfv)")
+        print("StringWithUUID: \(UIDevice.current.UUIDCreated)")
+        print("batteryLevel: \(UIDevice.current.BatteryLevel)")
+        print("batteryState: \(UIDevice.current.BatteryState)")
+        print("cpuCoreNum: \(UIDevice.current.CpuCoreNum)")
+        print("cpuType: \(UIDevice.current.CpuType)")
+        print("deviceName: \(UIDevice.current.DeviceName)")
+        print("deviceType: \(UIDevice.current.DeviceType)")
+        print("deviceVolume: \(UIDevice.current.Volume)")
+        print("diskTotalSize: \(UIDevice.current.DiskTotalSize)")
+        print("diskAvailableSize: \(UIDevice.current.DiskAvailableSize)")
+        print("ipAddress: \(String(describing: UIDevice.current.IpAddress))")
+        print("isJailbreak: \(UIDevice.current.isJailbreak)")
+        print("isSimulator: \(UIDevice.current.isSimulator)")
+        print("localizedModel: \(UIDevice.current.LocalizedModel)")
+        print("model: \(UIDevice.current.Model)")
+        print("name: \(UIDevice.current.Name)")
+        print("pasteBoardValue: \(UIDevice.current.PasteBoardValue)")
+        print("screenBrightness: \(UIDevice.current.Brightness)")
+        print("screenSize: \(UIDevice.current.Resolution)")
+        print("simProvider: \(UIDevice.current.SimProvider)")
+        print("systemName: \(UIDevice.current.SystemName)")
+        print("systemVersion: \(UIDevice.current.SystemVersion)")
         
-        print("memoryUsage: \(UIApplication.shared.sf.memoryUsage)")
+        print("DocumentsURL: \(UIApplication.shared.DocumentsURL?.absoluteString ?? "")")
+        print("DocumentsPath: \(UIApplication.shared.DocumentsPath ?? "")")
+        print("CachesURL: \(UIApplication.shared.CachesURL?.absoluteString ?? "")")
+        print("CachesPath: \(UIApplication.shared.CachesPath ?? "")")
+        print("LibraryURL: \(UIApplication.shared.LibraryURL?.absoluteString ?? "")")
+        print("LibraryPath: \(UIApplication.shared.LibraryPath ?? "")")
+        print("memoryUsage: \(UIApplication.shared.MemoryUsage)")
         
         print("13000000000".maskedPhoneNumber())
+
     }
     
     lazy var backView: UIView = {
@@ -53,12 +60,12 @@ class ViewController: UIViewController {
             .backgroundColor(.random)
             .makeBorder(color: .brown, with: 1.0)
             .makeCornerRadius(corners: [.topLeft, .bottomRight], radius: 10.0)
-            .makeShadow(5, color: .hex_bbcdc5, offset: CGSize(width: 5, height: 10), opacity: 1)
+            .makeShadow(5, color: .hex_BBCDC5, offset: CGSize(width: 5, height: 10), opacity: 1)
             .showBadgePoint()
             .addTapAction { view in
                 view?.sf.hiddenBadgePoint()
             }
-            .addTapsAction(tapsRequired: 2) { view in
+            .addTapAction( 2) { view in
                 UIAlertController().sf.message("点击了两下").show(self).hidden(2)
             }
             .add(subview: alphaLabel)
@@ -72,12 +79,13 @@ class ViewController: UIViewController {
                                  bgColor: .white,
                                  text: "鹊桥二号",
                                  textColor: .red,
-                                 aligment: .center,
-                                 radius: 5)
-        label.sf.addTapAction { [weak self] view in
-            guard let self = self else { return }
-            UIAlertController().sf.message("点击了 alphaLabel").show(self).hidden(2)
-        }
+                                 aligment: .center)
+        label.sf
+            .makeRadius(5.0)
+            .addTapAction { [weak self] view in
+                guard let self = self else { return }
+                UIAlertController().sf.message("点击了 alphaLabel").show(self).hidden(2)
+            }
         return label
     }()
     
@@ -105,14 +113,13 @@ class ViewController: UIViewController {
     lazy var btn: UIButton = {
         let btn = UIButton(type: .custom)
         btn.sf.frame(CGRect(x: 50, y: 180, width: SCREENW - 20 - 100, height: 60))
-            .imagePosition(title: "click me click me click me click me click me", image: UIImage(named: "img_block"), state: .normal, space: 15.0, position: .bottom)
-            .backgroundColor(.hex_0c8918)
+            .backgroundColor(.hex_0C8918)
             .makeRadius(10.0)
             .addTapAction { [weak self] view in
             guard let self = self else { return }
             UIAlertController.alertStyle(.actionSheet).message("按钮被点击了").show(self).hidden(2)
         }
-        
+        btn.makePosition(title: "click me click me click me click me click me", image: UIImage(named: "img_block"), state: .normal, space: 15.0, position: .bottom)
         return btn
     }()
 

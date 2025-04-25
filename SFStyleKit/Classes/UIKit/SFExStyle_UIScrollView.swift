@@ -6,10 +6,11 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
-// MARK: 系统Api支持
-
+// MARK: support SFExStyle for system Api of UIScrollView
 public extension SFExStyle where Base: UIScrollView {
     
 //    @discardableResult
@@ -65,12 +66,6 @@ public extension SFExStyle where Base: UIScrollView {
 //    }
     
     @discardableResult
-    func delegate(_ delegate: UIScrollViewDelegate) -> SFExStyle {
-        base.delegate = delegate
-        return self
-    }
-    
-    @discardableResult
     func contentOffset(_ offset: CGPoint) -> SFExStyle {
         base.contentOffset = offset
         return self
@@ -85,6 +80,13 @@ public extension SFExStyle where Base: UIScrollView {
     @discardableResult
     func contentInset(_ insets: UIEdgeInsets) -> SFExStyle {
         base.contentInset = insets
+        return self
+    }
+    
+    @available(iOS 17.4, *)
+    @discardableResult
+    func contentAlignmentPoint(_ point: CGPoint) -> SFExStyle {
+        base.contentAlignmentPoint = point
         return self
     }
     
@@ -108,6 +110,12 @@ public extension SFExStyle where Base: UIScrollView {
         base.automaticallyAdjustsScrollIndicatorInsets = a
         return self
     }
+    
+    @discardableResult
+    func delegate(_ delegate: UIScrollViewDelegate) -> SFExStyle {
+        base.delegate = delegate
+        return self
+    }
 
     @discardableResult
     func isDirectionalLockEnabled(_ a: Bool) -> SFExStyle {
@@ -118,6 +126,20 @@ public extension SFExStyle where Base: UIScrollView {
     @discardableResult
     func bounces(_ a: Bool) -> SFExStyle {
         base.bounces = a
+        return self
+    }
+    
+    @available(iOS 17.4, *)
+    @discardableResult
+    func bouncesHorizontally(_ a: Bool) -> SFExStyle {
+        base.bouncesHorizontally = a
+        return self
+    }
+
+    @available(iOS 17.4, *)
+    @discardableResult
+    func bouncesVertically(_ a: Bool) -> SFExStyle {
+        base.bouncesVertically = a
         return self
     }
 
@@ -145,15 +167,29 @@ public extension SFExStyle where Base: UIScrollView {
         return self
     }
     
+    @available(iOS 17.4, *)
     @discardableResult
-    func showsHorizontalScrollIndicator(_ show: Bool) -> SFExStyle {
-        base.showsHorizontalScrollIndicator = show
+    func transfersHorizontalScrollingToParent(_ show: Bool) -> SFExStyle {
+        base.transfersHorizontalScrollingToParent = show
+        return self
+    }
+
+    @available(iOS 17.4, *)
+    @discardableResult
+    func transfersVerticalScrollingToParent(_ show: Bool) -> SFExStyle {
+        base.transfersVerticalScrollingToParent = show
         return self
     }
     
     @discardableResult
     func showsVerticalScrollIndicator(_ show: Bool) -> SFExStyle {
         base.showsVerticalScrollIndicator = show
+        return self
+    }
+    
+    @discardableResult
+    func showsHorizontalScrollIndicator(_ show: Bool) -> SFExStyle {
+        base.showsHorizontalScrollIndicator = show
         return self
     }
     
@@ -214,6 +250,13 @@ public extension SFExStyle where Base: UIScrollView {
         return self
     }
     
+    @available(iOS 17.4, *)
+    @discardableResult
+    func withScrollIndicatorsShown(forContentOffsetChanges changes: () -> Void) -> SFExStyle {
+        base.withScrollIndicatorsShown(forContentOffsetChanges: changes)
+        return self
+    }
+    
     @discardableResult
     func delaysContentTouches(_ delays: Bool) -> SFExStyle {
         base.delaysContentTouches = delays
@@ -271,6 +314,13 @@ public extension SFExStyle where Base: UIScrollView {
         return self
     }
     
+    @available(iOS 17.4, *)
+    @discardableResult
+    func stopScrollingAndZooming() -> SFExStyle {
+        base.stopScrollingAndZooming()
+        return self
+    }
+    
     @available(iOS 7.0, *)
     @discardableResult
     func keyboardDismissMode(_ mode: UIScrollView.KeyboardDismissMode) -> SFExStyle {
@@ -291,4 +341,7 @@ public extension SFExStyle where Base: UIScrollView {
         base.allowsKeyboardScrolling = allows
         return self
     }
+    
 }
+
+#endif

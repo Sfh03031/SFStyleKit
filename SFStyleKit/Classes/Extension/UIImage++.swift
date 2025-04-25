@@ -1,69 +1,49 @@
 //
-//  SFExStyle_UIImage.swift
-//  SFStyleKit_Example
+//  UIImage++.swift
+//  Pods
 //
-//  Created by 望舒 on 2024/4/5.
-//  Copyright © 2024 CocoaPods. All rights reserved.
+//  Created by sfh on 2025/4/25.
 //
+
+#if canImport(UIKit)
 
 import UIKit
 import ImageIO
 
-// MARK: - 加载gift
+// MARK: load gift
 
 public extension UIImage {
-    /// 通过Data加载gif
+    
+    /// load gift by Data
     class func gif(data: Data) -> UIImage? {
-        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
-            print("SwiftGif: Source for the image does not exist")
-            return nil
-        }
-
+        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
         return UIImage.animatedImageWithSource(source)
     }
 
-    /// 通过URL加载gif
+    /// load gift by URL
     class func gif(url: String) -> UIImage? {
-        guard let bundleURL = URL(string: url) else {
-            print("SwiftGif: This image named \"\(url)\" does not exist")
-            return nil
-        }
-        
-        guard let imageData = try? Data(contentsOf: bundleURL) else {
-            print("SwiftGif: Cannot turn image named \"\(url)\" into NSData")
-            return nil
-        }
-        
+        guard let bundleURL = URL(string: url) else { return nil}
+        guard let imageData = try? Data(contentsOf: bundleURL) else { return nil }
         return gif(data: imageData)
     }
 
-    /// 通过name加载gif
+    /// load gift by image name
     class func gif(name: String) -> UIImage? {
-        guard let bundleURL = Bundle.main
-            .url(forResource: name, withExtension: "gif")
-        else {
-            print("SwiftGif: This image named \"\(name)\" does not exist")
-            return nil
-        }
-        
-        guard let imageData = try? Data(contentsOf: bundleURL) else {
-            print("SwiftGif: Cannot turn image named \"\(name)\" into NSData")
-            return nil
-        }
-        
+        guard let bundleURL = Bundle.main.url(forResource: name, withExtension: "gif") else { return nil }
+        guard let imageData = try? Data(contentsOf: bundleURL) else { return nil }
         return gif(data: imageData)
     }
 
-    /// 通过NSDataAsset加载gif
+    /// load gift by NSDataAsset
     class func gif(asset: String) -> UIImage? {
-        guard let dataAsset = NSDataAsset(name: asset) else {
-            print("SwiftGif: Cannot turn image named \"\(asset)\" into NSDataAsset")
-            return nil
-        }
-
+        guard let dataAsset = NSDataAsset(name: asset) else { return nil }
         return gif(data: dataAsset.data)
     }
+    
+}
 
+extension UIImage {
+    
     internal class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
         // Get dictionaries
@@ -72,9 +52,7 @@ public extension UIImage {
         defer {
             gifPropertiesPointer.deallocate()
         }
-        if CFDictionaryGetValueIfPresent(cfProperties,
-                                         Unmanaged.passUnretained(kCGImagePropertyGIFDictionary).toOpaque(),
-                                         gifPropertiesPointer) == false {
+        if CFDictionaryGetValueIfPresent(cfProperties, Unmanaged.passUnretained(kCGImagePropertyGIFDictionary).toOpaque(), gifPropertiesPointer) == false {
             return delay
         }
 
@@ -184,9 +162,10 @@ public extension UIImage {
         }
 
         // Heyhey
-        let animation = UIImage.animatedImage(with: frames,
-                                              duration: Double(duration) / 1000.0)
+        let animation = UIImage.animatedImage(with: frames, duration: Double(duration) / 1000.0)
 
         return animation
     }
 }
+
+#endif

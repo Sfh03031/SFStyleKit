@@ -6,12 +6,15 @@
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+#if canImport(Foundation)
+
 import Foundation
 import UIKit
 
 public let dateFormatter = DateFormatter()
 
 public extension SFExStyle where Base == String {
+    
     /// 判断字符串是否是身份证
     var isID: Bool {
         // 判断位数
@@ -344,4 +347,17 @@ public extension String {
             return self.replacingCharacters(in: range, with: String(repeating: "*", count: phoneCount - 7))
         }
     }
+    
+    /// 使用正则表达式替换
+    /// - Parameters:
+    ///   - pattern: 正则表达式
+    ///   - with: 要替换成的内容
+    ///   - options: 正则类型
+    /// - Returns: 新的字符串
+    func regularReplace(pattern: String, with: String, options: NSRegularExpression.Options = []) -> String {
+        let regex = try? NSRegularExpression(pattern: pattern, options: options)
+        return regex?.stringByReplacingMatches(in: self, options: [], range: NSMakeRange(0, self.count), withTemplate: with) ?? self
+    }
 }
+
+#endif
