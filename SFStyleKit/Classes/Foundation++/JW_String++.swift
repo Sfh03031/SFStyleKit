@@ -1,33 +1,30 @@
 //
-//  SFExStyle_String.swift
-//  SFStyleKit_Example
+//  String++.swift
+//  Pods
 //
-//  Created by sfh on 2024/4/3.
-//  Copyright © 2024 CocoaPods. All rights reserved.
+//  Created by sfh on 2025/4/27.
 //
 
-#if canImport(Foundation)
+#if canImport(UIKit)
 
-import Foundation
 import UIKit
 
-public let dateFormatter = DateFormatter()
-
-public extension SFExStyle where Base == String {
+// MARK: Whether it is an id number
+public extension String {
     
     /// 判断字符串是否是身份证
     var isID: Bool {
         // 判断位数
-        if base.count != 15 && base.count != 18 { return false }
-        var carid = base
+        if self.count != 15 && self.count != 18 { return false }
+        var carid = self
         var lSumQT = 0
         // 加权因子
         let R = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
         // 校验码
         let sChecker: [Int8] = [49, 48, 88, 57, 56, 55, 54, 53, 52, 51, 50]
         // 将15位身份证号转换成18位
-        let mString = NSMutableString(string: base)
-        if base.count == 15 {
+        let mString = NSMutableString(string: self)
+        if self.count == 15 {
             mString.insert("19", at: 6)
             var p = 0
             let pid = mString.utf8String
@@ -46,7 +43,7 @@ public extension SFExStyle where Base == String {
         let index = carid.index(cStartIndex, offsetBy: 2)
         // 判断地区码
         let sProvince = String(carid[cStartIndex..<index])
-        if !base.sf.areaCodeAt(sProvince) {
+        if !self.areaCodeAt(sProvince) {
             return false
         }
         // 判断年月日是否有效
@@ -105,150 +102,6 @@ public extension SFExStyle where Base == String {
         return true
     }
     
-    /// 判断字符串是否是手机号
-    var isPhone: Bool {
-        let regex = "^1[3|4|5|6|7|8|9][0-9]{9}$"
-        let test = NSPredicate(format: "SELF MATCHES %@", regex)
-        return test.evaluate(with: base)
-    }
-    
-    /// 判断字符串是否是邮箱
-    var isMail: Bool {
-        let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
-        let test = NSPredicate(format: "SELF MATCHES %@", regex)
-        return test.evaluate(with: base)
-    }
-    
-    /// 判断是不是车牌号
-    var isCarNum: Bool {
-        let regex = "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Za-z]{1}[A-Za-z]{1}[A-Za-z0-9]{4}[A-Za-z0-9挂学警港澳]{1}$"
-        let test = NSPredicate(format: "SELF MATCHES %@", regex)
-        return test.evaluate(with: base)
-    }
-    
-    /// 是否是中文
-    var isChinese: Bool {
-        let pred = NSPredicate(format: "SELF MATCHES %@", "(^[\u{4e00}-\u{9fa5}]+$)")
-        return pred.evaluate(with: base)
-    }
-    
-    /// 去掉空格
-    var noSpace: String {
-        let whitespace = CharacterSet.whitespacesAndNewlines
-        return base.trimmingCharacters(in: whitespace)
-    }
-    
-    /// 中文转拼音
-    func pinyin(_ noSpace: Bool = false) -> SFExStyle {
-        // 转化为可变字符串
-        let mString = NSMutableString(string: base)
-        // 转化为带声调的拼音
-        CFStringTransform(mString, nil, kCFStringTransformToLatin, false)
-        // 转化为不带声调
-        CFStringTransform(mString, nil, kCFStringTransformStripDiacritics, false)
-        // 转化为不可变字符串
-        let string = String(mString)
-        return noSpace ? string.replacingOccurrences(of: " ", with: "").sf : string.sf
-    }
-    
-    /// 时间戳 转 0000-00-00 00:00:00
-    /// - Parameter timeStamp: 时间戳
-    /// - Returns: 年月日时分秒
-    var timeStampToData: String {
-        let timeSta: TimeInterval = (base as NSString).doubleValue
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let date = Date(timeIntervalSince1970: timeSta)
-        return dateFormatter.string(from: date)
-    }
-    
-    /// 月份转时间Date
-    var monthToDate: Date? {
-        dateFormatter.locale = Locale.current
-        dateFormatter.dateFormat = "yyyy-MM"
-        return dateFormatter.date(from: base)
-    }
-    
-    /// base64转image
-    func base64StringToImage() -> UIImage? {
-        var str = base
-        // 1、判断用户传过来的base64的字符串是否是以data开口的，如果是以data开头的, 那么就获取字符串中的base代码，然后再转换，如果不是以data开头的，那么就直接转换
-        if str.hasPrefix("data:image") {
-            guard let newBase64String = str.components(separatedBy: ",").last else {
-                return nil
-            }
-            str = newBase64String
-        }
-        // 2、将处理好的base64String代码转换成Data
-        guard let imgNSData = Data(base64Encoded: str, options: Data.Base64DecodingOptions()) else {
-            return nil
-        }
-        // 3、将Data的图片，转换成UIImage
-        guard let codeImage = UIImage(data: imgNSData) else {
-            return nil
-        }
-        return codeImage
-    }
-    
-    /// base64编码
-    func toBase64() -> String? {
-        if let data = base.data(using: .utf8) {
-            return data.base64EncodedString()
-        }
-        return nil
-    }
-
-    /// base64解码
-    func fromBase64() -> String? {
-        if let data = Data(base64Encoded: base) {
-            return String(data: data, encoding: .utf8)
-        }
-        return nil
-    }
-    
-    /// 获取指定位置和长度的字符串
-    /// - Parameters:
-    ///   - start: 起始位置
-    ///   - length: 长度, 默认到结束
-    /// - Returns: 字符串
-    func subString(start: Int, length: Int = -1) -> String? {
-        if base.count < start + length { return nil }
-        var len = length
-        if len == -1 {
-            len = base.count - start
-        }
-        let st = base.index(base.startIndex, offsetBy: start)
-        let en = base.index(st, offsetBy: len)
-        let range = st..<en
-        return String(base[range])
-    }
-    
-    /// 获取指定位置的字符串
-    func subStringWith(_ index: Int) -> String? {
-        if base.count <= index { return nil }
-        let index = base.index(base.startIndex, offsetBy: index)
-        return String(base[index])
-    }
-    
-    /// 拨打电话
-    @discardableResult
-    func call() -> SFExStyle {
-        guard let url = URL(string: "tel:\(base)") else { return self }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        return self
-    }
-    
-    /// 计算文本高度
-    /// - Parameters:
-    ///   - font: 字体
-    ///   - width: 宽度
-    /// - Returns: 文本高度
-    func height(font: UIFont, width: CGFloat) -> CGFloat {
-        return base.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)),
-                                 options: .usesLineFragmentOrigin,
-                                 attributes: [.font: font],
-                                 context: nil).size.height
-    }
-    
     /// 判断地区码对应的地区是否存在
     func areaCodeAt(_ code: String) -> Bool {
         var dic: [String: String] = [:]
@@ -295,16 +148,167 @@ public extension SFExStyle where Base == String {
     
 }
 
-
+// MARK: New properties
 public extension String {
     
-    /// html字符串转富文本
+    /// 判断字符串是否是手机号
+    var isPhone: Bool {
+        let regex = "^1[3|4|5|6|7|8|9][0-9]{9}$"
+        let test = NSPredicate(format: "SELF MATCHES %@", regex)
+        return test.evaluate(with: self)
+    }
+    
+    /// 判断字符串是否是邮箱
+    var isMail: Bool {
+        let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        let test = NSPredicate(format: "SELF MATCHES %@", regex)
+        return test.evaluate(with: self)
+    }
+    
+    /// 判断是不是车牌号
+    var isCarNum: Bool {
+        let regex = "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Za-z]{1}[A-Za-z]{1}[A-Za-z0-9]{4}[A-Za-z0-9挂学警港澳]{1}$"
+        let test = NSPredicate(format: "SELF MATCHES %@", regex)
+        return test.evaluate(with: self)
+    }
+    
+    /// 是否是中文
+    var isChinese: Bool {
+        let pred = NSPredicate(format: "SELF MATCHES %@", "(^[\u{4e00}-\u{9fa5}]+$)")
+        return pred.evaluate(with: self)
+    }
+    
+    /// 去掉空格
+    var noSpace: String {
+        let whitespace = CharacterSet.whitespacesAndNewlines
+        return self.trimmingCharacters(in: whitespace)
+    }
+    
+    /// 时间戳 转 0000-00-00 00:00:00
+    /// - Parameter timeStamp: 时间戳
+    /// - Returns: 年月日时分秒
+    var timeStampToData: String {
+        let timeSta: TimeInterval = (self as NSString).doubleValue
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = Date(timeIntervalSince1970: timeSta)
+        return dateFormatter.string(from: date)
+    }
+    
+    /// 月份转时间Date
+    var monthToDate: Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateFormat = "yyyy-MM"
+        return dateFormatter.date(from: self)
+    }
+    
+}
+
+// MARK: New methods
+public extension String {
+    
+    /// Make chinese to pinyin
+    /// - Parameter noSpace: whether remove space
+    /// - Returns: new string
+    func toPinyin(_ noSpace: Bool = false) -> String {
+        let temp = NSMutableString(string: self)
+        // first, convert to Pinyin with tones
+        CFStringTransform(temp, nil, kCFStringTransformToLatin, false)
+        // second, convert to no tone
+        CFStringTransform(temp, nil, kCFStringTransformStripDiacritics, false)
+        let result = String(temp)
+        
+        return noSpace ? result.replacingOccurrences(of: " ", with: "") : result
+    }
+    
+    /// Make base64 string to image
+    func makeBase64Image() -> UIImage? {
+        var temp = self
+        if temp.hasPrefix("data:image") {
+            guard let newBase64String = temp.components(separatedBy: ",").last else { return nil }
+            temp = newBase64String
+        }
+        guard let imgData = Data(base64Encoded: temp, options: Data.Base64DecodingOptions()) else { return nil }
+        guard let codeImage = UIImage(data: imgData) else { return nil }
+        
+        return codeImage
+    }
+    
+    /// Make string to base64 encoded(base64加密)
+    func toBase64Encoded() -> String? {
+        if let data = self.data(using: .utf8) {
+            return data.base64EncodedString()
+        }
+        
+        return nil
+    }
+
+    /// Make string to base64 decoded(base64解密)
+    func toBase64Decoded() -> String? {
+        if let data = Data(base64Encoded: self) {
+            return String(data: data, encoding: .utf8)
+        }
+        
+        return nil
+    }
+    
+    /// Get a string of specified position and length
     /// - Parameters:
-    ///   - font: 字体，默认15
-    ///   - lineHeight: 行高，默认21
-    ///   - isFit: 是否按给定的字号和行高展示富文本
-    /// - Returns: NSMutableAttributedString富文本
-    func htmlAttributedString(font: UIFont = UIFont.systemFont(ofSize: 15, weight: .regular), 
+    ///   - start: position where to start
+    ///   - length: length, default is to end
+    /// - Returns: String
+    func subString(start: Int, length: Int = -1) -> String? {
+        if self.count < start + length { return nil }
+        var len = length
+        if len == -1 {
+            len = self.count - start
+        }
+        let st = self.index(self.startIndex, offsetBy: start)
+        let en = self.index(st, offsetBy: len)
+        let range = st..<en
+        return String(self[range])
+    }
+    
+    /// Get the string at the specified location
+    /// - Parameter index: index
+    /// - Returns: String
+    func subStringWith(_ index: Int) -> String? {
+        if self.count <= index { return nil }
+        let index = self.index(self.startIndex, offsetBy: index)
+        return String(self[index])
+    }
+    
+    /// Make phone call
+    func call(complete: ((Bool) -> Void)? = nil) {
+        guard let url = URL(string: "tel:\(self)") else {
+            fatalError("invalid phone number")
+        }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, completionHandler: complete)
+        }
+    }
+    
+    /// Calculate text height based on width
+    /// - Parameters:
+    ///   - font: default = `14.0`
+    ///   - width: based on width
+    /// - Returns: text height
+    func getBoundingHeight(font: UIFont = UIFont.systemFont(ofSize: 14.0), width: CGFloat) -> CGFloat {
+        let rectSize = self.boundingRect(with: CGSize(width: width, height: CGFLOAT_MAX),
+                                         options: [.usesLineFragmentOrigin, .usesFontLeading],
+                                         attributes: [.font: font],
+                                         context: nil).size
+        return ceil(rectSize.height)
+    }
+    
+    /// Make html string to attributed
+    /// - Parameters:
+    ///   - font: default = `15`
+    ///   - lineHeight: default = `21`
+    ///   - isFit: whether display rich text according to the given font size and line height or not
+    /// - Returns: NSMutableAttributedString
+    func htmlAttributedString(font: UIFont = UIFont.systemFont(ofSize: 15.0),
                               lineHeight: CGFloat = 21,
                               isFit: Bool = false) -> NSMutableAttributedString? {
         guard let data = self.data(using: String.Encoding.utf8, allowLossyConversion: false) else { return nil }
@@ -335,7 +339,7 @@ public extension String {
         return htmlString
     }
     
-    /// 手机号中间变*
+    /// Make the middle number of the phone as `*`
     func maskedPhoneNumber() -> String {
         let phoneCount = self.count
         if phoneCount < 4 {

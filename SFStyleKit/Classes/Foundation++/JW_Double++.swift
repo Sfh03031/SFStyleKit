@@ -1,18 +1,20 @@
+
 //
-//  SFExStyle_Double.swift
-//  SFStyleKit_Example
+//  Double++.swift
+//  Pods
 //
-//  Created by sfh on 2024/4/3.
-//  Copyright © 2024 CocoaPods. All rights reserved.
+//  Created by sfh on 2025/4/27.
 //
 
 #if canImport(Foundation)
 
 import Foundation
 
-public extension SFExStyle where Base == Double {
+public extension Double {
+    
     /// Double -> String
-    var stringValue: String { String(describing: base) }
+    var stringValue: String { String(describing: self) }
+    
 }
 
 public extension Double {
@@ -26,6 +28,7 @@ public extension Double {
         let divesor = pow(10.0, Double(places))
         return (self * divesor).rounded() / divesor
     }
+    
 }
 
 #endif

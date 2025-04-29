@@ -11,37 +11,37 @@ import UIKit
 
 public extension UIApplication {
     
-    /// documents的URL
+    /// documents URL
     var DocumentsURL: URL? {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
     }
     
-    /// documents的路径
+    /// documents path
     var DocumentsPath: String? {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
     }
     
-    /// caches的URL
+    /// caches URL
     var CachesURL: URL? {
         return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).last
     }
     
-    /// caches的路径
+    /// caches path
     var CachesPath: String? {
         return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
     }
     
-    /// library的URL
+    /// library URL
     var LibraryURL: URL? {
         return FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last
     }
     
-    /// library的路径
+    /// library path
     var LibraryPath: String? {
         return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
     }
     
-    /// 内存使用情况
+    /// MemoryUsage
     var MemoryUsage: String {
         var info = mach_task_basic_info()
         var count = mach_msg_type_number_t(MemoryLayout.size(ofValue: info) / MemoryLayout<integer_t>.size)

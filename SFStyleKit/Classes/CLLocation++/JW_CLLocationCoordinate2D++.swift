@@ -1,21 +1,31 @@
 //
-//  SFExStyle_CLLocationCoordinate2D.swift
-//  SFStyleKit_Example
+//  CLLocationCoordinate2D++.swift
+//  Pods
 //
-//  Created by sfh on 2024/4/3.
-//  Copyright © 2024 CocoaPods. All rights reserved.
+//  Created by sfh on 2025/4/27.
 //
 
 #if canImport(MapKit)
 
 import MapKit
 
-// MARK: 扩展
+public enum JWLocationType: String, CaseIterable {
+    case East       = "正东"
+    case South      = "正南"
+    case West       = "正西"
+    case North      = "正北"
+    case Northeast  = "东北"
+    case Southeast  = "东南"
+    case Southwest  = "西南"
+    case Northwest  = "西北"
+}
 
 public extension CLLocationCoordinate2D {
-    
-    /// 根据经纬坐标获取方位
-    func getPositionFrom(_ from: CLLocationCoordinate2D) -> String {
+     
+    /// get position by location coordinate2D
+    /// - Parameter from: CLLocationCoordinate2D
+    /// - Returns: case of JWLocationType
+    func getPosition(from: CLLocationCoordinate2D) -> JWLocationType {
         let lat1 = from.latitude * Double.pi / 180
         let lon1 = from.longitude * Double.pi / 180
         
@@ -27,26 +37,28 @@ public extension CLLocationCoordinate2D {
         let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
         let radiansBearing = atan2(y, x)
         let aDeg = radiansBearing * 180 / Double.pi
-        var str = ""
+        var target = JWLocationType.East
         if aDeg >= 75 && aDeg <= 105 {
-                str = "正东"
+            target = .East
         } else if aDeg > 15 && aDeg < 75 {
-                str = "东北"
+            target = .Northeast
         } else if aDeg >= -15 && aDeg <= 15 {
-                str = "正北"
+            target = .North
         } else if aDeg > -75 && aDeg < -15 {
-            str = "西北"
+            target = .Northwest
         } else if aDeg >= -105 && aDeg <= -75 {
-            str = "正西"
+            target = .West
         } else if aDeg > -165 && aDeg < -105 {
-            str = "西南"
+            target = .Southwest
         } else if (aDeg >= 165 && aDeg <= 180) || (aDeg >= -180 && aDeg <= -165) {
-            str = "正南"
+            target = .South
         } else if aDeg > 105 && aDeg < 165 {
-            str = "东南"
+            target = .Southeast
         }
-        return str
+        
+        return target
     }
+    
 }
 
 #endif

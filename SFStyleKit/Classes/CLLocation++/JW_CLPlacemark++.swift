@@ -1,32 +1,31 @@
 //
-//  SFExStyle_CLPlacemark.swift
-//  SFStyleKit_Example
+//  CLPlacemark++.swift
+//  Pods
 //
-//  Created by sfh on 2024/4/3.
-//  Copyright © 2024 CocoaPods. All rights reserved.
+//  Created by sfh on 2025/4/27.
 //
 
 #if canImport(CoreLocation)
 
 import CoreLocation
 
-// MARK: 扩展
-
 public extension CLPlacemark  {
-    /// 国家代码
+    
+    /// country code
     var countryCode: String? {
         String(format: "%@", isoCountryCode ?? "")
     }
     
-    /// 国-省
-    var country_province: String? {
+    /// country-province
+    var countryProvince: String? {
         String(format: "%@%@", country ?? "", administrativeArea ?? "")
     }
     
-    /// 市-区-路
-    var city_area_road: String? {
+    /// city-area-road
+    var cityAreaRoad: String? {
         String(format: "%@%@%@", locality ?? "", subLocality ?? "", name ?? "")
     }
+    
 }
 
 #endif

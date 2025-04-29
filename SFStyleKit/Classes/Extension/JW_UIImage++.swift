@@ -10,8 +10,7 @@
 import UIKit
 import ImageIO
 
-// MARK: load gift
-
+// MARK: Load gift
 public extension UIImage {
     
     /// load gift by Data

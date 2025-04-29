@@ -16,7 +16,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.sf.add(subview: backView).backgroundColor(.white)
+        self.view.sf.backgroundColor(.white).addSubview(backView)
         
         print("idfv: \(UIDevice.current.Idfv)")
         print("StringWithUUID: \(UIDevice.current.UUIDCreated)")
@@ -52,25 +52,28 @@ class ViewController: UIViewController {
         
         print("13000000000".maskedPhoneNumber())
 
+        let temp = "130123456789abcdefghijklmnopqrstuvwxyz"
+        print(temp.subString(start: 6, length: 3) ?? "-1")
+        print(temp.subString(at: 15) ?? "-1")
     }
     
     lazy var backView: UIView = {
         let view = UIView()
         view.sf.frame(CGRect(x: 10, y: 100, width: SCREENW - 20, height: SCREENH - 200))
             .backgroundColor(.random)
-            .makeBorder(color: .brown, with: 1.0)
-            .makeCornerRadius(corners: [.topLeft, .bottomRight], radius: 10.0)
-            .makeShadow(5, color: .hex_BBCDC5, offset: CGSize(width: 5, height: 10), opacity: 1)
-            .showBadgePoint()
-            .addTapAction { view in
-                view?.sf.hiddenBadgePoint()
-            }
-            .addTapAction( 2) { view in
-                UIAlertController().sf.message("点击了两下").show(self).hidden(2)
-            }
-            .add(subview: alphaLabel)
-            .add(subview: broveLabel)
-            .add(subview: btn)
+            .addSubview(alphaLabel)
+            .addSubview(broveLabel)
+            .addSubview(btn)
+        view.makeBorder(color: .brown, with: 1.0)
+        view.makeRadius(10.0, corners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner])
+        view.makeShadow(5.0, color: .hex_BBCDC5, offset: CGSizeMake(5, 10), opacity: 1)
+        view.showBadgePoint()
+        view.addTapAction(2) { view in
+            view?.hiddenBadgePoint()
+        }
+        view.addTapAction { view in
+            UIAlertController().sf.message("tap backView").show(self).hidden(2)
+        }
         return view
     }()
     
@@ -80,12 +83,11 @@ class ViewController: UIViewController {
                                  text: "鹊桥二号",
                                  textColor: .red,
                                  aligment: .center)
-        label.sf
-            .makeRadius(5.0)
-            .addTapAction { [weak self] view in
-                guard let self = self else { return }
-                UIAlertController().sf.message("点击了 alphaLabel").show(self).hidden(2)
-            }
+        label.makeRadius(5.0)
+        label.addTapAction { [weak self] view in
+            guard let self = self else { return }
+            UIAlertController().sf.message("点击了 alphaLabel").show(self).hidden(2)
+        }
         return label
     }()
     
@@ -95,18 +97,18 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.sf
             .frame(CGRect(x: 50, y: 100, width: SCREENW - 20 - 100, height: 60))
-            .bgColor(UIColor.hex_PT_FFBE98)
+            .backgroundColor(.hex_0C8918)
             .text(value)
             .textColor(.white)
             .font(UIFont.systemFont(ofSize: 15, weight: .semibold))
-            .alignment(.center)
-            .lines(2)
-            .makeCornerRadius(corners: [.topRight, .bottomLeft], radius: 20.0)
-            .makeCustomizeBorder(color: .red, with: 2, rectSide: [.left, .top, .bottom], topRight: 20, bottomLeft: 20, isSuperClip: true, isDash: false)
-            .addTapAction { [weak self] view in
-                guard let self = self else { return }
-                UIAlertController.alertStyle(.alert).message("点击了 broveLabel\n\(value)").show(self).hidden(2)
-            }
+            .textAlignment(.center)
+            .numberOfLines(2)
+        label.makeCornerRadius(corners: [.topRight, .bottomLeft], radius: 20.0)
+        label.makeRectSide(lineColor: .red, lineWidth: 2, rectSide: [.left, .top, .bottom], topRight: 20, bottomLeft: 20, isSuperClip: true, isDash: false)
+        label.addTapAction { [weak self] view in
+            guard let self = self else { return }
+            UIAlertController.sf.alertStyle(.alert).message("点击了 broveLabel\n\(value)").show(self).hidden(2)
+        }
         return label
     }()
     
@@ -114,12 +116,12 @@ class ViewController: UIViewController {
         let btn = UIButton(type: .custom)
         btn.sf.frame(CGRect(x: 50, y: 180, width: SCREENW - 20 - 100, height: 60))
             .backgroundColor(.hex_0C8918)
-            .makeRadius(10.0)
-            .addTapAction { [weak self] view in
+        btn.makeRadius(10.0)
+        btn.addTapAction { [weak self] view in
             guard let self = self else { return }
-            UIAlertController.alertStyle(.actionSheet).message("按钮被点击了").show(self).hidden(2)
+            UIAlertController.sf.alertStyle(.actionSheet).message("按钮被点击了").show(self).hidden(2)
         }
-        btn.makePosition(title: "click me click me click me click me click me", image: UIImage(named: "img_block"), state: .normal, space: 15.0, position: .bottom)
+        btn.makePosition(title: "click me click me click me click me click me", image: UIImage(named: "img_block"), state: .normal, space: 15.0, position: .right)
         return btn
     }()
 

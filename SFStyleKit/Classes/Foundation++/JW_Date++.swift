@@ -1,51 +1,53 @@
 //
-//  SFExStyle_Date.swift
-//  SFStyleKit_Example
+//  Date++.swift
+//  Pods
 //
-//  Created by sfh on 2024/4/3.
-//  Copyright © 2024 CocoaPods. All rights reserved.
+//  Created by sfh on 2025/4/27.
 //
 
 #if canImport(Foundation)
 
 import Foundation
 
-public extension SFExStyle where Base == Date {
+public extension Date {
     
-    /// 获取当前年
+    /// get now year
     var nowYear: Int {
         let curCalendar: Calendar = Calendar.current
-        let year: Int = curCalendar.component(.year, from: base)
+        let year: Int = curCalendar.component(.year, from: self)
         return year
     }
     
-    /// 获取当前月
+    /// get now month
     var nowMonth: Int {
         let curCalendar: Calendar = Calendar.current
-        let month: Int = curCalendar.component(.month, from: base)
+        let month: Int = curCalendar.component(.month, from: self)
         return month
     }
     
-    /// 获取当前日
+    /// get now day
     var nowDay: Int {
         let curCalendar: Calendar = Calendar.current
-        let day: Int = curCalendar.component(.day, from: base)
+        let day: Int = curCalendar.component(.day, from: self)
         return day
     }
     
-    /// 时间转换成年月
+    /// string value of year-month
     var yearMonth: String {
+        let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "yyyy-MM"
-        return dateFormatter.string(from: base)
+        return dateFormatter.string(from: self)
     }
     
-    /// 时间转换成年月日
+    /// string value of year-month-day
     var yearMonthDay: String {
+        let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.string(from: base)
+        return dateFormatter.string(from: self)
     }
+    
 }
 
 #endif

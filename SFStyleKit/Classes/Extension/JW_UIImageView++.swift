@@ -7,7 +7,7 @@
 
 #if canImport(UIKit)
 
-// MARK: load gif
+// MARK: Load gif
 public extension UIImageView {
     
     /// load gift by Data

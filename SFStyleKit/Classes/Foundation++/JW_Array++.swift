@@ -1,9 +1,8 @@
 //
-//  SFExStyle_Array.swift
-//  SFStyleKit_Example
+//  Array++.swift
+//  Pods
 //
-//  Created by sfh on 2024/4/3.
-//  Copyright © 2024 CocoaPods. All rights reserved.
+//  Created by sfh on 2025/4/27.
 //
 
 #if canImport(Foundation)
@@ -12,9 +11,9 @@ import Foundation
 
 public extension Array {
     
-    /// 数组去重，传入数组元素
-    /// 泛型E，约束类型为Equatable协议，
-    /// 数组的完整写法为 Array<Element>，其中 Element 是这个数组中唯一允许存在的数据类型。也可以使用像 [Element]这样的简单语法
+    /// Remove duplicate elements from the array
+    /// - Parameter filter: array element
+    /// - Returns: new Array
     func filterDuplicates<E: Equatable>(_ filter: (Element) -> E) -> [Element] {
         var result = [Element]()
         self.forEach { (e) in
@@ -25,6 +24,12 @@ public extension Array {
         }
         return result
     }
+    
+    /// Example:
+    /// let arr: Array<String> = ["1", "2", "3", "4", "5", "1", "6", "1", "7"]
+    /// print(arr.filterDuplicates({ $0 }))
+    /// log: `["1", "2", "3", "4", "5", "6", "7"]`
+    
 }
 
 #endif
