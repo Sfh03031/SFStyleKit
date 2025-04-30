@@ -40,13 +40,6 @@ it, simply add the following line to your Podfile:
 pod 'SFStyleKit'
 
 ```
-If you want to use the latest features of SFStyleKit use normal external source dependencies.
-
-```ruby
-
-pod 'SFStyleKit', :git => 'https://github.com/Sfh03031/SFStyleKit.git'
-
-```
 
 SFStyleKit has created sub libraries and subspecs.
 
