@@ -48,26 +48,55 @@ pod 'SFStyleKit', :git => 'https://github.com/Sfh03031/SFStyleKit.git'
 
 ```
 
-SFStyleKit has created sub library about core protocal, if you only want to use it, simply add the following line to your Podfile: 
+SFStyleKit has created sub libraries and subspecs.
 
-```ruby
-
-/// core protocal
+if you only want to use it about core protocal, simply add the following line to your Podfile: 
+```
 pod 'SFStyleKit/Core'
 
-/// extensions
-pod 'SFStyleKit/JWEx'
+#or
 
-/// support chain programming for system apis
-pod 'SFStyleKit/JWChain'
+pod 'SFStyleKit', :subspecs => ['Core']
 
 ```
 
-also you can use subspecs, simply add the following line to your Podfile:
+if you only want to use it about extensions, simply add the following line to your Podfile: 
+```
+pod 'SFStyleKit/JWEx'
+
+#or
+
+pod 'SFStyleKit', :subspecs => ['JWEx']
+
+```
+
+if you only want to use it about chain programming, simply add the following line to your Podfile: 
+```
+pod 'SFStyleKit/JWChain'
+
+#or
+
+pod 'SFStyleKit', :subspecs => ['JWChain']
+
+```
+
+if you want to use the full functionality, simply add the following line to your Podfile:
 
 ```swift
 
+pod 'SFStyleKit'
+
+#or
+
 pod 'SFStyleKit', :subspecs => ['Core', 'JWEx', 'JWChain']
+
+```
+
+If you want to use the latest features of SFStyleKit, use normal external source dependencies.
+
+```ruby
+
+pod 'SFStyleKit', :git => 'https://github.com/Sfh03031/SFStyleKit.git'
 
 ```
 
@@ -196,11 +225,11 @@ public extension SFExStyle where Base: UIView {
 
 ## Support
 
-#### Core
+### Core
 
 SFExStyle
 
-#### JWEx
+### JWEx
 
 CLLocation
 - CLLocationCoordinate2D
@@ -235,7 +264,7 @@ UIKit
 - UIColor
 - UIFont
 
-#### JWChain
+### JWChain
 
 QuartzCore
 - CALayer
