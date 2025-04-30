@@ -28,7 +28,7 @@
   "subspecs": [
     {
       "name": "Core",
-      "source_files": "SFStyleKit/Classes/SFExStyle.swift"
+      "source_files": "SFStyleKit/Classes/SFExStyle++/SFExStyle.swift"
     },
     {
       "name": "JWEx",
