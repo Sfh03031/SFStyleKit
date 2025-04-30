@@ -310,14 +310,14 @@ public extension SFExStyle where Base: UICollectionView {
     
     @discardableResult
     func registerNib<T: UICollectionViewCell>(_: T.Type) -> SFExStyle {
-        let nib = UINib(nibName: T.reuseIdentifier, bundle: nil)
-        base.register(nib, forCellWithReuseIdentifier: T.reuseIdentifier)
+        let nib = UINib(nibName: String(describing: T.self), bundle: nil)
+        base.register(nib, forCellWithReuseIdentifier: String(describing: T.self))
         return self
     }
     
     @discardableResult
     func registerClass<T: UICollectionViewCell>(_: T.Type) -> SFExStyle {
-        base.register(T.self, forCellWithReuseIdentifier: T.reuseIdentifier)
+        base.register(T.self, forCellWithReuseIdentifier: String(describing: T.self))
         return self
     }
     
@@ -328,27 +328,27 @@ public extension SFExStyle where Base: UICollectionView {
     
     @discardableResult
     func registerHeaderNib<T: UICollectionReusableView>(_: T.Type) -> SFExStyle {
-        let nib = UINib(nibName: T.reuseIdentifier, bundle: nil)
-        base.register(nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: T.reuseIdentifier)
+        let nib = UINib(nibName: String(describing: T.self), bundle: nil)
+        base.register(nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: T.self))
         return self
     }
     
     @discardableResult
     func registerHeaderClass<T: UICollectionReusableView>(_: T.Type) -> SFExStyle {
-        base.register(T.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: T.reuseIdentifier)
+        base.register(T.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: T.self))
         return self
     }
     
     @discardableResult
     func registerFooterNib<T: UICollectionReusableView>(_: T.Type) -> SFExStyle {
-        let nib = UINib(nibName: T.reuseIdentifier, bundle: nil)
-        base.register(nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: T.reuseIdentifier)
+        let nib = UINib(nibName: String(describing: T.self), bundle: nil)
+        base.register(nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: T.self))
         return self
     }
     
     @discardableResult
     func registerFooterClass<T: UICollectionReusableView>(_: T.Type) -> SFExStyle {
-        base.register(T.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: T.reuseIdentifier)
+        base.register(T.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: T.self))
         return self
     }
 }
