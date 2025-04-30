@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
   s.frameworks       = 'UIKit', 'Foundation', 'QuartzCore'
   
   s.subspec 'Core' do |ss|
-      ss.source_files = 'SFStyleKit/Classes/SFExStyle.swift'
+      ss.source_files = 'SFStyleKit/Classes/SFExStyle++/SFExStyle.swift'
   end
   
   s.subspec 'JWEx' do |ss|
