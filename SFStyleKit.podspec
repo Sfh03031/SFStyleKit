@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SFStyleKit'
-  s.version          = '0.1.8'
-  s.summary          = 'SFStyleKit is a swift library that supports chain programming and provides many useful extensions for iOS apps. (zh: SFStyleKit是一个为支持链式编程的swift库，同时提供了许多有用的扩展。)'
+  s.version          = '1.0.0'
+  s.summary          = 'SFStyleKit is a swift library that supports chain programming and provides many useful extensions for iOS apps. (zh: SFStyleKit是一个为系统原生api增加链式编程写法的swift库，同时为许多原生类增加了扩展。)'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,9 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-目前支持了UIKit、CALayer等共22种类型的链式编程写法，同时为UIDevice、UIApplication、UIView、UIImage、UIImageView、UIButton、UIColor等提供了各式扩展，例如UIDevice的设备型号、系统版本、电池、屏幕方向、屏幕亮度、设备音量、是否越狱、磁盘总/可用大小等属性或方法，UIApplication的缓存路径、内存使用情况，UIView的点击事件、动画，UIImage的加载gif数据、保存到系统相册，UIImageView的预览、加载gif图片，UIButton的调整图片和文字相对位置，UIColor的随机色、中国色、潘通年度色...
+  At present, the native APIs of 16 classes including CALayer and UIKit have been added with chain programming, and extensions have been added to 27 types including UIKit, Foundation, and CLLocation.
+  
+  (目前为CALayer、UIKit共16个类的原生api增加了链式编程写法，同时为UIKit、Foundation和CLLocation共27个类型增加了扩展。)
                        DESC
 
   s.homepage         = 'https://github.com/Sfh03031/SFStyleKit'
@@ -34,6 +36,14 @@ Pod::Spec.new do |s|
   
   s.subspec 'Core' do |ss|
       ss.source_files = 'SFStyleKit/Classes/SFExStyle.swift'
+  end
+  
+  s.subspec 'JWEx' do |ss|
+      ss.source_files = 'SFStyleKit/Classes/Extension++/**/*'
+  end
+  
+  s.subspec 'JWChain' do |ss|
+      ss.source_files = 'SFStyleKit/Classes/SFExStyle++/**/*'
   end
   
 end
