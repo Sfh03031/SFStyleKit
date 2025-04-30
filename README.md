@@ -95,14 +95,17 @@ pod 'SFStyleKit', :git => 'https://github.com/Sfh03031/SFStyleKit.git'
 
 ## Usage
 
-First, install and import SFStyleKit
+Install and import SFStyleKit
+
 ```swift
 
 import SFStyleKit
 
 ```
 
-Second, experience chain programming, Like this:
+### Chain programming
+
+experience chain programming, like:
 
 ```swift
 
@@ -130,6 +133,8 @@ Second, experience chain programming, Like this:
     
 ```
 you can see the code in the Example Project.
+
+### Extensions
 
 SFStyleKit also provides many easy-to-use extensions that can be viewed based on the source code.
 
@@ -195,23 +200,23 @@ Property extensions, like:
     
 ``` 
 
-That's all, enjoy it.
-
 ### Customized
-You can also create your own methods.
 
-Like this:
+You can also create your own methods. like:
+
 ```swift
 
 extension UIView: SFExStyleProtocol {}
 
 public extension SFExStyle where Base: UIView {
+
     @discardableResult 
     func methodA(_ radius: CGFloat) -> SFExStyle {
         base.layer.cornerRadius = radius
         base.layer.masksToBounds = radius > 0
         return self
     }
+    
 }
 
 ```
@@ -220,101 +225,107 @@ public extension SFExStyle where Base: UIView {
 
 ### Core
 
-SFExStyle
+- SFExStyle
 
 ### JWEx
 
-CLLocation
-- CLLocationCoordinate2D
-- CLPlacemark
+- CLLocation
+    - CLLocationCoordinate2D
+    - CLPlacemark
 
-Foundation
-- Array
-- Bundle
-- CGFloat
-- Date
-- Dictionary
-- Double
-- Float
-- Int
-- String
-- NSAttributedString
+- Foundation
+    - Array
+    - Bundle
+    - CGFloat
+    - Date
+    - Dictionary
+    - Double
+    - Float
+    - Int
+    - String
+    - NSAttributedString
 
-UIKit
-- UIAlertController
-- UIApplication
-- UIButton
-- UIDevice
-- UIImage
-- UIImageView
-- UILabel
-- UINavigationController
-- UITapGestureRecognizer
-- UITextField
-- UITextView
-- UIView
-- UIViewController
-- UIColor
-- UIFont
+- UIKit
+    - UIAlertController
+    - UIApplication
+    - UIButton
+    - UIDevice
+    - UIImage
+    - UIImageView
+    - UILabel
+    - UINavigationController
+    - UITapGestureRecognizer
+    - UITextField
+    - UITextView
+    - UIView
+    - UIViewController
+    - UIColor
+    - UIFont
 
 ### JWChain
 
-QuartzCore
-- CALayer
+- QuartzCore
+    - CALayer
 
-UIKit
-- UIAlertController
-- UIButton
-- UICollectionView
-- UICollectionViewFlowLayout
-- UIControl
-- UIImageView
-- UILabel
-- UIScrollView
-- UISlider
-- UIStackView
-- UISwitch
-- UITableView
-- UITextField
-- UITextView
-- UIView
+- UIKit
+    - UIAlertController
+    - UIButton
+    - UICollectionView
+    - UICollectionViewFlowLayout
+    - UIControl
+    - UIImageView
+    - UILabel
+    - UIScrollView
+    - UISlider
+    - UIStackView
+    - UISwitch
+    - UITableView
+    - UITextField
+    - UITextView
+    - UIView
 
 ## Change log
 
 2025.4.29, 1.0.0
+
 - Support iOS18.0
 
 - Upgrade version code and create sub libraries
 
-
 2024.10.11, 0.1.7
+
 - Update extensions and readme
 
 - Add new support device names
 
-
 2024.07.25, 0.1.6
+
 - Update extensions
 
 2024.07.11, 0.1.3
-- 1.Fix bugs
 
-- 2.Add new extensions with UICollectionView and UITableView
+- Fix bugs
+
+- Add new extensions with UICollectionView and UITableView
 
 2024.05.15, 0.1.2
-- 1.Add new common color extensions
+
+- Add new common color extensions
     
-- 2.Adjust the hierarchical structure of UIView extension and update several comments
+- Adjust the hierarchical structure of UIView extension and update several comments
 
 2024.04.15, 0.1.1
+
 - Initial version
 
 ## Warning
+
 If the system native method has a return value or a property that is read-only, this extension is not suitable for use.
 
 (zh: 如果系统原生方法有返回值或者属性是只读属性，则不适用这种链式写法的扩展。)
  
 ## Contributing
+
 Please make an issue or pull request if you have any request.
 
 Bug reports, Documentation, or tests, are always welcome as well.
