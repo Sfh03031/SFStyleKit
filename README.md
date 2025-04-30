@@ -15,10 +15,75 @@ SFStyleKit is a swift library that supports chain programming, at present, the n
 
 (zh: SFStyleKit是一个支持链式编程写法的swift库，目前为CALayer、UIKit共16个类的原生api增加了链式编程写法，同时为UIKit、Foundation和CLLocation共27个类型增加了扩展。)
 
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-Like this:
+
+## Requirements
+
+* iOS 12.0 or later
+* Swift 5.9.2
+* Xcode 15.1
+
+## Installation
+<!---->
+<!--### Carthage-->
+<!--```-->
+<!--  github "Sfh03031/SFStyleKit"-->
+<!--```-->
+
+### CocoaPods
+SFStyleKit is available through [CocoaPods](https://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+
+pod 'SFStyleKit'
+
+```
+If you want to use the latest features of SFStyleKit use normal external source dependencies.
+
+```ruby
+
+pod 'SFStyleKit', :git => 'https://github.com/Sfh03031/SFStyleKit.git'
+
+```
+
+SFStyleKit has created sub library about core protocal, if you only want to use it, simply add the following line to your Podfile: 
+
+```ruby
+
+/// core protocal
+pod 'SFStyleKit/Core'
+
+/// extensions
+pod 'SFStyleKit/JWEx'
+
+/// support chain programming for system apis
+pod 'SFStyleKit/JWChain'
+
+```
+
+also you can use subspecs, simply add the following line to your Podfile:
 
 ```swift
+
+pod 'SFStyleKit', :subspecs => ['Core', 'JWEx', 'JWChain']
+
+```
+
+## Usage
+
+First, install and import SFStyleKit
+```swift
+
+import SFStyleKit
+
+```
+
+Second, experience chain programming, Like this:
+
+```swift
+
     let SCREENW: CGFloat = UIScreen.main.bounds.width
     let SCREENH: CGFloat = UIScreen.main.bounds.height
     
@@ -46,7 +111,7 @@ you can see the code in the Example Project.
 
 SFStyleKit also provides many easy-to-use extensions that can be viewed based on the source code.
 
-Like:
+Methods extensions, like:
 
 ```swift
 
@@ -70,7 +135,7 @@ Like:
     
 ```
 
-Like:
+Property extensions, like:
 
 ```swift
 
@@ -108,56 +173,7 @@ Like:
     
 ``` 
 
-## Requirements
-
-* iOS 12.0 or later
-* Swift 5.9.2
-* Xcode 15.1
-
-## Installation
-<!---->
-<!--### Carthage-->
-<!--```-->
-<!--  github "Sfh03031/SFStyleKit"-->
-<!--```-->
-
-### CocoaPods
-SFStyleKit is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-
-pod 'SFStyleKit'
-
-```
-If you want to use the latest features of SFStyleKit use normal external source dependencies.
-
-```ruby
-pod 'SFStyleKit', :git => 'https://github.com/Sfh03031/SFStyleKit.git'
-```
-
-SFStyleKit has created sub library about core protocal, if you only want to use it, simply add the following line to your Podfile: 
-
-```ruby
-
-/// core protocal
-pod 'SFStyleKit/Core'
-
-/// extensions
-pod 'SFStyleKit/JWEx'
-
-/// support chain programming for system apis
-pod 'SFStyleKit/JWChain'
-
-```
-
-also you can use subspecs, simply add the following line to your Podfile:
-
-```swift
-
-pod 'SFStyleKit', :subspecs => ['Core', 'JWEx', 'JWChain']
-
-```
+That's all, enjoy it.
 
 ### Customized
 You can also create your own methods.
@@ -180,11 +196,11 @@ public extension SFExStyle where Base: UIView {
 
 ## Support
 
-####Core
+#### Core
 
 SFExStyle
 
-####Extension++
+#### JWEx
 
 CLLocation
 - CLLocationCoordinate2D
@@ -219,7 +235,7 @@ UIKit
 - UIColor
 - UIFont
 
-####SFExStyle++
+#### JWChain
 
 QuartzCore
 - CALayer
@@ -244,32 +260,32 @@ UIKit
 ## Change log
 
 2025.4.29, 1.0.0
-- support iOS18
+- Support iOS18.0
 
-- update extensions and readme
+- Upgrade version code and create sub libraries
 
 
 2024.10.11, 0.1.7
-- update extensions and readme(zh: 更新扩展和readme)
+- Update extensions and readme
 
-- newly added supported device names(zh: 新增支持的设备名称)
+- Add new support device names
 
 
 2024.07.25, 0.1.6
-- update extensions(zh: 修改一些扩展)
+- Update extensions
 
 2024.07.11, 0.1.3
-- 1.Fix bugs(zh: 修复bug)
+- 1.Fix bugs
 
-- 2.Add new extensions with UICollectionView and UITableView(zh: 为UICollectionView和UITableView扩展新的注册方法)
+- 2.Add new extensions with UICollectionView and UITableView
 
 2024.05.15, 0.1.2
-- 1.Add new common color extensions(zh: 增加新的常用色扩展)
+- 1.Add new common color extensions
     
-- 2.Adjust the hierarchical structure of UIView extension and update several comments(zh: 调整UIView扩展的层级结构，更新若干注释)
+- 2.Adjust the hierarchical structure of UIView extension and update several comments
 
 2024.04.15, 0.1.1
-- Initial version(zh: 初始版本)
+- Initial version
 
 ## Warning
 If the system native method has a return value or a property that is read-only, this extension is not suitable for use.
