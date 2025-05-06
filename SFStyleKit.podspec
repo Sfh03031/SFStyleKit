@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SFStyleKit'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'SFStyleKit is a swift library that supports chain programming and provides many useful extensions for iOS apps. (zh: SFStyleKit是一个为系统原生api增加链式编程写法的swift库，同时为许多原生类增加了扩展。)'
 
 # This description is used to generate tags and improve search results.

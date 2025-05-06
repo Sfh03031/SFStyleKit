@@ -437,13 +437,13 @@ public extension SFExStyle where Base: UITableView {
     
     @discardableResult
     func registerNib<T: UITableViewCell>(_: T.Type) -> SFExStyle {
-        let nib = UINib(nibName: String(describing: T.self), bundle: nil)
-        base.register(nib, forCellReuseIdentifier: String(describing: T.self))
+        let nib = UINib(nibName: NSStringFromClass(T.self), bundle: nil)
+        base.register(nib, forCellReuseIdentifier: NSStringFromClass(T.self))
         return self
     }
     
     func registerClass<T: UITableViewCell>(_: T.Type) -> SFExStyle {
-        base.register(T.self, forCellReuseIdentifier: String(describing: T.self))
+        base.register(T.self, forCellReuseIdentifier: NSStringFromClass(T.self))
         return self
     }
 }
