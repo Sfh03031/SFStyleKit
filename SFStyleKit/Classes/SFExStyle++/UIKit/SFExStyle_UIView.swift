@@ -10,6 +10,15 @@
 
 import UIKit
 
+// MARK: Support SFExStyle for extension of UIView
+
+public extension SFExStyle where Base: UIView {
+    
+    static var reuseIdentifier: String {
+        String(describing: self)
+    }
+}
+
 // MARK: Support SFExStyle for system Api of UIView
 public extension SFExStyle where Base: UIView {
     @discardableResult

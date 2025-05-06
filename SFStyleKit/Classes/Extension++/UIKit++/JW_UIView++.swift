@@ -157,7 +157,7 @@ public extension UIView {
 public extension UIView {
     
     /// reuseIdentifier
-    static var reuseIdentifier: String {
+    var reuseId: String {
         return String(describing: Self.self)
     }
     

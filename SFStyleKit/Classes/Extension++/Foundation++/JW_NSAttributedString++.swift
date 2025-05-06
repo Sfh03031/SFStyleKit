@@ -92,7 +92,7 @@ public extension NSAttributedString {
                 // 处理字体
                 if let originalFont = attributes[.font] as? UIFont {
                     let descriptor = originalFont.fontDescriptor
-                    var symbolicTraits = descriptor.symbolicTraits
+                    let symbolicTraits = descriptor.symbolicTraits
                     
                     let isBold = symbolicTraits.contains(.traitBold)
                     let isItalic = symbolicTraits.contains(.traitItalic)

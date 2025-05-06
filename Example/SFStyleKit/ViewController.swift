@@ -10,7 +10,7 @@ import UIKit
 import SFStyleKit
 
 class ViewController: UIViewController {
-    
+
     let SCREENW: CGFloat = UIScreen.main.bounds.width
     let SCREENH: CGFloat = UIScreen.main.bounds.height
 
@@ -55,6 +55,17 @@ class ViewController: UIViewController {
         let temp = "130123456789abcdefghijklmnopqrstuvwxyz"
         print(temp.subString(start: 6, length: 3) ?? "-1")
         print(temp.subString(at: 15) ?? "-1")
+        
+//        let collectionView = UICollectionView()
+//        let layout = UICollectionViewFlowLayout()
+//        layout.sf.itemSize(CGSize(width: 100, height: 100)).minimumLineSpacing(10.0).minimumInteritemSpacing(10.0)
+//        collectionView.sf.collectionViewLayout(layout)
+//            .registerClass(UICollectionViewCell.self)
+//            .registerHeaderClass(UICollectionReusableView.self)
+//            .registerFooterClass(UICollectionReusableView.self)
+//            .dataSource(self)
+//            .delegate(self)
+//        self.view.addSubview(collectionView)
     }
     
     lazy var backView: UIView = {
@@ -132,5 +143,16 @@ class ViewController: UIViewController {
 
 }
 
-
-
+//extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+//    
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 20
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.sf.reuseIdentifier, for: indexPath)
+//        cell.backgroundColor = UIColor(red: CGFloat(arc4random_uniform(256)) / 255.0, green: CGFloat(arc4random_uniform(256)) / 255.0, blue: CGFloat(arc4random_uniform(256)) / 255.0, alpha: 1.0)
+//        return cell
+//    }
+//    
+//}

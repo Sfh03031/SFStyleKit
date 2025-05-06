@@ -20,20 +20,20 @@ public extension SFExStyle where Base: UICollectionView {
     }
     
     @discardableResult
-    func delegate(_ value: UICollectionViewDelegate?) -> SFExStyle {
+    func delegate(_ value: (any UICollectionViewDelegate)?) -> SFExStyle {
         base.delegate = value
         return self
     }
     
     @discardableResult
-    func dataSource(_ value: UICollectionViewDataSource?) -> SFExStyle {
+    func dataSource(_ value: (any UICollectionViewDataSource)?) -> SFExStyle {
         base.dataSource = value
         return self
     }
     
     @available(iOS 10.0, *)
     @discardableResult
-    func prefetchDataSource(_ dataSource: UICollectionViewDataSourcePrefetching?) -> SFExStyle {
+    func prefetchDataSource(_ dataSource: (any UICollectionViewDataSourcePrefetching)?) -> SFExStyle {
         base.prefetchDataSource = dataSource
         return self
     }
@@ -47,14 +47,14 @@ public extension SFExStyle where Base: UICollectionView {
     
     @available(iOS 11.0, *)
     @discardableResult
-    func dragDelegate(_ value: UICollectionViewDragDelegate?) -> SFExStyle {
+    func dragDelegate(_ value: (any UICollectionViewDragDelegate)?) -> SFExStyle {
         base.dragDelegate = value
         return self
     }
     
     @available(iOS 11.0, *)
     @discardableResult
-    func dropDelegate(_ value: UICollectionViewDropDelegate?) -> SFExStyle {
+    func dropDelegate(_ value: (any UICollectionViewDropDelegate)?) -> SFExStyle {
         base.dropDelegate = value
         return self
     }
@@ -306,18 +306,19 @@ public extension SFExStyle where Base: UICollectionView {
 }
 
 // MARK: Add register Selectors about UICollectionViewCell
+
 public extension SFExStyle where Base: UICollectionView {
     
     @discardableResult
     func registerNib<T: UICollectionViewCell>(_: T.Type) -> SFExStyle {
-        let nib = UINib(nibName: String(describing: T.self), bundle: nil)
-        base.register(nib, forCellWithReuseIdentifier: String(describing: T.self))
+        let nib = UINib(nibName: T.sf.reuseIdentifier, bundle: nil)
+        base.register(nib, forCellWithReuseIdentifier: T.sf.reuseIdentifier)
         return self
     }
     
     @discardableResult
     func registerClass<T: UICollectionViewCell>(_: T.Type) -> SFExStyle {
-        base.register(T.self, forCellWithReuseIdentifier: String(describing: T.self))
+        base.register(T.self, forCellWithReuseIdentifier: T.sf.reuseIdentifier)
         return self
     }
     
@@ -328,27 +329,27 @@ public extension SFExStyle where Base: UICollectionView {
     
     @discardableResult
     func registerHeaderNib<T: UICollectionReusableView>(_: T.Type) -> SFExStyle {
-        let nib = UINib(nibName: String(describing: T.self), bundle: nil)
-        base.register(nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: T.self))
+        let nib = UINib(nibName: T.sf.reuseIdentifier, bundle: nil)
+        base.register(nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: T.sf.reuseIdentifier)
         return self
     }
     
     @discardableResult
     func registerHeaderClass<T: UICollectionReusableView>(_: T.Type) -> SFExStyle {
-        base.register(T.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: T.self))
+        base.register(T.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: T.sf.reuseIdentifier)
         return self
     }
     
     @discardableResult
     func registerFooterNib<T: UICollectionReusableView>(_: T.Type) -> SFExStyle {
-        let nib = UINib(nibName: String(describing: T.self), bundle: nil)
-        base.register(nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: T.self))
+        let nib = UINib(nibName: T.sf.reuseIdentifier, bundle: nil)
+        base.register(nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: T.sf.reuseIdentifier)
         return self
     }
     
     @discardableResult
     func registerFooterClass<T: UICollectionReusableView>(_: T.Type) -> SFExStyle {
-        base.register(T.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: T.self))
+        base.register(T.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: T.sf.reuseIdentifier)
         return self
     }
 }
