@@ -17,6 +17,8 @@ SFStyleKit is a swift library that supports chain programming, at present, the n
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+[DeepWiki](https://deepwiki.com/Sfh03031/SFStyleKit/)
+
 
 ## Requirements
 
