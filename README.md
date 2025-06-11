@@ -19,11 +19,13 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Tree
 
+Directory structure of SFStyleKit:
+
 <div align="center" >
   <img width="85%" src="image/tree.png" />
 </div>
 
-[DeepWiki](https://deepwiki.com/Sfh03031/SFStyleKit/)
+also, [DeepWiki](https://deepwiki.com/Sfh03031/SFStyleKit/) may help you better understand SFStyleKit
 
 
 ## Requirements
